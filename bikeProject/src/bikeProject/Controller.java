@@ -7,12 +7,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
+import java.sql.Connection;
 
 public class Controller {
 	
-    @FXML
+	@FXML
     private Pane panLogin;
-    
+
     @FXML
     private AnchorPane anchorPaneLogin;
 
@@ -26,10 +27,24 @@ public class Controller {
     private TextField txtUsername;
 
     @FXML
+    private Button btnSingIn;
+
+    @FXML
     void login(ActionEvent event) {
-    	System.out.println("funziona");
-    	System.out.println(txtUsername.getText());
-    	System.out.println(pswLogin.getText());
+    	User_Dataservice user = new User_Dataservice();
+    	System.out.println(user.login(txtUsername.getText(), pswLogin.getText()));
+    }
+
+    @FXML
+    void signIn(ActionEvent event) {
+    	
+    	User_Dataservice user = new User_Dataservice();
+    	user.registerNewUser();
+    	
+//    	User user = new User();
+//    	user.login(txtUsername.getText(), "SS");
+//    	System.out.println(user.username);
+    	
     }
 
 }
