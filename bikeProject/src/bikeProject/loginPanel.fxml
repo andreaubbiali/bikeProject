@@ -15,7 +15,7 @@
             <Button fx:id="btnLogin" layoutX="142.0" layoutY="162.0" mnemonicParsing="false" onAction="#login" text="Login" />
             <TextField fx:id="txtUsername" layoutX="156.0" layoutY="40.0" />
             <Text layoutX="55.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-            <Text layoutX="42.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+            <Text layoutX="42.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usersssname" />
          </children>
       </AnchorPane>
    </children>
