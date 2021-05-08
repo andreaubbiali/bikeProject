@@ -1,4 +1,4 @@
-package bikeProject;
+package bikeProject.database;
 
 import java.sql.ResultSet;
 
