@@ -5,7 +5,7 @@ import bikeProject.database.Database_Interface;
 import bikeProject.database.User_Database;
 import bikeProject.database.Database_Interface.Database_Interface_User;
 
-public interface Dataservice {
+public interface Dataservice_Interface {
 	
 	Database db = new Database();
 	

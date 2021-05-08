@@ -6,16 +6,11 @@ import bikeProject.PasswordUtils;
 
 import java.sql.ResultSet;
 
-public class User_Dataservice implements Dataservice {
+public class User_Dataservice implements Dataservice_Interface {
 	
 	// public final /*@ not_null @*/ long ID;
 	public /*@ not_null @ */ String username;
 	// private String password;
-	
-//	public User(String username){
-//		this.ID = 1;
-//		login(username, "aa");
-//	}
 	
 	/*
 	 * @PRE the user is registered but not authenticated to the application

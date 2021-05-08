@@ -17,7 +17,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
     	
     	
-    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/loginPanel.fxml"));
+    	FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/panels/loginPanel.fxml"));
         Parent root = loader.load();
 
         Scene scene = new Scene(root);
