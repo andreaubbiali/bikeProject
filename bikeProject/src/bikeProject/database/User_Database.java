@@ -38,8 +38,9 @@ public class User_Database extends Database implements Database_Interface.Databa
 	        }
 	        
 	        user.setUsername(res.getString("username"));
-	        res.close();
 		}
+		
+		res.close();
 		
 	}
 	
