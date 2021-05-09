@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 /*
  * Ricordati che per far partire il controller devi aggiungere 
  * import javafx.event.ActionEvent;
+ * DOVE METTERE LA CLOSE DELLA DB CONNECTION?
  */
 
 public class Main extends Application {

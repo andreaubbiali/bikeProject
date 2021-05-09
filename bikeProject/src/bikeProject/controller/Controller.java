@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.event.ActionEvent;
 import java.sql.Connection;
 
-import bikeProject.dataservice.User_Dataservice;
+import bikeProject.dataservice.User;
 
 public class Controller {
 	
@@ -33,15 +33,15 @@ public class Controller {
 
     @FXML
     void login(ActionEvent event) {
-    	User_Dataservice user = new User_Dataservice();
+    	User user = new User();
     	System.out.println(user.login(txtUsername.getText(), pswLogin.getText()));
     }
 
     @FXML
     void signIn(ActionEvent event) {
     	
-    	User_Dataservice user = new User_Dataservice();
-    	user.registerNewUser();
+    	User user = new User();
+    	user.registerNewUser(txtUsername.getText(), pswLogin.getText());
     	
 //    	User user = new User();
 //    	user.login(txtUsername.getText(), "SS");
