@@ -1,14 +1,18 @@
 package bikeProject.dataservice;
 
+import java.util.List;
+
 import bikeProject.PasswordUtils;
 
-public class User implements Dataservice_Interface {
+public class User implements Dataservice_Interface.User {
 
 	// public final /*@ not_null @*/ long ID;
 	public /* @ not_null @ */ String name;
 	public /* @ not_null @ */ String surname;
 	public /* @ not_null @ */ String username;
 	public /* @ not_null @ */ String email;
+
+	public List<Credit_Card> creditCard;
 
 	/*
 	 * @PRE the user is registered but not authenticated to the application

@@ -2,8 +2,8 @@ package bikeProject.dataservice;
 
 public class Credit_Card {
 
-	public /* @ not_null @ */ long ID;
 	public /* @ not_null @ */ long number;
-	public User user;
-
+	public /* @ not_null @ */ long cvv;
+	public /* @ not_null @ */ long expireDate;
+	public /* @ not_null @ */ long userID;
 }
