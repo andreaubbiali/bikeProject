@@ -17,7 +17,7 @@ public class Database implements Database_Interface {
 	
 	public void createConnection() {
 		try {
-			this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bikeProject?user=root&password=aeri2aicee5Oyo1euQuai7niexa8choo");
+			this.conn = DriverManager.getConnection("jdbc:mysql://192.168.178.35:3306/bikeProject?user=bikeProject&password=aeri2aicee5Oyo1euQuai7niexa8choo");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
