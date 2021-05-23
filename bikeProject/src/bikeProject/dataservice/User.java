@@ -83,6 +83,7 @@ public class User implements DataserviceInterface, UserInterface {
 
 		// TODO
 		// userDB.controlUniqueCodeOfAUser(subscription);
+		// userDB.login(uniqueCode, password, user);
 
 		return true;
 	}

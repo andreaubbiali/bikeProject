@@ -7,7 +7,7 @@ import java.sql.Statement;
 import bikeProject.PasswordUtils;
 import bikeProject.dataservice.User;
 
-public class User_Database extends Database implements Database_Interface.Database_Interface_User {
+public class UserDatabase extends Database implements UserDatabaseInterface {
 
 	public ResultSet getUser() throws Exception {
 
