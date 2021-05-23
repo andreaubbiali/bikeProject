@@ -1,6 +1,6 @@
 package bikeProject.controller;
 
-import bikeProject.dataservice.Dataservice_Interface;
+import bikeProject.dataservice.DataserviceInterface;
 import bikeProject.dataservice.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,7 +76,7 @@ public class Controller_Login {
 
 	@FXML
 	void login(ActionEvent event) {
-		Dataservice_Interface inter = new User();
+		DataserviceInterface inter = new User();
 
 		System.out.println(inter.login(txtUsername.getText(), pswLogin.getText()));
 //    	User user = new User();
