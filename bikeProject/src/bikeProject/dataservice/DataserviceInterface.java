@@ -2,13 +2,16 @@ package bikeProject.dataservice;
 
 import bikeProject.database.Database;
 import bikeProject.database.Database_Interface;
-import bikeProject.database.UserDatabaseInterface;
+import bikeProject.database.SubscriptionDatabase;
+import bikeProject.database.SubscriptionDatabaseInterface;
 import bikeProject.database.UserDatabase;
+import bikeProject.database.UserDatabaseInterface;
 
 public interface DataserviceInterface {
 
 	Database_Interface database = new Database();
 	UserDatabaseInterface userDB = new UserDatabase();
+	SubscriptionDatabaseInterface subscriptionDB = new SubscriptionDatabase();
 
 //	Database_Interface.Database_Interface_User userDB = new User_Database();
 

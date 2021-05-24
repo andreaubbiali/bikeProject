@@ -1,5 +1,6 @@
 package bikeProject.dataservice;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import bikeProject.exception.InvalidCreditCardException;
@@ -78,14 +79,39 @@ public class User implements DataserviceInterface, UserInterface {
 		this.student = student;
 	}
 
-	public boolean isValidUniqueCodeSubscriptionForUser(String uniqueCode, String password) {
+	public boolean isValidUniqueCodeSubscriptionForUser(String uniqueCode, String password) throws SQLException {
 		// Subscription subscription = new Subscription(uniqueCode);
 
 		// TODO
-		// userDB.controlUniqueCodeOfAUser(subscription);
-		// userDB.login(uniqueCode, password, user);
+		try {
+			User user = subscriptionDB.controlUniqueCodeOfAUser(uniqueCode);
+			// userDB.login(uniqueCode, password, user);
+
+			// TODO controlla
+			setUser(user);
+
+		} catch (SQLException e) {
+
+		}
 
 		return true;
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param surname
+	 * @param email
+	 * @param username
+	 */
+	public void setUser(User user) {
+		setName(user.name);
+		setSurname(user.surname);
+		setUsername(user.username);
+		setEmail(user.email);
+		setStudent(user.student);
+		setCreditCard(user.creditCard);
+		setSubscription(user.subscription);
 	}
 
 //	/*
@@ -134,22 +160,6 @@ public class User implements DataserviceInterface, UserInterface {
 //		setSurname(surname);
 //		setUsername(username);
 //		setEmail(email);
-//	}
-//
-//	public void setName(String name) {
-//		this.name = name;
-//	}
-//
-//	public void setSurname(String surname) {
-//		this.surname = surname;
-//	}
-//
-//	public void setEmail(String email) {
-//		this.email = email;
-//	}
-//
-//	public void setUsername(String username) {
-//		this.username = username;
 //	}
 
 	public long getID() {
