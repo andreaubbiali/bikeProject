@@ -2,10 +2,10 @@ package bikeProject.database;
 
 import java.sql.SQLException;
 
-import bikeProject.dataservice.User;
+import bikeProject.dataservice.Subscription;
 
 public interface SubscriptionDatabaseInterface {
 
-	public User controlUniqueCodeOfAUser(String uniqueCode) throws SQLException;
+	public void getSubscriptionByUniqueCode(String uniqueCode, Subscription subscription) throws SQLException;
 
 }

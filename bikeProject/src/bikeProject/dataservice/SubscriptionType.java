@@ -7,7 +7,6 @@ public class SubscriptionType {
 	private /* @ not_null @ */ float price;
 	private /* @ not_null @ */ int daysDuration;
 	private /* @ not_null @ */ int mustStartIn;
-	private /* @ not_null @ */ boolean automaticStart;
 
 	public long getID() {
 		return ID;
@@ -47,14 +46,6 @@ public class SubscriptionType {
 
 	public void setMustStartIn(int mustStartIn) {
 		this.mustStartIn = mustStartIn;
-	}
-
-	public boolean isAutomaticStart() {
-		return automaticStart;
-	}
-
-	public void setAutomaticStart(boolean automaticStart) {
-		this.automaticStart = automaticStart;
 	}
 
 }

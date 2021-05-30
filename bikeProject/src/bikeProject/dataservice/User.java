@@ -79,22 +79,21 @@ public class User implements DataserviceInterface, UserInterface {
 		this.student = student;
 	}
 
+	/**
+	 * 
+	 * @param uniqueCode
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 */
 	public boolean isValidUniqueCodeSubscriptionForUser(String uniqueCode, String password) throws SQLException {
-		// Subscription subscription = new Subscription(uniqueCode);
+		Subscription subscription = new Subscription(uniqueCode);
 
-		// TODO
-		try {
-			User user = subscriptionDB.controlUniqueCodeOfAUser(uniqueCode);
-			// userDB.login(uniqueCode, password, user);
+		login(subscription.getUserID(), password);
 
-			// TODO controlla
-			setUser(user);
+		// check the validity of the subcription
+		return subscription.isValid();
 
-		} catch (SQLException e) {
-
-		}
-
-		return true;
 	}
 
 	/**
