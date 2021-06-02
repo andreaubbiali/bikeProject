@@ -49,18 +49,40 @@ public class Subscription implements DataserviceInterface {
 	 */
 	public boolean isValid() {
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(subscriptionDate);
+		Date today = new Date();
+		int duration;
 
-		if (startDate != null) {
+		if (startDate == null) {
+			// the subscription hasn't been started
 
-			// the subscription has been started
-			cal.add(Calendar.DAY_OF_YEAR, daysDuration);
+			cal.setTime(subscriptionDate);
+
+			// oggi deve essere < mustStartIn+daysDuration
+
+			// add duration to subscriptionDate
+			cal.add(Calendar.DAY_OF_YEAR, type.getMustStartIn());
+
+			if (today.after(cal.getTime())) {
+				return false;
+			}
+
+			return true;
 
 		} else {
+			// the subscription has been started
 
+			// oggi < startDate+daysDuration
+			cal.setTime(startDate);
+
+			cal.add(Calendar.DAY_OF_YEAR, type.getDaysDuration());
+
+			if (today.after(cal.getTime())) {
+				return false;
+			}
+
+			return true;
 		}
 
-		return true;
 	}
 
 	public long getID() {
