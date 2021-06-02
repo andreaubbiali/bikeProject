@@ -74,6 +74,7 @@ class IsValidSubscriptionTest {
 		boolean res = subscription.isValid();
 
 		assertTrue(res);
+
 	}
 
 	// subscription fatta 5 giorni fa,mustStartIn 4 giorni

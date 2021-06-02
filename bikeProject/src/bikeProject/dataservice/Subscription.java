@@ -62,11 +62,10 @@ public class Subscription implements DataserviceInterface {
 			// add duration to subscriptionDate
 			cal.add(Calendar.DAY_OF_YEAR, type.getMustStartIn());
 
-			if (today.after(cal.getTime())) {
-				return false;
+			// today before subscriptionDate+nustStartIn
+			if (today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString())) {
+				return true;
 			}
-
-			return true;
 
 		} else {
 			// the subscription has been started
@@ -76,13 +75,13 @@ public class Subscription implements DataserviceInterface {
 
 			cal.add(Calendar.DAY_OF_YEAR, type.getDaysDuration());
 
-			if (today.after(cal.getTime())) {
-				return false;
+			if (today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString())) {
+				return true;
 			}
 
-			return true;
 		}
 
+		return false;
 	}
 
 	public long getID() {
