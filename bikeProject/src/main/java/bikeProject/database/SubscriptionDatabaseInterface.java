@@ -6,6 +6,8 @@ import bikeProject.dataservice.Subscription;
 
 public interface SubscriptionDatabaseInterface {
 
-	public void getSubscriptionByUniqueCode(String uniqueCode, Subscription subscription) throws SQLException;
+    public void getSubscriptionByUniqueCode(String uniqueCode, Subscription subscription) throws SQLException;
+
+    long createNewSubscription(Subscription subscription) throws SQLException;
 
 }

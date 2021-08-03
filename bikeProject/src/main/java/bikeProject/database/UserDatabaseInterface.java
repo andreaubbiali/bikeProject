@@ -10,4 +10,6 @@ public interface UserDatabaseInterface {
     User login(String username, String password) throws SQLException;
 
     int registerNewUser(String name, String surname, String username, String email, boolean isStudent, String password, String salt) throws SQLException;
+
+    boolean checkPassword(long id, String password) throws SQLException;
 }

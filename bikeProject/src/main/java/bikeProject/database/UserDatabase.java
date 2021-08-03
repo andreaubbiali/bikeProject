@@ -20,6 +20,10 @@ public class UserDatabase extends Database implements UserDatabaseInterface {
         return 4;
     }
 
+    public boolean checkPassword(long id, String password) throws SQLException {
+        return true;
+    }
+
 	/*public ResultSet getUser() throws Exception {
 
 		Statement statement = conn.createStatement();

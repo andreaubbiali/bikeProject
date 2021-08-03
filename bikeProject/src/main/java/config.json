@@ -1,4 +1,5 @@
 {
   "productionMode": false,
-  "universityMockResponse": true
+  "universityMockResponse": true,
+  "bankMockResponse": true
 }

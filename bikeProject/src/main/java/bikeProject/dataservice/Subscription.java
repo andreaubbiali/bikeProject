@@ -7,129 +7,136 @@ import java.util.UUID;
 
 public class Subscription implements DataserviceInterface {
 
-	// SE mustStartIN = 0 --> startDate today
+    private /* @ not_null @ */ long ID;
+    private /* @ not_null @ */ SubscriptionType type;
+    private /* @ not_null @ */ String uniqueCode;
+    private /* @ not_null @ */ Date subscriptionDate;
+    private /* @ not_null @ */ long userID;
+    private /* @ not_null @ */ long creditCardID;
+    private /* @ not_null @ */ Date startDate;
 
-	private /* @ not_null @ */ long ID;
-	private /* @ not_null @ */ SubscriptionType type;
-	private /* @ not_null @ */ String uniqueCode;
-	private /* @ not_null @ */ Date subscriptionDate;
-	private /* @ not_null @ */ long userID;
-	private /* @ not_null @ */ Date startDate;
+    public String createNewSubscription(long userID, SubscriptionType subType, long creditCardID) throws SQLException {
+        Date today = new Date();
 
-	public Subscription() {
-	}
+        this.type = subType;
+        this.subscriptionDate = today;
+        this.userID = userID;
+        this.creditCardID = creditCardID;
+        if ( type.getMustStartIn() == 0 ) {
+            // the subscription start immediately
+            this.startDate = today;
+        }
 
-	public Subscription(String uniqueCode) throws SQLException {
+        // generate the random code used by the user for rent the bike
+        this.uniqueCode = UUID.randomUUID().toString();
+
+        // add the subscription into db
+        this.ID = subscriptionDB.createNewSubscription(this);
+
+        return uniqueCode;
+    }
+
+    /**
+     * if the mustStartDate = null the startDate can't be null
+     *
+     * @return
+     */
+    public boolean isValid() {
+        Calendar cal = Calendar.getInstance();
+        Date today = new Date();
+        int duration;
+
+        if ( startDate == null ) {
+            // the subscription hasn't been started
+
+            cal.setTime(subscriptionDate);
+
+            // oggi deve essere < mustStartIn+daysDuration
+
+            // add duration to subscriptionDate
+            cal.add(Calendar.DAY_OF_YEAR, type.getMustStartIn());
+
+            // today before subscriptionDate+nustStartIn
+            if ( today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString()) ) {
+                return true;
+            }
+
+        } else {
+            // the subscription has been started
+
+            // oggi < startDate+daysDuration
+            cal.setTime(startDate);
+
+            cal.add(Calendar.DAY_OF_YEAR, type.getDaysDuration());
+
+            if ( today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString()) ) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    /*public Subscription(String uniqueCode) throws SQLException {
 		// TODO
 		subscriptionDB.getSubscriptionByUniqueCode(uniqueCode, this);
-	}
+	}*/
 
-	public String createSubscription(SubscriptionType type, long userID) {
-		Date today = new Date();
+    public long getID() {
+        return ID;
+    }
 
-		this.type = type;
-		if (type.getMustStartIn() == 0) {
-			this.startDate = today;
-		}
-		this.subscriptionDate = today;
-		this.userID = userID;
+    public void setID(long iD) {
+        this.ID = iD;
+    }
 
-		this.uniqueCode = UUID.randomUUID().toString();
+    public SubscriptionType getType() {
+        return type;
+    }
 
-		// TODO
-//		this.ID = db.createSubscription(this);
+    public void setType(SubscriptionType type) {
+        this.type = type;
+    }
 
-		return uniqueCode;
-	}
+    public Date getSubscriptionDate() {
+        return subscriptionDate;
+    }
 
-	/**
-	 * if the mustStartDate = null the startDate can't be null
-	 * 
-	 * @return
-	 */
-	public boolean isValid() {
-		Calendar cal = Calendar.getInstance();
-		Date today = new Date();
-		int duration;
+    public void setSubscriptionDate(Date subscriptionDate) {
+        this.subscriptionDate = subscriptionDate;
+    }
 
-		if (startDate == null) {
-			// the subscription hasn't been started
+    public long getUserID() {
+        return userID;
+    }
 
-			cal.setTime(subscriptionDate);
+    public void setUserID(long userID) {
+        this.userID = userID;
+    }
 
-			// oggi deve essere < mustStartIn+daysDuration
+    public String getUniqueCode() {
+        return uniqueCode;
+    }
 
-			// add duration to subscriptionDate
-			cal.add(Calendar.DAY_OF_YEAR, type.getMustStartIn());
+    public void setUniqueCode(String uniqueCode) {
+        this.uniqueCode = uniqueCode;
+    }
 
-			// today before subscriptionDate+nustStartIn
-			if (today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString())) {
-				return true;
-			}
+    public Date getStartDate() {
+        return startDate;
+    }
 
-		} else {
-			// the subscription has been started
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
-			// oggi < startDate+daysDuration
-			cal.setTime(startDate);
+    public long getCreditCardID() {
+        return creditCardID;
+    }
 
-			cal.add(Calendar.DAY_OF_YEAR, type.getDaysDuration());
-
-			if (today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString())) {
-				return true;
-			}
-
-		}
-
-		return false;
-	}
-
-	public long getID() {
-		return ID;
-	}
-
-	public void setID(long iD) {
-		ID = iD;
-	}
-
-	public SubscriptionType getType() {
-		return type;
-	}
-
-	public void setType(SubscriptionType type) {
-		this.type = type;
-	}
-
-	public Date getSubscriptionDate() {
-		return subscriptionDate;
-	}
-
-	public void setSubscriptionDate(Date subscriptionDate) {
-		this.subscriptionDate = subscriptionDate;
-	}
-
-	public long getUserID() {
-		return userID;
-	}
-
-	public void setUserID(long userID) {
-		this.userID = userID;
-	}
-
-	public String getUniqueCode() {
-		return uniqueCode;
-	}
-
-	public void setUniqueCode(String uniqueCode) {
-		this.uniqueCode = uniqueCode;
-	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    public void setCreditCardID(long creditCardID) {
+        this.creditCardID = creditCardID;
+    }
 
 }

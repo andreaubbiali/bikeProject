@@ -8,8 +8,9 @@ import bikeProject.PasswordUtils;
 import bikeProject.exception.InvalidCreditCardException;
 import bikeProject.exception.PaymentException;
 import bikeProject.exception.UserNotFoundException;
+import bikeProject.exception.WrongPasswordException;
 
-public class User implements DataserviceInterface, UserInterface {
+public class User implements DataserviceInterface {
 
     /**
      * @invariant
@@ -87,37 +88,32 @@ public class User implements DataserviceInterface, UserInterface {
     }
 
     /**
-     * @param subType      the type of subscription the user want to subscribe
-     * @param creditCardID the id of the credit card used for payment
-     * @return the uniqueCode of the subscription
-     * @throws InvalidCreditCardException if the selected credit card doesn't exist
-     *                                    or is not valid for the subscription
-     * @throws PaymentException           if the payment fails
-     * @requires creditCardID > 0
-     * @ensures (a > = b & & \ result = = a) || (b > a && \result == b)
+     * @param subType
+     * @param selectedCreditCard
+     * @return
+     * @throws InvalidCreditCardException
+     * @throws PaymentException
      */
-    public String addSubscription(SubscriptionType subType, long creditCardID) throws InvalidCreditCardException, PaymentException {
-        CreditCard selectedCreditCard = null;
+    public String addSubscription(String password, SubscriptionType subType, CreditCard selectedCreditCard) throws WrongPasswordException, SQLException, InvalidCreditCardException, PaymentException {
 
-        try {
-            selectedCreditCard = new CreditCard(creditCardID);
-
-            if ( selectedCreditCard == null || !selectedCreditCard.isCreditCardValidForSubscription(subType) ) {
-                throw new InvalidCreditCardException("The selected creditCard isn't valid for the subscription");
-            }
-
-        } catch ( Exception e ) {
-            throw new InvalidCreditCardException("The selected creditCard isn't valid");
+        // check the user password to add subscription
+        if ( !checkPassword(password) ) {
+            throw new WrongPasswordException();
         }
+
+        // check if the credit card is valid for the subscription selected
+        if ( !selectedCreditCard.isCreditCardValidForSubscription(subType) ) {
+            throw new InvalidCreditCardException("The selected creditCard isn't valid for the subscription");
+        }
+
+        // creation of the subscription
+        Subscription subscription = new Subscription();
+        String uniqueCode = subscription.createNewSubscription(this.ID, subType, selectedCreditCard.getID());
 
         // payment for the subscription
         selectedCreditCard.pay(subType.getPrice());
-
-        // creation of the new subscription
-        Subscription newSubscription = new Subscription();
-        String uniqueCode = newSubscription.createSubscription(subType, ID);
-
-        this.subscription.add(newSubscription);
+        
+        this.subscription.add(subscription);
 
         return uniqueCode;
     }
@@ -145,11 +141,20 @@ public class User implements DataserviceInterface, UserInterface {
     }
 
     /**
+     * @param password
+     * @return
+     */
+    public boolean checkPassword(String password) throws SQLException {
+
+        return userDB.checkPassword(this.ID, password);
+    }
+
+    /*  *//**
      * @param uniqueCode
      * @param password
      * @return
      * @throws SQLException
-     */
+     *//*
     public boolean isValidUniqueCodeSubscriptionForUser(String uniqueCode, String password) throws SQLException {
         Subscription subscription = new Subscription(uniqueCode);
 
@@ -159,7 +164,7 @@ public class User implements DataserviceInterface, UserInterface {
         // check the validity of the subscription
         return subscription.isValid();
 
-    }
+    }*/
 
     /**
      * @param id

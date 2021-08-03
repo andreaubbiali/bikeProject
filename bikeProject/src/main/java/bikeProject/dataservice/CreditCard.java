@@ -58,8 +58,14 @@ public class CreditCard implements DataserviceInterface, CreditCardInterface {
      * @throws PaymentException if something with the call goes wrong
      */
     public void pay(float amount) throws PaymentException {
-        // TODO
-        // connect to banks payment
+        if ( config.IsProductionMode() ) {
+            // send request to bank
+        } else {
+
+            if ( !config.getBankMockResponse() ) {
+                throw new PaymentException();
+            }
+        }
     }
 
     /**
