@@ -9,13 +9,12 @@ public class Subscription implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ SubscriptionType type;
-    private /* @ not_null @ */ String uniqueCode;
     private /* @ not_null @ */ Date subscriptionDate;
     private /* @ not_null @ */ long userID;
     private /* @ not_null @ */ long creditCardID;
     private /* @ not_null @ */ Date startDate;
 
-    public String createNewSubscription(long userID, SubscriptionType subType, long creditCardID) throws SQLException {
+    public void createNewSubscription(long userID, SubscriptionType subType, long creditCardID) throws SQLException {
         Date today = new Date();
 
         this.type = subType;
@@ -27,13 +26,9 @@ public class Subscription implements DataserviceInterface {
             this.startDate = today;
         }
 
-        // generate the random code used by the user for rent the bike
-        this.uniqueCode = UUID.randomUUID().toString();
-
         // add the subscription into db
         this.ID = subscriptionDB.createNewSubscription(this);
 
-        return uniqueCode;
     }
 
     /**
@@ -113,14 +108,6 @@ public class Subscription implements DataserviceInterface {
 
     public void setUserID(long userID) {
         this.userID = userID;
-    }
-
-    public String getUniqueCode() {
-        return uniqueCode;
-    }
-
-    public void setUniqueCode(String uniqueCode) {
-        this.uniqueCode = uniqueCode;
     }
 
     public Date getStartDate() {

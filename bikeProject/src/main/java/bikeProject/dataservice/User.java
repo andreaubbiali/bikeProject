@@ -50,20 +50,19 @@ public class User implements DataserviceInterface {
     }
 
     /**
-     * @param username
      * @param password
      * @throws UserNotFoundException
      * @throws SQLException
      */
-    public void login(String username, String password) throws UserNotFoundException, SQLException {
+    public void login(String email, String password) throws UserNotFoundException, SQLException {
 
-        User user = userDB.login(username, password);
+        User user = userDB.login(email, password);
         if ( user == null ) {
             throw new UserNotFoundException();
         }
         setUser(user);
 
-        System.out.println("New login from: " + username);
+        System.out.println("New login from: " + email);
     }
 
     /**
@@ -88,7 +87,7 @@ public class User implements DataserviceInterface {
      * @throws InvalidCreditCardException
      * @throws PaymentException
      */
-    public String addSubscription(String password, SubscriptionType subType, CreditCard selectedCreditCard) throws WrongPasswordException, SQLException, InvalidCreditCardException, PaymentException {
+    public void addSubscription(String password, SubscriptionType subType, CreditCard selectedCreditCard) throws WrongPasswordException, SQLException, InvalidCreditCardException, PaymentException {
 
         // check the user password to add subscription
         if ( !checkPassword(password) ) {
@@ -102,17 +101,12 @@ public class User implements DataserviceInterface {
 
         // creation of the subscription
         Subscription subscription = new Subscription();
-        String uniqueCode = subscription.createNewSubscription(this.ID, subType, selectedCreditCard.getID());
+        subscription.createNewSubscription(this.ID, subType, selectedCreditCard.getID());
 
         // payment for the subscription
         selectedCreditCard.pay(subType.getPrice());
 
         this.subscription.add(subscription);
-
-        return uniqueCode;
-    }
-
-    public void rentBike(BikeType bikeType, String subscriptionCode) {
 
     }
 
