@@ -69,7 +69,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         System.out.println("start of the application");
-        Config tmp = Config.getInstance();
 
         try {
             Application.launch(args);

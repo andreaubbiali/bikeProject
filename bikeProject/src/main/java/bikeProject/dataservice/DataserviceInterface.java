@@ -1,5 +1,6 @@
 package bikeProject.dataservice;
 
+import bikeProject.config.Config;
 import bikeProject.database.Database;
 import bikeProject.database.Database_Interface;
 import bikeProject.database.SubscriptionDatabase;
@@ -8,6 +9,8 @@ import bikeProject.database.UserDatabase;
 import bikeProject.database.UserDatabaseInterface;
 
 public interface DataserviceInterface {
+
+	Config config = Config.getInstance();
 
 	Database_Interface database = new Database();
 	UserDatabaseInterface userDB = new UserDatabase();

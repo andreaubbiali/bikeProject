@@ -3,237 +3,259 @@ package bikeProject.dataservice;
 import java.sql.SQLException;
 import java.util.List;
 
-import bikeProject.Main;
 import bikeProject.PasswordUtils;
 import bikeProject.exception.InvalidCreditCardException;
 import bikeProject.exception.PaymentException;
+import bikeProject.exception.UserNotFoundException;
 
 public class User implements DataserviceInterface, UserInterface {
 
-	/**
-	 * @invariant
-	 */
+    /**
+     * @invariant
+     */
 
-	private /* @ not_null @ */ long ID;
-	private /* @ not_null @ */ String name;
-	private /* @ not_null @ */ String surname;
-	private /* @ not_null @ */ String username;
-	private /* @ not_null @ */ String email;
-	private /* @ not_null @ */ boolean isStudent;
-	private List<CreditCard> creditCard;
-	private List<Subscription> subscription;
+    private /* @ not_null @ */ long ID;
+    private /* @ not_null @ */ String name;
+    private /* @ not_null @ */ String surname;
+    private /* @ not_null @ */ String username;
+    private /* @ not_null @ */ String email;
+    private /* @ not_null @ */ boolean isStudent;
+    private List<CreditCard> creditCard;
+    private List<Subscription> subscription;
 
-	/**
-	 * 
-	 * @param name
-	 * @param surname
-	 * @param email
-	 * @param username
-	 * @param password
-	 */
-	public void registerNewUser(String name, String surname, String email, String username, String password,
-			boolean isStudent) {
+    /**
+     * @param name     string the name of the user
+     * @param surname  string the surname of the user
+     * @param email    string the email of the user
+     * @param username string the username of the user
+     * @param password string the password of the user
+     */
+    public void registerNewUser(String name, String surname, String username, String email, String password, boolean isStudent) throws SQLException {
 
-		// Generate Salt. The generated value can be stored in DB.
-		String salt = PasswordUtils.getSalt(30);
+        // Generate Salt. The generated value can be stored in DB.
+        String salt = PasswordUtils.getSalt(30);
 
-		// Protect user's password. The generated value can be stored in DB.
-		String mySecurePassword = PasswordUtils.generateSecurePassword(password, salt);
+        // Protect user's password. The generated value can be stored in DB as pw.
+        String mySecurePassword = PasswordUtils.generateSecurePassword(password, salt);
 
-		int id;
-		try {
-			// TODO fixx
-			// id = userDB.registerNewUser(name, surname, email, username, isStudent, mySecurePassword, salt);
-			id = 5;
-			setUser(id, name, surname, email, username, isStudent);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        if ( isStudent ) {
+            // check with the university if the user is a student
+            isStudent = checkIsUserAStudent();
+        }
 
+        int id;
+        try {
+            // Add user into DB
+            id = userDB.registerNewUser(name, surname, username, email, isStudent, mySecurePassword, salt);
+            // set user attributes
+            setUser(id, name, surname, username, email, isStudent);
 
+        } catch ( SQLException e ) {
+            // error inserting user into DB
+            throw new SQLException();
+        }
 
-		System.out.println("New user registered: " + this.username);
-	}
+        System.out.println("New user registered: " + this.username);
+    }
 
-	/*
-	 * @PRE the user is registered but not authenticated to the application
-	 * 
-	 * @POST the use is authenticated
-	 */
-	public boolean login(String username, String password) {
+    /**
+     * @param username
+     * @param password
+     * @throws UserNotFoundException
+     * @throws SQLException
+     */
+    public void login(String username, String password) throws UserNotFoundException, SQLException {
 
-		System.out.println("stampa di this.username prima    " + this.username + " fine");
+        try {
+            User user = userDB.login(username, password);
+            if ( user == null ) {
+                throw new UserNotFoundException();
+            }
+            setUser(user);
+        } catch ( SQLException e ) {
+            // error in the db
+            throw new SQLException();
 
-		try {
-			userDB.login(username, password, this);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+        }
 
-		System.out.println("stampa di this.username dopo    " + this.username + " fine");
+        System.out.println("New login from: " + username);
+    }
 
-		return false;
+    /**
+     * @param subType      the type of subscription the user want to subscribe
+     * @param creditCardID the id of the credit card used for payment
+     * @return the uniqueCode of the subscription
+     * @throws InvalidCreditCardException if the selected credit card doesn't exist
+     *                                    or is not valid for the subscription
+     * @throws PaymentException           if the payment fails
+     * @requires creditCardID > 0
+     * @ensures (a > = b & & \ result = = a) || (b > a && \result == b)
+     */
+    public String addSubscription(SubscriptionType subType, long creditCardID) throws InvalidCreditCardException, PaymentException {
+        CreditCard selectedCreditCard = null;
 
-	}
+        try {
+            selectedCreditCard = new CreditCard(creditCardID);
 
-	/**
-	 * @requires creditCardID > 0
-	 * @ensures (a >= b && \result == a) || (b > a && \result == b)
-	 * 
-	 * @param subType      the type of subscription the user want to subscribe
-	 * @param creditCardID the id of the credit card used for payment
-	 * @throws InvalidCreditCardException if the selected credit card doesn't exist
-	 *                                    or is not valid for the subscription
-	 * @throws PaymentException           if the payment fails
-	 * @return the uniqueCode of the subscription
-	 */
-	public String addSubscription(SubscriptionType subType, long creditCardID)
-			throws InvalidCreditCardException, PaymentException {
-		CreditCard selectedCreditCard = null;
+            if ( selectedCreditCard == null || !selectedCreditCard.isCreditCardValidForSubscription(subType) ) {
+                throw new InvalidCreditCardException("The selected creditCard isn't valid for the subscription");
+            }
 
-		try {
-			selectedCreditCard = new CreditCard(creditCardID);
+        } catch ( Exception e ) {
+            throw new InvalidCreditCardException("The selected creditCard isn't valid");
+        }
 
-			if (selectedCreditCard == null || !selectedCreditCard.isCreditCardValidForSubscription(subType)) {
-				throw new InvalidCreditCardException("The selected creditCard isn't valid for the subscription");
-			}
+        // payment for the subscription
+        selectedCreditCard.pay(subType.getPrice());
 
-		} catch (Exception e) {
-			throw new InvalidCreditCardException("The selected creditCard isn't valid");
-		}
+        // creation of the new subscription
+        Subscription newSubscription = new Subscription();
+        String uniqueCode = newSubscription.createSubscription(subType, ID);
 
-		// payment for the subscription
-		selectedCreditCard.pay(subType.getPrice());
+        this.subscription.add(newSubscription);
 
-		// creation of the new subscription
-		Subscription newSubscription = new Subscription();
-		String uniqueCode = newSubscription.createSubscription(subType, ID);
+        return uniqueCode;
+    }
 
-		this.subscription.add(newSubscription);
+    /**
+     * @param creditCard
+     */
+    public void addCreditCard(CreditCard creditCard) {
 
-		return uniqueCode;
-	}
+        this.creditCard.add(creditCard);
 
-	/**
-	 * 
-	 * @param creditCard
-	 */
-	public void addCreditCard(CreditCard creditCard) {
+    }
 
-		this.creditCard.add(creditCard);
+    /**
+     * request to the university to check if the user is a student
+     */
+    public boolean checkIsUserAStudent() {
 
-	}
+        // check if is in production or test mode
+        if ( config.IsProductionMode() ) {
 
-	/**
-	 * 
-	 * @param student
-	 */
-	public void setIsStudent(boolean isStudent) {
-		
-		// send request to university
+            try {
+                // this.isStudent = send request to university
+            } catch ( Exception e ) {
+                e.printStackTrace();
+            }
 
-		// TODO fix
-//		if (Config.prova == 2) {
-//			System.out.println("FUNZIONATO");
-//		}
-		
-		this.isStudent = isStudent;
-	}
+        } else {
+            // get mocked response for test
+            this.isStudent = config.getUniversityMockResponse();
 
-	/**
-	 * 
-	 * @param uniqueCode
-	 * @param password
-	 * @return
-	 * @throws SQLException
-	 */
-	public boolean isValidUniqueCodeSubscriptionForUser(String uniqueCode, String password) throws SQLException {
-		Subscription subscription = new Subscription(uniqueCode);
+        }
+        return this.isStudent;
+    }
 
-		// TODO fix
-		// login(subscription.getUserID(), password);
+    /**
+     * @param uniqueCode
+     * @param password
+     * @return
+     * @throws SQLException
+     */
+    public boolean isValidUniqueCodeSubscriptionForUser(String uniqueCode, String password) throws SQLException {
+        Subscription subscription = new Subscription(uniqueCode);
 
-		// check the validity of the subcription
-		return subscription.isValid();
+        // TODO fix
+        // login(subscription.getUserID(), password);
 
-	}
+        // check the validity of the subscription
+        return subscription.isValid();
 
-	/**
-	 * 
-	 * @param name
-	 * @param surname
-	 * @param email
-	 * @param username
-	 * @param password
-	 * @param isStudent
-	 */
-	public void setUser(int id, String name, String surname, String email, String username, boolean isStudent) {
-		setID(id);
-		setName(name);
-		setSurname(surname);
-		setEmail(email);
-		setUsername(username);
-		setIsStudent(isStudent);
-	}
+    }
 
-	// GETTERS AND SETTERS
-	public long getID() {
-		return ID;
-	}
+    /**
+     * @param id
+     * @param name
+     * @param surname
+     * @param username
+     * @param email
+     * @param isStudent
+     */
+    public void setUser(int id, String name, String surname, String username, String email, boolean isStudent) {
+        setID(id);
+        setName(name);
+        setSurname(surname);
+        setUsername(username);
+        setEmail(email);
+        setIsStudent(isStudent);
+    }
 
-	public void setID(long iD) {
-		ID = iD;
-	}
+    /**
+     * @param user
+     */
+    public void setUser(User user) {
+        setID(user.ID);
+        setName(user.name);
+        setSurname(user.surname);
+        setUsername(user.username);
+        setEmail(user.email);
+        setIsStudent(user.isStudent);
+    }
 
-	public String getName() {
-		return name;
-	}
+    // GETTERS AND SETTERS
+    public long getID() {
+        return ID;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setID(long iD) {
+        ID = iD;
+    }
 
-	public String getSurname() {
-		return surname;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getSurname() {
+        return surname;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public boolean isStudent() {
-		return isStudent;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public List<CreditCard> getCreditCard() {
-		return creditCard;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setCreditCard(List<CreditCard> creditCard) {
-		this.creditCard = creditCard;
-	}
+    public boolean isStudent() {
+        return isStudent;
+    }
 
-	public List<Subscription> getSubscription() {
-		return subscription;
-	}
+    public void setIsStudent(boolean isStudent) {
+        this.isStudent = isStudent;
+    }
 
-	public void setSubscription(List<Subscription> subscription) {
-		this.subscription = subscription;
-	}
+    public List<CreditCard> getCreditCard() {
+        return creditCard;
+    }
+
+    public void setCreditCard(List<CreditCard> creditCard) {
+        this.creditCard = creditCard;
+    }
+
+    public List<Subscription> getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(List<Subscription> subscription) {
+        this.subscription = subscription;
+    }
 }

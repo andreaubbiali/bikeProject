@@ -2,14 +2,25 @@ package bikeProject.database;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import bikeProject.PasswordUtils;
 import bikeProject.dataservice.User;
+import bikeProject.exception.UserNotFoundException;
 
 public class UserDatabase extends Database implements UserDatabaseInterface {
 
-	public ResultSet getUser() throws Exception {
+    public User login(String username, String password) throws SQLException {
+        User user = new User();
+        return user;
+    }
+
+    public int registerNewUser(String name, String surname, String username, String email, boolean isStudent, String password, String salt) throws SQLException {
+        return 4;
+    }
+
+	/*public ResultSet getUser() throws Exception {
 
 		Statement statement = conn.createStatement();
 		String query = "SELECT * FROM user";
@@ -61,6 +72,6 @@ public class UserDatabase extends Database implements UserDatabaseInterface {
 			// TODO: sistemare questo throw
 			throw new Exception();
 		}
-	}
+	}*/
 
 }

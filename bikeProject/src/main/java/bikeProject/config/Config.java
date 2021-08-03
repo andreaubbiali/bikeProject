@@ -8,6 +8,7 @@ import org.json.simple.parser.JSONParser;
 public class Config {
 
 	private static Config instance = null;
+	private static boolean productionMode;
 	private static boolean universityMockResponse;
 
 	private Config() {
@@ -40,13 +41,20 @@ public class Config {
 
 
 		// getting variables
+		productionMode = (boolean) jo.get("productionMode");
 		universityMockResponse = (boolean) jo.get("universityMockResponse");
 
 		return inst;
 	}
 
 	public boolean getUniversityMockResponse() {
+
 		return universityMockResponse;
+	}
+
+	public boolean IsProductionMode(){
+
+		return productionMode;
 	}
 
 }
