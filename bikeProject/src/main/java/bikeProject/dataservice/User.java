@@ -1,6 +1,7 @@
 package bikeProject.dataservice;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import bikeProject.PasswordUtils;
@@ -44,16 +45,11 @@ public class User implements DataserviceInterface, UserInterface {
         }
 
         int id;
-        try {
-            // Add user into DB
-            id = userDB.registerNewUser(name, surname, username, email, isStudent, mySecurePassword, salt);
-            // set user attributes
-            setUser(id, name, surname, username, email, isStudent);
 
-        } catch ( SQLException e ) {
-            // error inserting user into DB
-            throw new SQLException();
-        }
+        // Add user into DB
+        id = userDB.registerNewUser(name, surname, username, email, isStudent, mySecurePassword, salt);
+        // set user attributes
+        setUser(id, name, surname, username, email, isStudent);
 
         System.out.println("New user registered: " + this.username);
     }
@@ -66,19 +62,28 @@ public class User implements DataserviceInterface, UserInterface {
      */
     public void login(String username, String password) throws UserNotFoundException, SQLException {
 
-        try {
-            User user = userDB.login(username, password);
-            if ( user == null ) {
-                throw new UserNotFoundException();
-            }
-            setUser(user);
-        } catch ( SQLException e ) {
-            // error in the db
-            throw new SQLException();
-
+        User user = userDB.login(username, password);
+        if ( user == null ) {
+            throw new UserNotFoundException();
         }
+        setUser(user);
 
         System.out.println("New login from: " + username);
+    }
+
+    /**
+     * @param number
+     * @param cvv
+     * @param expireDate
+     * @throws SQLException
+     */
+    public void addCreditCard(long number, long cvv, Date expireDate) throws SQLException, InvalidCreditCardException {
+
+        CreditCard creditCard = new CreditCard();
+        // register the new credit card
+        creditCard.registerNewCreditCard(this.ID, number, cvv, expireDate);
+
+        this.creditCard.add(creditCard);
     }
 
     /**
@@ -115,15 +120,6 @@ public class User implements DataserviceInterface, UserInterface {
         this.subscription.add(newSubscription);
 
         return uniqueCode;
-    }
-
-    /**
-     * @param creditCard
-     */
-    public void addCreditCard(CreditCard creditCard) {
-
-        this.creditCard.add(creditCard);
-
     }
 
     /**

@@ -1,133 +1,150 @@
 package bikeProject.dataservice;
 
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
+import bikeProject.exception.InvalidCreditCardException;
 import bikeProject.exception.PaymentException;
 
-public class CreditCard {
+public class CreditCard implements DataserviceInterface, CreditCardInterface {
 
-	private /* @ not_null @ */ long ID;
-	private /* @ not_null @ */ long number;
-	private /* @ not_null @ */ long cvv;
-	private /* @ not_null @ */ Date expireDate;
+    private /* @ not_null @ */ long ID;
+    private /* @ not_null @ */ long number;
+    private /* @ not_null @ */ long cvv;
+    private /* @ not_null @ */ Date expireDate;
 
-	public CreditCard(long ID) throws Exception {
-		// TODO
-		// database get creditCardByID() probabilmente mi serve anche lo userid per
-		// controllare meglio
-		setID(ID);
-	}
+    /**
+     * @param userID
+     * @param number
+     * @param cvv
+     * @param expireDate
+     */
+    public void registerNewCreditCard(long userID, long number, long cvv, Date expireDate) throws SQLException, InvalidCreditCardException {
+        try {
+            if ( !isCreditCardValid(expireDate) ) {
+                throw new InvalidCreditCardException("The credit card is expired");
+            }
 
-	public CreditCard() {
-	}
+            // register new credit card for a user
+            int id = credCardDB.registerNewCreditCard(userID, number, cvv, expireDate);
 
-	public CreditCard(long number, long cvv, Date expireDate) {
-		this.number = number;
-		this.cvv = cvv;
-		this.expireDate = expireDate;
-	}
+            // set credit card fields
+            setCreditCard(id, number, cvv, expireDate);
 
-	/**
-	 * 
-	 * @param amount the amount to be payed
-	 * @throws PaymentException if something with the call goes wrong
-	 */
-	public void pay(float amount) throws PaymentException {
-		// TODO
-		// connect to banks payment
-	}
+        } catch ( SQLException e ) {
+            throw e;
+        }
+    }
 
-//	/**
-//	 * 
-//	 * @return true if is valid false otherwise
-//	 */
-//	public boolean isValid() {
-//		Date today = new Date();
-//
-//		if (today.after(expireDate)) {
-//			return false;
-//		}
-//
-//		return true;
-//	}
+    /**
+     * To be valid the credit card must not be expired
+     *
+     * @param expireDate
+     * @return
+     */
+    public boolean isCreditCardValid(Date expireDate) {
+        Date today = new Date();
 
-	/**
-	 * The credit card is valid if is valid for all the period of the subscription
-	 * from today. The credit card must be valid for at least the duration of the
-	 * subscription +30 days if the subscription start automatically. For other
-	 * subscription the card must be valid for the 'MustStartIn' + daysDuration + 30
-	 * days.
-	 * 
-	 * @param subType the type of subscription
-	 * @return true if the credit card is valid, false otherwise
-	 */
-	public boolean isCreditCardValidForSubscription(SubscriptionType subType) {
-		Date today = new Date();
-		Calendar calDate = Calendar.getInstance();
-		calDate.setTime(today);
+        if ( today.after(expireDate) ) {
+            return false;
+        }
 
-		// check that the credit card isn't expired or expire today
-		if (today.after(expireDate)) {
-			return false;
-		}
+        return true;
+    }
 
-		// minimum days duration of the credit card
-		int daysDuration;
+    /**
+     * @param amount the amount to be payed
+     * @throws PaymentException if something with the call goes wrong
+     */
+    public void pay(float amount) throws PaymentException {
+        // TODO
+        // connect to banks payment
+    }
 
-		if (subType.getMustStartIn() == 0) {
-			// subscription start automatically so the credit card must be valid for the
-			// daysDuration+30
-			daysDuration = subType.getDaysDuration() + 30;
-		} else {
-			// subscription not start automatically so the credit card must be valid for the
-			// mustStartIn + daysDuration + 30
-			daysDuration = subType.getMustStartIn() + subType.getDaysDuration() + 30;
-		}
+    /**
+     * The credit card is valid if is valid for all the period of the subscription
+     * from today. The credit card must be valid for at least the duration of the
+     * subscription +30 days if the subscription start automatically. For other
+     * subscription the card must be valid for the 'MustStartIn' + daysDuration + 30
+     * days.
+     *
+     * @param subType the type of subscription
+     * @return true if the credit card is valid, false otherwise
+     */
+    public boolean isCreditCardValidForSubscription(SubscriptionType subType) {
+        Date today = new Date();
+        Calendar calDate = Calendar.getInstance();
+        calDate.setTime(today);
 
-		// add the minimum days the credit card must be valid from today
-		calDate.add(Calendar.DAY_OF_YEAR, daysDuration);
+        // check that the credit card isn't expired or expire today
+        if ( today.after(expireDate) ) {
+            return false;
+        }
 
-		// don't find any better methods
-		boolean isDateEqual = calDate.getTime().toString().equals(expireDate.toString());
-		// control the expireDate
-		if (calDate.getTime().after(expireDate) && !isDateEqual) {
-			return false;
-		}
+        // minimum days duration of the credit card
+        int daysDuration;
 
-		return true;
-	}
+        if ( subType.getMustStartIn() == 0 ) {
+            // subscription start automatically so the credit card must be valid for the
+            // daysDuration+30
+            daysDuration = subType.getDaysDuration() + 30;
+        } else {
+            // subscription not start automatically so the credit card must be valid for the
+            // mustStartIn + daysDuration + 30
+            daysDuration = subType.getMustStartIn() + subType.getDaysDuration() + 30;
+        }
 
-	public long getID() {
-		return ID;
-	}
+        // add the minimum days the credit card must be valid from today
+        calDate.add(Calendar.DAY_OF_YEAR, daysDuration);
 
-	public void setID(long ID) {
-		this.ID = ID;
-	}
+        // don't find any better methods
+        boolean isDateEqual = calDate.getTime().toString().equals(expireDate.toString());
+        // control the expireDate
+        if ( calDate.getTime().after(expireDate) && !isDateEqual ) {
+            return false;
+        }
 
-	public long getNumber() {
-		return number;
-	}
+        return true;
+    }
 
-	public void setNumber(long number) {
-		this.number = number;
-	}
+    public void setCreditCard(long id, long number, long cvv, Date expireDate) {
+        setID(id);
+        setNumber(number);
+        setCvv(cvv);
+        setExpireDate(expireDate);
+    }
 
-	public long getCvv() {
-		return cvv;
-	}
+    public long getID() {
+        return ID;
+    }
 
-	public void setCvv(long cvv) {
-		this.cvv = cvv;
-	}
+    public void setID(long ID) {
+        this.ID = ID;
+    }
 
-	public Date getExpireDate() {
-		return expireDate;
-	}
+    public long getNumber() {
+        return number;
+    }
 
-	public void setExpireDate(Date expireDate) {
-		this.expireDate = expireDate;
-	}
+    public void setNumber(long number) {
+        this.number = number;
+    }
+
+    public long getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(long cvv) {
+        this.cvv = cvv;
+    }
+
+    public Date getExpireDate() {
+        return expireDate;
+    }
+
+    public void setExpireDate(Date expireDate) {
+        this.expireDate = expireDate;
+    }
 
 }
