@@ -65,8 +65,8 @@ public class CreditCard implements DataserviceInterface, CreditCardInterface {
     /**
      * The credit card is valid if is valid for all the period of the subscription
      * from today. The credit card must be valid for at least the duration of the
-     * subscription +30 days if the subscription start automatically. For other
-     * subscription the card must be valid for the 'MustStartIn' + daysDuration + 30
+     * subscription +10 days if the subscription start automatically. For other
+     * subscription the card must be valid for the 'MustStartIn' + daysDuration + 10
      * days.
      *
      * @param subType the type of subscription
@@ -74,34 +74,24 @@ public class CreditCard implements DataserviceInterface, CreditCardInterface {
      */
     public boolean isCreditCardValidForSubscription(SubscriptionType subType) {
         Date today = new Date();
-        Calendar calDate = Calendar.getInstance();
-        calDate.setTime(today);
+        Calendar minimumDate = Calendar.getInstance();
+        minimumDate.setTime(today);
 
         // check that the credit card isn't expired or expire today
-        if ( today.after(expireDate) ) {
+        if ( !isCreditCardValid(this.expireDate) ) {
             return false;
         }
 
-        // minimum days duration of the credit card
-        int daysDuration;
-
-        if ( subType.getMustStartIn() == 0 ) {
-            // subscription start automatically so the credit card must be valid for the
-            // daysDuration+30
-            daysDuration = subType.getDaysDuration() + 30;
-        } else {
-            // subscription not start automatically so the credit card must be valid for the
-            // mustStartIn + daysDuration + 30
-            daysDuration = subType.getMustStartIn() + subType.getDaysDuration() + 30;
-        }
+        // minimum days' duration of the credit card
+        int daysDuration = subType.getMustStartIn() + subType.getDaysDuration() + 10;
 
         // add the minimum days the credit card must be valid from today
-        calDate.add(Calendar.DAY_OF_YEAR, daysDuration);
+        minimumDate.add(Calendar.DAY_OF_YEAR, daysDuration);
 
         // don't find any better methods
-        boolean isDateEqual = calDate.getTime().toString().equals(expireDate.toString());
+        boolean isDateEqual = minimumDate.getTime().toString().equals(expireDate.toString());
         // control the expireDate
-        if ( calDate.getTime().after(expireDate) && !isDateEqual ) {
+        if ( minimumDate.getTime().after(expireDate) && !isDateEqual ) {
             return false;
         }
 

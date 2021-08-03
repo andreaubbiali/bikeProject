@@ -23,209 +23,57 @@ public class IsCreditCardValidForSubscriptionTest {
         return date.getTime();
     }
 
+    //credi card expired
     @Test
-    public void isCreditCardValidForSubscription_False_equalDate() {
+    public void isCreditCardValidForSubscription_False_CreditCardExpired() {
 
-        creditCard.setExpireDate(today);
+        // the credit card will expire in 20 days
+        creditCard.setExpireDate(createDateFromToday(-20));
 
         boolean res = creditCard.isCreditCardValidForSubscription(subType);
         assertFalse(res);
     }
 
+    // start immediately, duration 10 days + 10 days for penalties = 20
     @Test
-    public void isCreditCardValidForSubscription_False_ExpireDateBefore() {
+    public void isCreditCardValidForSubscription_True_equalDate() {
 
-        // expire date yesterday
-        Date expireDate = createDateFromToday(-1);
-
-        creditCard.setExpireDate(expireDate);
-
-        boolean res = creditCard.isCreditCardValidForSubscription(subType);
-        assertFalse(res);
-    }
-
-    // test with mustStartIn = 0
-
-    // partito oggi, dura 5 giorni, la carta scade tra 5 giorni
-    @Test
-    public void isCreditCardValidForSubscription_False_1() {
-
-        int daysDuration = 5;
+        // the credit card will expire in 20 days
+        creditCard.setExpireDate(createDateFromToday(20));
 
         subType.setMustStartIn(0);
-        subType.setDaysDuration(daysDuration);
-
-        // expireDate equal to daysDuration
-        Date expireDate = createDateFromToday(daysDuration);
-        creditCard.setExpireDate(expireDate);
-
-        // subscription.setStartDate(today);
-
-        boolean res = creditCard.isCreditCardValidForSubscription(subType);
-        assertFalse(res);
-    }
-
-    // partito oggi, dura 5 giorni, la carta scade tra 34 giorni (30 gg + 5 gg)-1
-    @Test
-    public void isCreditCardValidForSubscription_False_2() {
-
-        int daysDuration = 5;
-
-        subType.setMustStartIn(0);
-        subType.setDaysDuration(daysDuration);
-
-        Date expireDate = createDateFromToday(34);
-        creditCard.setExpireDate(expireDate);
-
-        // subscription.setStartDate(today);
-
-        boolean res = creditCard.isCreditCardValidForSubscription(subType);
-        assertFalse(res);
-    }
-
-    // partito oggi, dura 5 giorni, la carta scade tra 35 giorni (30 gg + 5 gg)
-    @Test
-    public void isCreditCardValidForSubscription_True_3() {
-
-        int daysDuration = 5;
-
-        subType.setMustStartIn(0);
-        subType.setDaysDuration(daysDuration);
-
-        Date expireDate = createDateFromToday(35);
-        creditCard.setExpireDate(expireDate);
-
-        // subscription.setStartDate(today);
+        subType.setDaysDuration(10);
 
         boolean res = creditCard.isCreditCardValidForSubscription(subType);
         assertTrue(res);
     }
 
-    // partito oggi, dura 5 giorni, la carta scade tra 35 giorni (30 gg + 5 gg)+1
+    // start immediately, duration 5 days + 10 days for penalties = 15
     @Test
-    public void isCreditCardValidForSubscription_True_4() {
+    public void isCreditCardValidForSubscription_True_ExpireAfter() {
 
-        int daysDuration = 5;
+        // the credit card will expire in 20 days
+        creditCard.setExpireDate(createDateFromToday(20));
 
         subType.setMustStartIn(0);
-        subType.setDaysDuration(daysDuration);
-
-        Date expireDate = createDateFromToday(36);
-        creditCard.setExpireDate(expireDate);
-
-        // subscription.setStartDate(today);
+        subType.setDaysDuration(5);
 
         boolean res = creditCard.isCreditCardValidForSubscription(subType);
         assertTrue(res);
     }
 
-    /*
-     * // partito 20 gg fa, dura 30 giorni, carta scade 39 giorni ==
-     * ((20gg-10gg)+30)-1
-     *
-     * @Test public void isCreditCardValidForSubscription_False_5() {
-     *
-     * int daysDuration = 30;
-     *
-     * subType.setMustStartIn(0); subType.setDaysDuration(daysDuration);
-     *
-     * Date expireDate = createDateFromToday(39);
-     * creditCard.setExpireDate(expireDate);
-     *
-     * Date startDate = createDateFromToday(-20);
-     * subscription.setStartDate(startDate);
-     *
-     * boolean res = creditCard.isCreditCardValidForSubscription(subType,
-     * subscription); assertFalse(res); }
-     *
-     * // partito 20 gg fa, dura 30 giorni, carta scade 40 giorni ==
-     * ((20gg-10gg)+30)
-     *
-     * @Test public void isCreditCardValidForSubscription_True_6() {
-     *
-     * int daysDuration = 30;
-     *
-     * subType.setMustStartIn(0); subType.setDaysDuration(daysDuration);
-     *
-     * Date expireDate = createDateFromToday(40);
-     * creditCard.setExpireDate(expireDate);
-     *
-     * Date startDate = createDateFromToday(-20);
-     * subscription.setStartDate(startDate);
-     *
-     * boolean res = creditCard.isCreditCardValidForSubscription(subType,
-     * subscription); assertTrue(res); }
-     *
-     * // partito 20 gg fa, dura 30 giorni, carta scade 41 giorni ==
-     * ((20gg-10gg)+30)+1
-     *
-     * @Test public void isCreditCardValidForSubscription_True_7() {
-     *
-     * int daysDuration = 30;
-     *
-     * subType.setMustStartIn(0); subType.setDaysDuration(daysDuration);
-     *
-     * Date expireDate = createDateFromToday(41);
-     * creditCard.setExpireDate(expireDate);
-     *
-     * Date startDate = createDateFromToday(-20);
-     * subscription.setStartDate(startDate);
-     *
-     * boolean res = creditCard.isCreditCardValidForSubscription(subType,
-     * subscription); assertTrue(res); }
-     */
-
-    // test with mustStartIn != 0
-
-    // abbonamento deve partire entro 20 gg.
-    // daysDuration = 10
-    // (20gg+10gg)+30gg == 60gg
-
-    // carta scade tra 59 gg
+    // start immediately, duration 15 days + 10 days for penalties = 25
     @Test
-    public void isCreditCardValidForSubscription_False_8() {
+    public void isCreditCardValidForSubscription_False_ExpireBefore() {
 
-        int daysDuration = 10;
+        // the credit card will expire in 20 days
+        creditCard.setExpireDate(createDateFromToday(20));
 
-        subType.setMustStartIn(20);
-        subType.setDaysDuration(daysDuration);
-
-        Date expireDate = createDateFromToday(59);
-        creditCard.setExpireDate(expireDate);
+        subType.setMustStartIn(0);
+        subType.setDaysDuration(15);
 
         boolean res = creditCard.isCreditCardValidForSubscription(subType);
         assertFalse(res);
     }
 
-    // carta scade tra 60gg
-    @Test
-    public void isCreditCardValidForSubscription_True_9() {
-
-        int daysDuration = 10;
-
-        subType.setMustStartIn(20);
-        subType.setDaysDuration(daysDuration);
-
-        Date expireDate = createDateFromToday(60);
-        creditCard.setExpireDate(expireDate);
-
-        boolean res = creditCard.isCreditCardValidForSubscription(subType);
-        assertTrue(res);
-    }
-
-    // carta scade tra 61gg
-    @Test
-    public void isCreditCardValidForSubscription_True_10() {
-
-        int daysDuration = 10;
-
-        subType.setMustStartIn(20);
-        subType.setDaysDuration(daysDuration);
-
-        Date expireDate = createDateFromToday(61);
-        creditCard.setExpireDate(expireDate);
-
-        boolean res = creditCard.isCreditCardValidForSubscription(subType);
-        assertTrue(res);
-    }
 }
