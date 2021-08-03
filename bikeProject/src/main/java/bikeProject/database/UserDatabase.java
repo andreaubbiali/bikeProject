@@ -11,12 +11,12 @@ import bikeProject.exception.UserNotFoundException;
 
 public class UserDatabase extends Database implements UserDatabaseInterface {
 
-    public User login(String username, String password) throws SQLException {
+    public User login(String email, String password) throws SQLException {
         User user = new User();
         return user;
     }
 
-    public int registerNewUser(String name, String surname, String username, String email, boolean isStudent, String password, String salt) throws SQLException {
+    public int registerNewUser(String name, String surname, String email, boolean isStudent, String password, String salt) throws SQLException {
         return 4;
     }
 

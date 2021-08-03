@@ -12,14 +12,9 @@ import bikeProject.exception.WrongPasswordException;
 
 public class User implements DataserviceInterface {
 
-    /**
-     * @invariant
-     */
-
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ String name;
     private /* @ not_null @ */ String surname;
-    private /* @ not_null @ */ String username;
     private /* @ not_null @ */ String email;
     private /* @ not_null @ */ boolean isStudent;
     private List<CreditCard> creditCard;
@@ -29,10 +24,9 @@ public class User implements DataserviceInterface {
      * @param name     string the name of the user
      * @param surname  string the surname of the user
      * @param email    string the email of the user
-     * @param username string the username of the user
      * @param password string the password of the user
      */
-    public void registerNewUser(String name, String surname, String username, String email, String password, boolean isStudent) throws SQLException {
+    public void registerNewUser(String name, String surname, String email, String password, boolean isStudent) throws SQLException {
 
         // Generate Salt. The generated value can be stored in DB.
         String salt = PasswordUtils.getSalt(30);
@@ -48,11 +42,11 @@ public class User implements DataserviceInterface {
         int id;
 
         // Add user into DB
-        id = userDB.registerNewUser(name, surname, username, email, isStudent, mySecurePassword, salt);
+        id = userDB.registerNewUser(name, surname, email, isStudent, mySecurePassword, salt);
         // set user attributes
-        setUser(id, name, surname, username, email, isStudent);
+        setUser(id, name, surname, email, isStudent);
 
-        System.out.println("New user registered: " + this.username);
+        System.out.println("New user registered: " + this.email);
     }
 
     /**
@@ -112,10 +106,14 @@ public class User implements DataserviceInterface {
 
         // payment for the subscription
         selectedCreditCard.pay(subType.getPrice());
-        
+
         this.subscription.add(subscription);
 
         return uniqueCode;
+    }
+
+    public void rentBike(BikeType bikeType, String subscriptionCode) {
+
     }
 
     /**
@@ -170,15 +168,13 @@ public class User implements DataserviceInterface {
      * @param id
      * @param name
      * @param surname
-     * @param username
      * @param email
      * @param isStudent
      */
-    public void setUser(int id, String name, String surname, String username, String email, boolean isStudent) {
+    public void setUser(int id, String name, String surname, String email, boolean isStudent) {
         setID(id);
         setName(name);
         setSurname(surname);
-        setUsername(username);
         setEmail(email);
         setIsStudent(isStudent);
     }
@@ -190,7 +186,6 @@ public class User implements DataserviceInterface {
         setID(user.ID);
         setName(user.name);
         setSurname(user.surname);
-        setUsername(user.username);
         setEmail(user.email);
         setIsStudent(user.isStudent);
     }
@@ -218,14 +213,6 @@ public class User implements DataserviceInterface {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
