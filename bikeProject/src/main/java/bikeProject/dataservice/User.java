@@ -58,7 +58,7 @@ public class User implements DataserviceInterface {
 
         User user = userDB.login(email, password);
         if ( user == null ) {
-            throw new UserNotFoundException();
+            throw new UserNotFoundException("Wrong email or password");
         }
         setUser(user);
 
@@ -116,7 +116,7 @@ public class User implements DataserviceInterface {
     public boolean checkIsUserAStudent() {
 
         // check if is in production or test mode
-        if ( config.IsProductionMode() ) {
+        if ( config.isProductionMode() ) {
 
             try {
                 // this.isStudent = send request to university

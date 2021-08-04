@@ -11,6 +11,7 @@ public class Config {
     private static boolean productionMode;
     private static boolean universityMockResponse;
     private static boolean bankMockResponse;
+    private static boolean rackMockResponse;
 
     private Config() {
         // Exists only to defeat instantiation.
@@ -44,6 +45,7 @@ public class Config {
         productionMode = (boolean) jo.get("productionMode");
         universityMockResponse = (boolean) jo.get("universityMockResponse");
         bankMockResponse = (boolean) jo.get("bankMockResponse");
+        rackMockResponse = (boolean) jo.get("rackMockResponse");
 
         return inst;
     }
@@ -53,13 +55,18 @@ public class Config {
         return universityMockResponse;
     }
 
-    public boolean IsProductionMode() {
+    public boolean isProductionMode() {
 
         return productionMode;
     }
 
     public boolean getBankMockResponse() {
+
         return bankMockResponse;
+    }
+
+    public boolean getRackMockResponse() {
+        return rackMockResponse;
     }
 
 }

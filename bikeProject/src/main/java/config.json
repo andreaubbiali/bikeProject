@@ -1,5 +1,6 @@
 {
   "productionMode": false,
   "universityMockResponse": true,
-  "bankMockResponse": true
+  "bankMockResponse": true,
+  "rackMockResponse": true
 }
