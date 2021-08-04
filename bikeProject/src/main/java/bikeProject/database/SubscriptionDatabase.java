@@ -9,7 +9,15 @@ import bikeProject.dataservice.SubscriptionType;
 
 public class SubscriptionDatabase extends Database implements SubscriptionDatabaseInterface {
 
-	public void getSubscriptionByUniqueCode(String uniqueCode, Subscription subscription) throws SQLException {
+	public long createNewSubscription(Subscription subscription) throws SQLException {
+		return 5;
+	}
+
+	public void setSubscriptionDateNow() throws SQLException {
+
+	}
+
+	/*public void getSubscriptionByUniqueCode(String uniqueCode, Subscription subscription) throws SQLException {
 
 		SubscriptionType subType = new SubscriptionType();
 
@@ -45,6 +53,6 @@ public class SubscriptionDatabase extends Database implements SubscriptionDataba
 
 		res.close();
 
-	}
+	}*/
 
 }

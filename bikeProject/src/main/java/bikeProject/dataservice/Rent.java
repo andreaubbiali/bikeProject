@@ -2,67 +2,57 @@ package bikeProject.dataservice;
 
 import java.util.Date;
 
+import bikeProject.database.RentDatabase;
 import bikeProject.exception.NotValidRentException;
 
-public class Rent {
+public class Rent implements DataserviceInterface {
 
-	private /* @ not_null @ */ long ID;
-	private /* @ not_null @ */ long bikeID;
-	private /* @ not_null @ */ long userID;
-	private /* @ not_null @ */ Date startDate;
+    private /* @ not_null @ */ long ID;
+    private /* @ not_null @ */ Bike bike;
+    private /* @ not_null @ */ User user;
+    private /* @ not_null @ */ Date startDate;
 
-	public Rent(String uniqueCode, String password) throws NotValidRentException {
-		User user = new User();
+    public void createRent(User user, Bike bike) {
+        Date today = new Date();
 
-		// check the validity of uniqueCode and the password
-		// TODO fix
-		/*if (!user.isValidUniqueCodeSubscriptionForUser(uniqueCode, password)) {
-			throw new NotValidRentException("Not found subscription with this uniqueCode and password");
-		}*/
+        this.user = user;
+        this.bike = bike;
+        this.startDate = today;
 
-		this.userID = user.getID();
-	}
+        // add the record into db
+        rentDB.createRent(user, bike, startDate);
+    }
 
-	public void createRent(long bike) {
-		Date today = new Date();
+    public long getID() {
+        return ID;
+    }
 
-		this.bikeID = bike;
-		this.startDate = today;
+    public void setID(long ID) {
+        this.ID = ID;
+    }
 
-		// TODO
-		// create the rent into the database
-	}
+    public Bike getBike() {
+        return bike;
+    }
 
-	public long getID() {
-		return ID;
-	}
+    public void setBike(Bike bike) {
+        this.bike = bike;
+    }
 
-	public void setID(long iD) {
-		ID = iD;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public long getBikeID() {
-		return bikeID;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setBikeID(long bikeID) {
-		this.bikeID = bikeID;
-	}
+    public Date getStartDate() {
+        return startDate;
+    }
 
-	public long getUserID() {
-		return userID;
-	}
-
-	public void setUserID(long userID) {
-		this.userID = userID;
-	}
-
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
 }

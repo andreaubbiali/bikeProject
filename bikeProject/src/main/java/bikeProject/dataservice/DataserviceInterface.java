@@ -11,6 +11,8 @@ public interface DataserviceInterface {
     UserDatabaseInterface userDB = new UserDatabase();
     SubscriptionDatabaseInterface subscriptionDB = new SubscriptionDatabase();
     CreditCardDatabaseInterface credCardDB = new CreditCardDatabase();
+    RentDatabaseInterface rentDB = new RentDatabase();
+    RackPositionDatabaseInterface rackDB = new RackPositionDatabase();
 
 //	Database_Interface.Database_Interface_User userDB = new User_Database();
 

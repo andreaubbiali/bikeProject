@@ -12,7 +12,7 @@ public class Subscription implements DataserviceInterface {
     private /* @ not_null @ */ Date subscriptionDate;
     private /* @ not_null @ */ long userID;
     private /* @ not_null @ */ long creditCardID;
-    private /* @ not_null @ */ Date startDate;
+    private Date startDate;
 
     public void createNewSubscription(long userID, SubscriptionType subType, long creditCardID) throws SQLException {
         Date today = new Date();
@@ -32,51 +32,47 @@ public class Subscription implements DataserviceInterface {
     }
 
     /**
-     * if the mustStartDate = null the startDate can't be null
+     * A subscription is valid if today is:
+     * if the subscription is started, today must be before or equal to: startDate + daysDuration
+     * if the subscription isn't started, today must be before or equal to: subscriptionDate + mustStartIn
      *
-     * @return
+     * @return true if is valid false otherwise
      */
     public boolean isValid() {
         Calendar cal = Calendar.getInstance();
         Date today = new Date();
-        int duration;
 
-        if ( startDate == null ) {
-            // the subscription hasn't been started
+        if ( this.startDate != null ) {
+            // subscription started
 
-            cal.setTime(subscriptionDate);
-
-            // oggi deve essere < mustStartIn+daysDuration
-
-            // add duration to subscriptionDate
-            cal.add(Calendar.DAY_OF_YEAR, type.getMustStartIn());
-
-            // today before subscriptionDate+nustStartIn
-            if ( today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString()) ) {
-                return true;
-            }
+            // calculate startDate + daysDuration
+            cal.setTime(this.startDate);
+            cal.add(Calendar.DAY_OF_YEAR, this.type.getDaysDuration());
 
         } else {
-            // the subscription has been started
+            // subscription not started
 
-            // oggi < startDate+daysDuration
-            cal.setTime(startDate);
+            // calculate subscriptionDate + mustStartIn
+            cal.setTime(this.subscriptionDate);
+            cal.add(Calendar.DAY_OF_YEAR, this.type.getMustStartIn());
+        }
 
-            cal.add(Calendar.DAY_OF_YEAR, type.getDaysDuration());
-
-            if ( today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString()) ) {
-                return true;
-            }
-
+        // check the condition
+        if ( today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString()) ) {
+            return true;
         }
 
         return false;
     }
 
-    /*public Subscription(String uniqueCode) throws SQLException {
-		// TODO
-		subscriptionDB.getSubscriptionByUniqueCode(uniqueCode, this);
-	}*/
+    public void startSubscriptionNow() throws SQLException {
+        Date today = new Date();
+
+        this.startDate = today;
+
+        // update record on db
+        subscriptionDB.setSubscriptionDateNow();
+    }
 
     public long getID() {
         return ID;
