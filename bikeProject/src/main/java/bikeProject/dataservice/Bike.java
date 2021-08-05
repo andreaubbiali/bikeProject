@@ -1,24 +1,28 @@
 package bikeProject.dataservice;
 
-public class Bike {
-	private /* @ not_null @ */ long ID;
-	private /* @ not_null @ */ BikeType type;
-	private /* @ not_null @ */ boolean isInMaintenance;
+import java.sql.SQLException;
 
-	public BikeType getType() {
-		return type;
-	}
+public class Bike implements DataserviceInterface {
+    private /* @ not_null @ */ long ID;
+    private /* @ not_null @ */ BikeType type;
+    private /* @ not_null @ */ boolean isInMaintenance;
 
-	public void setType(BikeType type) {
-		this.type = type;
-	}
+    public void setInMaintenance(boolean isInMaintenance) throws SQLException {
 
-	public boolean isInMaintenance() {
-		return isInMaintenance;
-	}
+        this.isInMaintenance = isInMaintenance;
+        bikeDB.updateIsInMaintenance(this);
+    }
 
-	public void setInMaintenance(boolean isInMaintenance) {
-		this.isInMaintenance = isInMaintenance;
-	}
+    public BikeType getType() {
+        return type;
+    }
+
+    public void setType(BikeType type) {
+        this.type = type;
+    }
+
+    public boolean isInMaintenance() {
+        return isInMaintenance;
+    }
 
 }

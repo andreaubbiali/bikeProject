@@ -13,6 +13,8 @@ public interface DataserviceInterface {
     CreditCardDatabaseInterface credCardDB = new CreditCardDatabase();
     RentDatabaseInterface rentDB = new RentDatabase();
     RackPositionDatabaseInterface rackDB = new RackPositionDatabase();
+    BikeDatabaseInterface bikeDB = new BikeDatabase();
+    DamagedBikeInterface damagedBikeDB = new DamagedBikeDatabase();
 
 //	Database_Interface.Database_Interface_User userDB = new User_Database();
 
