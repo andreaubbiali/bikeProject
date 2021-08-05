@@ -1,6 +1,7 @@
 package bikeProject.dataservice;
 
 import bikeProject.exception.NotValidRentException;
+import bikeProject.exception.RackException;
 import bikeProject.exception.UserNotFoundException;
 
 import java.sql.SQLException;
@@ -76,6 +77,39 @@ public class TotemRack implements DataserviceInterface {
 
         // return the position where to take the bike
         return rackPosition.getID();
+    }
+
+    public void returnBike(String email, long rackPositionPlace) throws SQLException, RackException {
+
+        // get the bike type used by the user
+        BikeType bikeType = rentDB.getBikeTypeByUserEmail(email);
+
+        boolean found = false;
+
+        // check if the rack position allow the bikeType
+        for ( RackPosition position : rackPositionList ) {
+
+            // find the rack position requested
+            if ( position.getID() == rackPositionPlace ) {
+                found = true;
+
+                if ( position.isBroken() ) {
+                    throw new RackException("The rack position selected is broken");
+                } else if ( !position.getAcceptedBikeType().equals(bikeType) ) {
+                    throw new RackException("The rack position selected is for bike of type: " + position.getAcceptedBikeType().getType() + " not for: " + bikeType.getType());
+                }
+
+                // unlock the rack position
+                if ( !position.lock() ) {
+                    throw new RackException("Something wrong trying to unlock the position requested on the rack");
+                }
+            }
+
+        }
+
+        if ( !found ) {
+            throw new RackException("No position with this rack position number");
+        }
     }
 
     // GETTERS AND SETTERS
