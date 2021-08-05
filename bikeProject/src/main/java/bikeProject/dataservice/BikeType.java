@@ -1,21 +1,32 @@
 package bikeProject.dataservice;
 
-public enum BikeType {
-	NORMAL("Normal", false), ELECTRIC("Electric", false), ELETTRICSEAT("ElectricSeat", true);
+public class  BikeType implements DataserviceInterface{
 
-	private boolean babySeat;
-	private String type;
+	private /* @ not_null @ */ long ID;
+	private /* @ not_null @ */ String type;
+	private /* @ not_null @ */ boolean babySeat;
+
+	public long getID() {
+		return ID;
+	}
+
+	public void setID(long ID) {
+		this.ID = ID;
+	}
 
 	public String getType() {
-		return this.type;
+		return type;
 	}
 
-	public boolean getSimbolo() {
-		return this.babySeat;
-	}
-
-	private BikeType(String type, boolean babySeat) {
+	public void setType(String type) {
 		this.type = type;
+	}
+
+	public boolean isBabySeat() {
+		return babySeat;
+	}
+
+	public void setBabySeat(boolean babySeat) {
 		this.babySeat = babySeat;
 	}
 }

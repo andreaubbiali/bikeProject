@@ -12,6 +12,6 @@ public class RentDatabase implements RentDatabaseInterface {
     }
 
     public BikeType getBikeTypeByUserEmail(String email) throws SQLException {
-        return BikeType.ELECTRIC;
+        return new BikeType();
     }
 }
