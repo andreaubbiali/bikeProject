@@ -47,24 +47,16 @@ public class TotemRack implements DataserviceInterface {
 
         // find the parkPosition requested
         RackPosition rackPosition = new RackPosition();
-        found = false;
         for ( RackPosition position : rackPositionList ) {
-            rackPosition = position;
 
-            // check all requisites: a bike into the rack position, bikeType requested by the user, bike not in maintenance and a not broken position
-            if ( rackPosition.getBike() != null && rackPosition.getBike().getType().equals(bikeType) && !rackPosition.getBike().isInMaintenance() && !rackPosition.isBroken() ) {
-
-                // try to unlock the rack
-                if ( rackPosition.unlock() ) {
-                    found = true;
-                    break;
-                }
-
+            if ( position.isBikeTypeRentable(bikeType) ) {
+                rackPosition = position;
+                break;
             }
         }
 
         // check errors
-        if ( !found ) {
+        if ( rackPosition != null ) {
             throw new NotValidRentException("No park position founded with the bike type requested or probably rack positions are broken");
         }
 
