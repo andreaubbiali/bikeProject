@@ -14,7 +14,8 @@ public interface DataserviceInterface {
     RentDatabaseInterface rentDB = new RentDatabase();
     RackPositionDatabaseInterface rackDB = new RackPositionDatabase();
     BikeDatabaseInterface bikeDB = new BikeDatabase();
-    DamagedBikeInterface damagedBikeDB = new DamagedBikeDatabase();
+    DamagedBikeDatabaseInterface damagedBikeDB = new DamagedBikeDatabase();
+    TariffDatabaseInterface tariffDB = new TariffDatabase();
 
 //	Database_Interface.Database_Interface_User userDB = new User_Database();
 

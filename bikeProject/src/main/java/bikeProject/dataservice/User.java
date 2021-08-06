@@ -5,10 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import bikeProject.PasswordUtils;
-import bikeProject.exception.InvalidCreditCardException;
-import bikeProject.exception.PaymentException;
-import bikeProject.exception.UserNotFoundException;
-import bikeProject.exception.WrongPasswordException;
+import bikeProject.exception.*;
 
 public class User implements DataserviceInterface {
 
@@ -80,6 +77,27 @@ public class User implements DataserviceInterface {
         this.creditCard.add(creditCard);
     }
 
+    public Subscription getValidSubscription() throws InvalidSubscriptionException {
+        Subscription subscription = new Subscription();
+        boolean found = false ;
+
+        for ( int i = this.subscription.size() - 1; i >= 0; i-- ) {
+            subscription = this.subscription.get(i);
+
+            // check if the subscription is valid
+            if ( subscription.isValid() ) {
+                found = true;
+                break;
+            }
+        }
+
+        if (!found){
+            throw new InvalidSubscriptionException("There are no subscription valid for the user");
+        }
+
+        return subscription;
+    }
+
     /**
      * @param subType
      * @param selectedCreditCard
@@ -101,7 +119,7 @@ public class User implements DataserviceInterface {
 
         // creation of the subscription
         Subscription subscription = new Subscription();
-        subscription.createNewSubscription(this.ID, subType, selectedCreditCard.getID());
+        subscription.createNewSubscription(this, subType, selectedCreditCard);
 
         // payment for the subscription
         selectedCreditCard.pay(subType.getPrice());

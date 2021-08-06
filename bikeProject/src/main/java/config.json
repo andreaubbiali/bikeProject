@@ -2,5 +2,7 @@
   "productionMode": false,
   "universityMockResponse": true,
   "bankMockResponse": true,
-  "rackMockResponse": true
+  "rackMockResponse": true,
+  "maximumRentMinutes": 1440,
+  "tariffExceedMaximumRentMinutes": 150
 }

@@ -12,6 +12,8 @@ public class Config {
     private static boolean universityMockResponse;
     private static boolean bankMockResponse;
     private static boolean rackMockResponse;
+    private static int maximumRentMinutes;
+    private static Float tariffExceedMaximumRentMinutes;
 
     private Config() {
         // Exists only to defeat instantiation.
@@ -46,6 +48,8 @@ public class Config {
         universityMockResponse = (boolean) jo.get("universityMockResponse");
         bankMockResponse = (boolean) jo.get("bankMockResponse");
         rackMockResponse = (boolean) jo.get("rackMockResponse");
+        maximumRentMinutes = (int) jo.get("maximumRentMinutes");
+        tariffExceedMaximumRentMinutes = (Float) jo.get("tariffExceedMaximumRentMinutes");
 
         return inst;
     }
@@ -67,6 +71,14 @@ public class Config {
 
     public boolean getRackMockResponse() {
         return rackMockResponse;
+    }
+
+    public int getMaximumRentMinutes() {
+        return maximumRentMinutes;
+    }
+
+    public Float getTariffExceedMaximumRentMinutes() {
+        return tariffExceedMaximumRentMinutes;
     }
 
 }

@@ -10,17 +10,17 @@ public class Subscription implements DataserviceInterface {
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ SubscriptionType type;
     private /* @ not_null @ */ Date subscriptionDate;
-    private /* @ not_null @ */ long userID;
-    private /* @ not_null @ */ long creditCardID;
+    private /* @ not_null @ */ User user;
+    private /* @ not_null @ */ CreditCard creditCard;
     private Date startDate;
 
-    public void createNewSubscription(long userID, SubscriptionType subType, long creditCardID) throws SQLException {
+    public void createNewSubscription(User user, SubscriptionType subType, CreditCard creditCard) throws SQLException {
         Date today = new Date();
 
         this.type = subType;
         this.subscriptionDate = today;
-        this.userID = userID;
-        this.creditCardID = creditCardID;
+        this.user = user;
+        this.creditCard = creditCard;
         if ( type.getMustStartIn() == 0 ) {
             // the subscription start immediately
             this.startDate = today;
@@ -98,12 +98,12 @@ public class Subscription implements DataserviceInterface {
         this.subscriptionDate = subscriptionDate;
     }
 
-    public long getUserID() {
-        return userID;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(long userID) {
-        this.userID = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getStartDate() {
@@ -114,12 +114,12 @@ public class Subscription implements DataserviceInterface {
         this.startDate = startDate;
     }
 
-    public long getCreditCardID() {
-        return creditCardID;
+    public CreditCard getCreditCard() {
+        return creditCard;
     }
 
-    public void setCreditCardID(long creditCardID) {
-        this.creditCardID = creditCardID;
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 
 }
