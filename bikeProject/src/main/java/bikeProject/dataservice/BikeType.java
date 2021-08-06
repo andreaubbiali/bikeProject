@@ -3,7 +3,7 @@ package bikeProject.dataservice;
 public class  BikeType implements DataserviceInterface{
 
 	private /* @ not_null @ */ long ID;
-	private /* @ not_null @ */ String type;
+	private /* @ not_null @ */ BikeTypeEnum type;
 	private /* @ not_null @ */ boolean babySeat;
 
 	public long getID() {
@@ -14,11 +14,11 @@ public class  BikeType implements DataserviceInterface{
 		this.ID = ID;
 	}
 
-	public String getType() {
+	public BikeTypeEnum getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(BikeTypeEnum type) {
 		this.type = type;
 	}
 
