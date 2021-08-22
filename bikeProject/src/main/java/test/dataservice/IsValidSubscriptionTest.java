@@ -54,6 +54,7 @@ public class IsValidSubscriptionTest {
 
         Date subscriptionDate = createDateFromToday(-5);
 
+        subscription.setDeleted(false);
         setSubscriptionType(10, 6);
         setSubscription(subscriptionDate, null);
 
@@ -68,6 +69,7 @@ public class IsValidSubscriptionTest {
 
         Date subscriptionDate = createDateFromToday(-5);
 
+        subscription.setDeleted(false);
         setSubscriptionType(10, 5);
         setSubscription(subscriptionDate, null);
 
@@ -83,6 +85,7 @@ public class IsValidSubscriptionTest {
 
         Date subscriptionDate = createDateFromToday(-5);
 
+        subscription.setDeleted(false);
         setSubscriptionType(10, 4);
         setSubscription(subscriptionDate, null);
 
@@ -99,6 +102,7 @@ public class IsValidSubscriptionTest {
 
         Date startDate = createDateFromToday(-10);
 
+        subscription.setDeleted(false);
         setSubscriptionType(11, 10);
         setSubscription(null, startDate);
 
@@ -113,6 +117,7 @@ public class IsValidSubscriptionTest {
 
         Date startDate = createDateFromToday(-10);
 
+        subscription.setDeleted(false);
         setSubscriptionType(10, 10);
         setSubscription(null, startDate);
 
@@ -127,9 +132,22 @@ public class IsValidSubscriptionTest {
 
         Date startDate = createDateFromToday(-10);
 
+        subscription.setDeleted(false);
         setSubscriptionType(9, 10);
         setSubscription(null, startDate);
 
+        boolean res = subscription.isValid();
+
+        assertFalse(res);
+    }
+
+    // deleted
+    @Test
+    public void isValid_Subscription_False_7() {
+
+        Date subscriptionDate = createDateFromToday(-5);
+
+        subscription.setDeleted(true);
         boolean res = subscription.isValid();
 
         assertFalse(res);
