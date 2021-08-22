@@ -8,5 +8,7 @@ public interface SubscriptionDatabaseInterface {
 
     long createNewSubscription(Subscription subscription) throws SQLException;
 
+    void updateSubscription(Subscription subscription) throws SQLException;
+
     void setSubscriptionDateNow() throws SQLException;
 }

@@ -12,7 +12,9 @@ public class Subscription implements DataserviceInterface {
     private /* @ not_null @ */ Date subscriptionDate;
     private /* @ not_null @ */ User user;
     private /* @ not_null @ */ CreditCard creditCard;
+    private /* @ not_null @ */ int countExceededTime;
     private Date startDate;
+    private /* @ not_null @ */ boolean deleted;
 
     public void createNewSubscription(User user, SubscriptionType subType, CreditCard creditCard) throws SQLException {
         Date today = new Date();
@@ -25,6 +27,8 @@ public class Subscription implements DataserviceInterface {
             // the subscription start immediately
             this.startDate = today;
         }
+        this.countExceededTime = 0;
+        this.deleted = false;
 
         // add the subscription into db
         this.ID = subscriptionDB.createNewSubscription(this);
@@ -32,7 +36,7 @@ public class Subscription implements DataserviceInterface {
     }
 
     /**
-     * A subscription is valid if today is:
+     * A subscription is valid if is not deleted and today is:
      * if the subscription is started, today must be before or equal to: startDate + daysDuration
      * if the subscription isn't started, today must be before or equal to: subscriptionDate + mustStartIn
      *
@@ -41,6 +45,10 @@ public class Subscription implements DataserviceInterface {
     public boolean isValid() {
         Calendar cal = Calendar.getInstance();
         Date today = new Date();
+
+        if (this.deleted){
+            return false;
+        }
 
         if ( this.startDate != null ) {
             // subscription started
@@ -72,6 +80,21 @@ public class Subscription implements DataserviceInterface {
 
         // update record on db
         subscriptionDB.setSubscriptionDateNow();
+    }
+
+    /**
+     * added 1 to countExceededTime and check if the subscription must be deleted
+     * @throws SQLException
+     */
+    public void exceededRentTime()  throws SQLException {
+        this.countExceededTime += 1;
+
+        if (countExceededTime == 3) {
+            // exceeded the maximum times so delete the subscription
+            this.deleted = true;
+        }
+
+        subscriptionDB.updateSubscription(this);
     }
 
     public long getID() {
@@ -121,5 +144,13 @@ public class Subscription implements DataserviceInterface {
     public void setCreditCard(CreditCard creditCard) {
         this.creditCard = creditCard;
     }
+
+    public int getCountExceededTime() {return countExceededTime;}
+
+    public void setCountExceededTime(int countExceededTime) {this.countExceededTime = countExceededTime;}
+
+    public boolean isDeleted() {return deleted;}
+
+    public void setDeleted(boolean deleted) {this.deleted = deleted;}
 
 }

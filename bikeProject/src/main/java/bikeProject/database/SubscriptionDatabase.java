@@ -13,6 +13,10 @@ public class SubscriptionDatabase extends Database implements SubscriptionDataba
 		return 5;
 	}
 
+	public void updateSubscription(Subscription subscription) throws SQLException{
+
+	}
+
 	public void setSubscriptionDateNow() throws SQLException {
 
 	}

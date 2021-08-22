@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import bikeProject.database.RentDatabase;
+import bikeProject.exception.InvalidSubscriptionException;
 import bikeProject.exception.NotValidRentException;
 import bikeProject.exception.PaymentException;
 
@@ -27,7 +28,7 @@ public class Rent implements DataserviceInterface {
         rentDB.createRent(user, bike, startDate);
     }
 
-    public void endRent(CreditCard creditCard) throws PaymentException, SQLException {
+    public void endRent(CreditCard creditCard) throws PaymentException, SQLException, InvalidSubscriptionException {
         this.endDate = new Date();
 
         rentDB.updateRent(this);
@@ -45,7 +46,13 @@ public class Rent implements DataserviceInterface {
         // calculate the cost to be pay
         Float totalCost;
         if (config.getMaximumRentMinutes() < rentMinutes){
-            totalCost =config.getTariffExceedMaximumRentMinutes();
+            // exceeded the maximum rent time so pay the penal
+            totalCost = config.getTariffExceedMaximumRentMinutes();
+
+            // update user subscription because has exceeded the maximum time
+            Subscription subscription = user.getValidSubscription();
+            subscription.exceededRentTime();
+
         } else {
             totalCost = tariff.calculateCostOfRent(rentMinutes, bike.getType());
         }
