@@ -6,5 +6,5 @@ import java.sql.SQLException;
 
 public interface BikeDatabaseInterface {
 
-    public void updateIsInMaintenance(Bike bike) throws SQLException;
+    void updateBike(Bike bike) throws SQLException;
 }
