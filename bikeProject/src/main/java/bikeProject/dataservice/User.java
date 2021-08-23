@@ -1,7 +1,7 @@
 package bikeProject.dataservice;
 
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import bikeProject.PasswordUtils;
@@ -79,7 +79,7 @@ public class User implements DataserviceInterface {
 
     public Subscription getValidSubscription() throws InvalidSubscriptionException {
         Subscription subscription = new Subscription();
-        boolean found = false ;
+        boolean found = false;
 
         for ( int i = this.subscription.size() - 1; i >= 0; i-- ) {
             subscription = this.subscription.get(i);
@@ -91,7 +91,7 @@ public class User implements DataserviceInterface {
             }
         }
 
-        if (!found){
+        if ( !found ) {
             throw new InvalidSubscriptionException("There are no subscription valid for the user");
         }
 

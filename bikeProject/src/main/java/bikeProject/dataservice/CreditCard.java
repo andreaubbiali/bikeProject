@@ -27,7 +27,7 @@ public class CreditCard implements DataserviceInterface, CreditCardInterface {
             }
 
             // register new credit card for a user
-            int id = credCardDB.registerNewCreditCard(userID, number, cvv, expireDate);
+            long id = credCardDB.registerNewCreditCard(userID, number, cvv, expireDate);
 
             // set credit card fields
             setCreditCard(id, number, cvv, expireDate);
