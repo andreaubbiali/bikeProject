@@ -11,18 +11,16 @@ public class Subscription implements DataserviceInterface {
     private /* @ not_null @ */ SubscriptionType type;
     private /* @ not_null @ */ Date subscriptionDate;
     private /* @ not_null @ */ User user;
-    private /* @ not_null @ */ CreditCard creditCard;
     private /* @ not_null @ */ int countExceededTime;
     private Date startDate;
     private /* @ not_null @ */ boolean deleted;
 
-    public void createNewSubscription(User user, SubscriptionType subType, CreditCard creditCard) throws SQLException {
+    public void createNewSubscription(User user, SubscriptionType subType) throws SQLException {
         Date today = new Date();
 
         this.type = subType;
         this.subscriptionDate = today;
         this.user = user;
-        this.creditCard = creditCard;
         if ( type.getMustStartIn() == 0 ) {
             // the subscription start immediately
             this.startDate = today;
@@ -46,7 +44,7 @@ public class Subscription implements DataserviceInterface {
         Calendar cal = Calendar.getInstance();
         Date today = new Date();
 
-        if (this.deleted){
+        if ( this.deleted ) {
             return false;
         }
 
@@ -84,12 +82,13 @@ public class Subscription implements DataserviceInterface {
 
     /**
      * added 1 to countExceededTime and check if the subscription must be deleted
+     *
      * @throws SQLException
      */
-    public void exceededRentTime()  throws SQLException {
+    public void exceededRentTime() throws SQLException {
         this.countExceededTime += 1;
 
-        if (countExceededTime == 3) {
+        if ( countExceededTime == 3 ) {
             // exceeded the maximum times so delete the subscription
             this.deleted = true;
         }
@@ -137,20 +136,20 @@ public class Subscription implements DataserviceInterface {
         this.startDate = startDate;
     }
 
-    public CreditCard getCreditCard() {
-        return creditCard;
+    public int getCountExceededTime() {
+        return countExceededTime;
     }
 
-    public void setCreditCard(CreditCard creditCard) {
-        this.creditCard = creditCard;
+    public void setCountExceededTime(int countExceededTime) {
+        this.countExceededTime = countExceededTime;
     }
 
-    public int getCountExceededTime() {return countExceededTime;}
+    public boolean isDeleted() {
+        return deleted;
+    }
 
-    public void setCountExceededTime(int countExceededTime) {this.countExceededTime = countExceededTime;}
-
-    public boolean isDeleted() {return deleted;}
-
-    public void setDeleted(boolean deleted) {this.deleted = deleted;}
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
 }
