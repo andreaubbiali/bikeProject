@@ -3,23 +3,29 @@ package bikeProject.database;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import bikeProject.dataservice.Subscription;
 import bikeProject.dataservice.SubscriptionType;
 
 public class SubscriptionDatabase extends Database implements SubscriptionDatabaseInterface {
 
-	public long createNewSubscription(Subscription subscription) throws SQLException {
-		return 5;
-	}
+    public long createNewSubscription(Subscription subscription) throws SQLException {
+        return 5;
+    }
 
-	public void updateSubscription(Subscription subscription) throws SQLException{
+    public void updateSubscription(Subscription subscription) throws SQLException {
 
-	}
+    }
 
-	public void setSubscriptionDateNow() throws SQLException {
+    public void setSubscriptionDateNow() throws SQLException {
 
-	}
+    }
+
+    public List<Subscription> getSubscriptionByUserID(long id) throws SQLException {
+        return new ArrayList<Subscription>();
+    }
 
 	/*public void getSubscriptionByUniqueCode(String uniqueCode, Subscription subscription) throws SQLException {
 
