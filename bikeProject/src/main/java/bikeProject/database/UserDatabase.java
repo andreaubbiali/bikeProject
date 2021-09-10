@@ -8,74 +8,94 @@ import java.sql.Statement;
 import bikeProject.PasswordUtils;
 import bikeProject.dataservice.User;
 import bikeProject.exception.UserNotFoundException;
+import bikeProject.exception.WrongPasswordException;
 
 public class UserDatabase extends Database implements UserDatabaseInterface {
 
-    public User login(String email, String password) throws SQLException {
-        User user = new User();
-        return user;
+    public void login(User user, String email, String password) throws SQLException, WrongPasswordException {
+
+        PreparedStatement statement = conn.prepareStatement("SELECT * FROM user WHERE email = ? LIMIT 1;");
+        statement.setString(1, email);
+        ResultSet res = statement.executeQuery();
+
+        if ( !checkPassword(res, password) ) {
+            throw new WrongPasswordException();
+        }
+
+        user.setUser(res.getInt("id"), res.getString("name"), res.getString("surname"), res.getString("email"),
+                res.getBoolean("isStudent"));
+
+        res.close();
     }
 
-    public int registerNewUser(String name, String surname, String email, boolean isStudent, String password, String salt) throws SQLException {
-        return 4;
+    public int registerNewUser(String name, String surname, String email, boolean isStudent, String password,
+                               String salt) throws SQLException {
+
+        // prepare the statement
+        PreparedStatement statement = conn.prepareStatement("INSERT INTO user (name, surname, email, password, " +
+                "salt, is_student) VALUES (?,?,?,?,?,?);");
+        statement.setString(1, name);
+        statement.setString(2, surname);
+        statement.setString(3, email);
+        statement.setString(5, password);
+        statement.setString(6, salt);
+        statement.setBoolean(7, isStudent);
+
+        // execute the query
+        int res = statement.executeUpdate();
+        if ( res == 0 ) {
+            throw new SQLException("Register user failed, no rows affected.");
+        }
+
+        try ( ResultSet generatedKeys = statement.getGeneratedKeys() ) {
+            if ( generatedKeys.next() ) {
+                return generatedKeys.getInt(1);
+            } else {
+                throw new SQLException("Register user failed, no ID obtained.");
+            }
+        }
+
     }
 
-    public boolean checkPassword(long id, String password) throws SQLException {
-        return true;
+    public boolean checkPasswordByID(long id, String password) throws SQLException {
+
+        PreparedStatement statement = conn.prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
+        statement.setLong(1, id);
+        ResultSet res = statement.executeQuery();
+
+        boolean valid = checkPassword(res, password);
+        res.close();
+
+        return valid;
     }
 
-	/*public ResultSet getUser() throws Exception {
+    public void getUser(User user) throws SQLException {
 
-		Statement statement = conn.createStatement();
-		String query = "SELECT * FROM user";
-		ResultSet res = statement.executeQuery(query);
+        PreparedStatement statement = conn.prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
+        statement.setLong(1, user.getID());
+        ResultSet res = statement.executeQuery();
 
-		return res;
-	}
+        user.setUser(res.getInt("id"), res.getString("name"), res.getString("surname"), res.getString("email"),
+                res.getBoolean("isStudent"));
 
-	public void login(String username, String password, User user) throws Exception {
+        res.close();
 
-		PreparedStatement statement = conn.prepareStatement("SELECT * FROM user WHERE username = ? LIMIT 1;");
-		statement.setString(1, username);
-		ResultSet res = statement.executeQuery();
+    }
 
-		while (res.next()) {
-			// Encrypted and Base64 encoded password read from database
-			String securePassword = res.getString("password");
+    private boolean checkPassword(ResultSet res, String password) throws SQLException {
 
-			// Salt value stored in database
-			String salt = res.getString("salt");
+        while ( res.next() ) {
 
-			boolean passwordMatch = PasswordUtils.verifyUserPassword(password, securePassword, salt);
+            // Encrypted and Base64 encoded password read from database
+            String dbPassword = res.getString("password");
 
-			if (!passwordMatch) {
-				// TODO: sistemare questo throw
-				throw new Exception();
-			}
+            // Salt value stored in database
+            String salt = res.getString("salt");
 
-			user.setUsername(res.getString("username"));
-		}
+            return PasswordUtils.verifyUserPassword(password, dbPassword, salt);
+        }
 
-		res.close();
-
-	}
-
-	public void registerNewUser(String name, String surname, String email, String username, String password,
-			String salt) throws Exception {
-
-		PreparedStatement statement = conn.prepareStatement(
-				"INSERT INTO user (name, surname, username, email, password, salt) VALUES (?,?,?,?,?,?);");
-		statement.setString(1, name);
-		statement.setString(2, surname);
-		statement.setString(3, username);
-		statement.setString(4, email);
-		statement.setString(5, password);
-		statement.setString(6, salt);
-		int res = statement.executeUpdate();
-		if (res == 0) {
-			// TODO: sistemare questo throw
-			throw new Exception();
-		}
-	}*/
+        return false;
+    }
 
 }

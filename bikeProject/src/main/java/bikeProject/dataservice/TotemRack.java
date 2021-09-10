@@ -11,12 +11,14 @@ public class TotemRack implements DataserviceInterface {
     private /* @ not_null @ */ String address;
     private /* @ not_null @ */ List<RackPosition> rackPositionList;
 
-    public long rentBike(String email, String password, BikeType bikeType) throws SQLException, UserNotFoundException, NotValidRentException, InvalidSubscriptionException {
+    public long rentBike(String email, String password, BikeType bikeType) throws SQLException, UserNotFoundException
+            , NotValidRentException, InvalidSubscriptionException, WrongPasswordException {
 
         // check login user
-        User user = userDB.login(email, password);
-        if ( user == null ) {
-            throw new UserNotFoundException("No user founded with this credentials");
+        User user = new User();
+        userDB.login(user, email, password);
+        if ( user.getName().isEmpty() ) {
+            throw new UserNotFoundException("User not found");
         }
 
         // get valid subscription of the user
@@ -39,7 +41,7 @@ public class TotemRack implements DataserviceInterface {
 
         // check errors
         if ( rackPosition != null ) {
-            throw new NotValidRentException("No park position founded with the bike type requested or probably rack positions are broken");
+            throw new NotValidRentException("No park position founded with the bike type requested or probably rack " + "positions are broken");
         }
 
         // start the rental
@@ -53,7 +55,8 @@ public class TotemRack implements DataserviceInterface {
         return rackPosition.getID();
     }
 
-    public void returnBike(String email, long rackPositionPlace) throws SQLException, RackException, InvalidSubscriptionException, PaymentException, InvalidCreditCardException {
+    public void returnBike(String email, long rackPositionPlace) throws SQLException, RackException,
+            InvalidSubscriptionException, PaymentException, InvalidCreditCardException {
 
         // get the bike type used by the user
         Rent rent = rentDB.getRentByEmail(email);

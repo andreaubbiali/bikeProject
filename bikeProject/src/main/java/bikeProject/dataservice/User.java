@@ -51,13 +51,13 @@ public class User implements DataserviceInterface {
      * @throws UserNotFoundException
      * @throws SQLException
      */
-    public void login(String email, String password) throws UserNotFoundException, SQLException {
+    public void login(String email, String password) throws UserNotFoundException, SQLException,
+            WrongPasswordException {
 
-        User user = userDB.login(email, password);
-        if ( user == null ) {
-            throw new UserNotFoundException("Wrong email or password");
+        userDB.login(this, email, password);
+        if ( this.getName().isEmpty() ) {
+            throw new UserNotFoundException("User not found");
         }
-        setUser(user);
 
         System.out.println("New login from: " + email);
     }
@@ -156,7 +156,7 @@ public class User implements DataserviceInterface {
      */
     public boolean checkPassword(String password) throws SQLException {
 
-        return userDB.checkPassword(this.ID, password);
+        return userDB.checkPasswordByID(this.ID, password);
     }
 
     public CreditCard getCreditCardValidForSubscription(Subscription subscription) throws InvalidCreditCardException {
