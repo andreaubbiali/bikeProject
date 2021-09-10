@@ -53,7 +53,7 @@ public class TotemRack implements DataserviceInterface {
         return rackPosition.getID();
     }
 
-    public void returnBike(String email, long rackPositionPlace) throws SQLException, RackException, InvalidSubscriptionException, PaymentException {
+    public void returnBike(String email, long rackPositionPlace) throws SQLException, RackException, InvalidSubscriptionException, PaymentException, InvalidCreditCardException {
 
         // get the bike type used by the user
         Rent rent = rentDB.getRentByEmail(email);
@@ -86,7 +86,8 @@ public class TotemRack implements DataserviceInterface {
             throw new RackException("No position with this rack position number");
         }
 
-        rent.endRent(rent.getUser().getValidSubscription().getCreditCard());
+        Subscription userSubscription = rent.getUser().getValidSubscription();
+        rent.endRent(userSubscription.getUser().getCreditCardValidForSubscription(userSubscription));
 
     }
 

@@ -119,7 +119,7 @@ public class User implements DataserviceInterface {
 
         // creation of the subscription
         Subscription subscription = new Subscription();
-        subscription.createNewSubscription(this, subType, selectedCreditCard);
+        subscription.createNewSubscription(this, subType);
 
         // payment for the subscription
         selectedCreditCard.pay(subType.getPrice());
@@ -157,6 +157,17 @@ public class User implements DataserviceInterface {
     public boolean checkPassword(String password) throws SQLException {
 
         return userDB.checkPassword(this.ID, password);
+    }
+
+    public CreditCard getCreditCardValidForSubscription(Subscription subscription) throws InvalidCreditCardException {
+
+        for ( CreditCard creditCard : creditCard ) {
+            if ( creditCard.isCreditCardValidForSubscription(subscription.getType()) ) {
+                return creditCard;
+            }
+        }
+
+        throw new InvalidCreditCardException("There are no valid credit card");
     }
 
     /*  *//**

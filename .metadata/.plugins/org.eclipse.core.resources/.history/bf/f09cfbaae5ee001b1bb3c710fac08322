@@ -1,0 +1,43 @@
+package bikeProject.config;
+
+import java.io.File;
+import java.util.Scanner;
+
+public class Config {
+
+	private static Config instance = null;
+	private static boolean universityMockResponse;
+
+	private Config() {
+		// Exists only to defeat instantiation.
+	}
+
+	public static Config getInstance() {
+		if (instance == null) {
+			instance = readConfig();
+		}
+		return instance;
+	}
+
+	public static Config readConfig() {
+		Config inst = new Config();
+
+		try {
+			File myObj = new File("config.json");
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNextLine()) {
+				String data = myReader.nextLine();
+			}
+			myReader.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return inst;
+	}
+
+	public String getUniversityMockResponse() {
+		return universityMockResponse;
+	}
+
+}

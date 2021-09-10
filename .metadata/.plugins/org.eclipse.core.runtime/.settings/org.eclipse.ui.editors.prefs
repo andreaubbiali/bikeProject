@@ -1,0 +1,7 @@
+additionIndicationColor=78,154,6
+changeIndicationColor=114,159,207
+eclipse.preferences.version=1
+linked.focus.color=255,255,255
+overviewRuler_migration=migrated_3.1
+quickdiff.characterMode=true
+quickdiff.defaultProvider=org.eclipse.egit.ui.internal.decorators.GitQuickDiffProvider

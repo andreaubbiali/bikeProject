@@ -1,0 +1,5 @@
+package bikeProject.dataservice;
+
+public class Config {
+
+}

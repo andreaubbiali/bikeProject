@@ -1,0 +1,44 @@
+package bikeProject.config;
+
+import java.io.FileNotFoundException;
+
+public class Config {
+
+	private static Config instance = null;
+	private static boolean universityMockResponse;
+
+	private Config() {
+		// Exists only to defeat instantiation.
+	}
+
+	public static Config getInstance() {
+		if (instance == null) {
+			instance = readConfig();
+		}
+		return instance;
+	}
+
+	public static Config readConfig() {
+		Config inst = new Config();
+
+		try {
+			File myObj = new File("filename.txt");
+			Scanner myReader = new Scanner(myObj);
+			while (myReader.hasNextLine()) {
+				String data = myReader.nextLine();
+				System.out.println(data);
+			}
+			myReader.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
+		}
+
+		return inst;
+	}
+
+	public String getUniversityMockResponse() {
+		return universityMockResponse;
+	}
+
+}

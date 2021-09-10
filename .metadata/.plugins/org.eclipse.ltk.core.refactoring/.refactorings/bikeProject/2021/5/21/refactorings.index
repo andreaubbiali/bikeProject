@@ -1,0 +1,13 @@
+1621672457269	Rename type 'Admin_User'
+1621673947410	Rename type 'Subscribe_Type'
+1621673976337	Rename type 'Subscribtion_Type'
+1621675379799	Rename type 'Bike_Type'
+1621675458871	Rename type 'Credit_Card'
+1621675468513	Rename type 'Rack_Park'
+1621675476449	Rename type 'Subscription_Type'
+1621675483361	Rename type 'User_Admin'
+1621691017191	Delete element
+1621691023842	Rename compilation unit 'subscriptionTypee.java'
+1621691129641	Rename type 'subscriptionType'
+1621693074315	Rename package 'exception'
+1621694512307	Rename type 'CreditCardException'

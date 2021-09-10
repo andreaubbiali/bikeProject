@@ -1,0 +1,5 @@
+1621759807058	Rename type 'prova'
+1621759820747	Rename type 'IsCreditCardValidForSubscription'
+1621785173946	Encapsulate field 'uniqueCode'
+1621789633797	Rename type 'Dataservice_Interface'
+1622293304269	Encapsulate field 'startDate'
