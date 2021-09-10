@@ -14,13 +14,25 @@ public class CreditCard implements DataserviceInterface, CreditCardInterface {
     private /* @ not_null @ */ long cvv;
     private /* @ not_null @ */ Date expireDate;
 
+    // TODO l'ho aggiunto perchè mi dava problemi... va bene lasciarlo così?
+    public CreditCard() {
+    }
+
+    public CreditCard(long id, long number, long cvv, Date expireDate) {
+        this.setID(id);
+        this.setNumber(number);
+        this.setCvv(cvv);
+        this.setExpireDate(expireDate);
+    }
+
     /**
      * @param userID
      * @param number
      * @param cvv
      * @param expireDate
      */
-    public void registerNewCreditCard(long userID, long number, long cvv, Date expireDate) throws SQLException, InvalidCreditCardException {
+    public void registerNewCreditCard(long userID, long number, long cvv, Date expireDate) throws SQLException,
+            InvalidCreditCardException {
         try {
             if ( !isCreditCardValid(expireDate) ) {
                 throw new InvalidCreditCardException("The credit card is expired");

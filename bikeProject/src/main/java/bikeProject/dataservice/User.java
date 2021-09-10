@@ -194,24 +194,24 @@ public class User implements DataserviceInterface {
      * @param email
      * @param isStudent
      */
-    public void setUser(int id, String name, String surname, String email, boolean isStudent) {
+    public void setUser(int id, String name, String surname, String email, boolean isStudent) throws SQLException {
         setID(id);
         setName(name);
         setSurname(surname);
         setEmail(email);
         setIsStudent(isStudent);
+        setCreditCard(credCardDB.getCreditCardByUserID(id));
+        setSubscription(subscriptionDB.getSubscriptionByUserID(id));
     }
 
-    /**
-     * @param user
-     */
-    public void setUser(User user) {
+    /*public void setUser(User user) throws SQLException {
         setID(user.ID);
         setName(user.name);
         setSurname(user.surname);
         setEmail(user.email);
         setIsStudent(user.isStudent);
-    }
+        setCreditCard(credCardDB.getCreditCardByUserID(id));
+    }*/
 
     // GETTERS AND SETTERS
     public long getID() {
