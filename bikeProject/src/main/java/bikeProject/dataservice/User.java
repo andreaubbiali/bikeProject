@@ -201,7 +201,8 @@ public class User implements DataserviceInterface {
         setEmail(email);
         setIsStudent(isStudent);
         setCreditCard(credCardDB.getCreditCardByUserID(id));
-        setSubscription(subscriptionDB.getSubscriptionByUserID(id));
+        Subscription subscription = new Subscription();
+        setSubscription(subscription.getSubscriptionByUser(this));
     }
 
     /*public void setUser(User user) throws SQLException {

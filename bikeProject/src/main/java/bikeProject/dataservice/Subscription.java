@@ -3,6 +3,7 @@ package bikeProject.dataservice;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 public class Subscription implements DataserviceInterface {
@@ -31,6 +32,17 @@ public class Subscription implements DataserviceInterface {
         // add the subscription into db
         this.ID = subscriptionDB.createNewSubscription(this);
 
+    }
+
+    public List<Subscription> getSubscriptionByUser(User user) throws SQLException {
+        List<Subscription> subscriptionList = subscriptionDB.getSubscriptionByUserID(user.getID());
+
+        for ( Subscription sub : subscriptionList ) {
+            setType(sub.type.getTypeByID());
+            setUser(user);
+        }
+
+        return subscriptionList;
     }
 
     /**
@@ -77,7 +89,7 @@ public class Subscription implements DataserviceInterface {
         this.startDate = today;
 
         // update record on db
-        subscriptionDB.setSubscriptionDateNow();
+        subscriptionDB.setSubscriptionStartDateNow(this);
     }
 
     /**

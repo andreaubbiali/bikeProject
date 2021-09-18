@@ -1,51 +1,55 @@
 package bikeProject.dataservice;
 
-public class SubscriptionType {
+public class SubscriptionType implements DataserviceInterface {
 
-	private /* @ not_null @ */ long ID;
-	private /* @ not_null @ */ String type;
-	private /* @ not_null @ */ float price;
-	private /* @ not_null @ */ int daysDuration;
-	private /* @ not_null @ */ int mustStartIn;
+    private /* @ not_null @ */ long ID;
+    private /* @ not_null @ */ String type;
+    private /* @ not_null @ */ float price;
+    private /* @ not_null @ */ int daysDuration;
+    private /* @ not_null @ */ int mustStartIn;
 
-	public long getID() {
-		return ID;
-	}
+    public SubscriptionType getTypeByID() {
+        return subTypeDB.getTypeByID();
+    }
 
-	public void setID(long iD) {
-		ID = iD;
-	}
+    public long getID() {
+        return ID;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public void setID(long iD) {
+        ID = iD;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public float getPrice() {
-		return price;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public void setPrice(float price) {
-		this.price = price;
-	}
+    public float getPrice() {
+        return price;
+    }
 
-	public int getDaysDuration() {
-		return daysDuration;
-	}
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
-	public void setDaysDuration(int daysDuration) {
-		this.daysDuration = daysDuration;
-	}
+    public int getDaysDuration() {
+        return daysDuration;
+    }
 
-	public int getMustStartIn() {
-		return mustStartIn;
-	}
+    public void setDaysDuration(int daysDuration) {
+        this.daysDuration = daysDuration;
+    }
 
-	public void setMustStartIn(int mustStartIn) {
-		this.mustStartIn = mustStartIn;
-	}
+    public int getMustStartIn() {
+        return mustStartIn;
+    }
+
+    public void setMustStartIn(int mustStartIn) {
+        this.mustStartIn = mustStartIn;
+    }
 
 }
