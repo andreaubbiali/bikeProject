@@ -22,12 +22,13 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         System.out.println("ARRIVA");
-        try{
-            // Se vuoi usare la cartella panels nel path di bikeProject devi mettere gli fxml li e usare queste stringhe:
+        try {
+            // Se vuoi usare la cartella panels nel path di bikeProject devi mettere gli fxml li e usare queste
+            // stringhe:
             /*URL url = Paths.get("src/main/java/bikeProject/panels/loginPanel.fxml").toUri().toURL();
             FXMLLoader loader = new FXMLLoader(url);*/
             // getResource punta alle resources
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("loginPanel.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("homePagePanel.fxml"));
             System.out.println("PROBLEMA");
             Parent root = loader.load();
             System.out.println("qua");
@@ -35,10 +36,9 @@ public class Main extends Application {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }catch(Exception e){
+        } catch ( Exception e ) {
             e.printStackTrace();
         }
-
 
 //		// to mantain the state throught different panels
 //
@@ -47,7 +47,8 @@ public class Main extends Application {
 //		Scene firstScene = new Scene(firstPane);
 //
 ////		// getting loader and a pane for the second scene
-////		FXMLLoader secondPageLoader = new FXMLLoader(getClass().getResource("/bikeProject/panels/provaPanel.fxml"));
+////		FXMLLoader secondPageLoader = new FXMLLoader(getClass().getResource("/bikeProject/panels/provaPanel
+// .fxml"));
 ////		Parent secondPane = secondPageLoader.load();
 ////		Scene secondScene = new Scene(secondPane);
 //
@@ -57,7 +58,8 @@ public class Main extends Application {
 //		firstPaneController.setSecondScene(secondScene);
 //
 //		// injecting first scene into the controller of the second scene
-//		bikeProject.controller.ControllerProva secondPaneController = (bikeProject.controller.ControllerProva) secondPageLoader
+//		bikeProject.controller.ControllerProva secondPaneController = (bikeProject.controller.ControllerProva)
+//		secondPageLoader
 //				.getController();
 //		secondPaneController.setFirstScene(firstScene);
 //
@@ -72,7 +74,7 @@ public class Main extends Application {
 
         try {
             Application.launch(args);
-        } catch (Exception e) {
+        } catch ( Exception e ) {
             System.out.println(e);
         }
     }
