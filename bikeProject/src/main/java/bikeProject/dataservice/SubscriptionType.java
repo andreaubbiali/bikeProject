@@ -1,5 +1,7 @@
 package bikeProject.dataservice;
 
+import java.sql.SQLException;
+
 public class SubscriptionType implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
@@ -8,8 +10,8 @@ public class SubscriptionType implements DataserviceInterface {
     private /* @ not_null @ */ int daysDuration;
     private /* @ not_null @ */ int mustStartIn;
 
-    public SubscriptionType getTypeByID() {
-        return subTypeDB.getTypeByID();
+    public SubscriptionType getType() throws SQLException {
+        return subTypeDB.getTypeByID(this.ID);
     }
 
     public long getID() {
@@ -20,7 +22,7 @@ public class SubscriptionType implements DataserviceInterface {
         ID = iD;
     }
 
-    public String getType() {
+    public String getTypeName() {
         return type;
     }
 

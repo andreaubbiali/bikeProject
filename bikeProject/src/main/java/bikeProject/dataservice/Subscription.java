@@ -38,7 +38,7 @@ public class Subscription implements DataserviceInterface {
         List<Subscription> subscriptionList = subscriptionDB.getSubscriptionByUserID(user.getID());
 
         for ( Subscription sub : subscriptionList ) {
-            setType(sub.type.getTypeByID());
+            setType(sub.type.getType());
             setUser(user);
         }
 
