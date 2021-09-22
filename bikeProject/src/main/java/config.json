@@ -1,12 +1,8 @@
 {
-  /* value used to know if use test value or do specific request like in production*/
   "productionMode": false,
-  /* mocked responses used when the preductionMode is false*/
   "universityMockResponse": true,
   "bankMockResponse": true,
   "rackMockResponse": true,
-  /* 24 hours, maximum rental duration*/
   "maximumRentMinutes": 1440,
-  /* tariff paid by user if exceeds the maximum rent time*/
   "tariffExceedMaximumRentMinutes": 150
 }

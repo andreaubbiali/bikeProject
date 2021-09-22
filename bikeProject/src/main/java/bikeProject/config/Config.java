@@ -44,11 +44,15 @@ public class Config {
         JSONObject jo = (JSONObject) obj;
 
         // getting variables
+        /* value used to know if use test value or do specific request like in production*/
         productionMode = (boolean) jo.get("productionMode");
+        /* mocked responses used when the preductionMode is false*/
         universityMockResponse = (boolean) jo.get("universityMockResponse");
         bankMockResponse = (boolean) jo.get("bankMockResponse");
         rackMockResponse = (boolean) jo.get("rackMockResponse");
+        /* 24 hours, maximum rental duration*/
         maximumRentMinutes = (int) jo.get("maximumRentMinutes");
+        /* tariff paid by user if exceeds the maximum rent time*/
         tariffExceedMaximumRentMinutes = (Float) jo.get("tariffExceedMaximumRentMinutes");
 
         return inst;
