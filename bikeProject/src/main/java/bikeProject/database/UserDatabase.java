@@ -23,7 +23,7 @@ public class UserDatabase extends Database implements UserDatabaseInterface {
         }
 
         user.setUser(res.getInt("id"), res.getString("name"), res.getString("surname"), res.getString("email"),
-                res.getBoolean("isStudent"));
+                res.getBoolean("is_Student"));
 
         res.close();
     }

@@ -11,7 +11,7 @@
    <children>
       <PasswordField fx:id="pswLogin" layoutX="250.0" layoutY="123.0" />
       <TextField fx:id="txtUsername" layoutX="250.0" layoutY="56.0" />
-      <Text layoutX="98.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" />
+      <Text layoutX="98.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
       <Text layoutX="101.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
       <Button fx:id="btnLogin" layoutX="136.0" layoutY="213.0" mnemonicParsing="false" onAction="#login" text="Login" />
       <Button fx:id="btnGoBack" layoutX="395.0" layoutY="213.0" mnemonicParsing="false" onAction="#goBackToHomePage" text="Go back to homepage" />

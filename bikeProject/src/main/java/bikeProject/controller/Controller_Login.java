@@ -73,7 +73,7 @@ public class Controller_Login {
             lblError.setText("User not found. RETRY");
             return;
         } catch ( WrongPasswordException w ) {
-            lblError.setText("The password is wrong. RETRY");
+            lblError.setText("The email or password is wrong. RETRY");
             return;
         } catch ( SQLException s ) {
             lblError.setText("Error sql.");
