@@ -7,12 +7,18 @@ import bikeProject.exception.WrongPasswordException;
 import java.sql.SQLException;
 
 public class Controller_User {
-    public User user;
+    private static User user = null;
 
-    public Controller_User() {
+    private Controller_User() {
+        this.user = new User();
+    }
+
+    public static Controller_User getInstance() {
         if ( user == null ) {
-            this.user = new User();
+            user = new Controller_User();
         }
+
+        return user;
     }
 
     public void login(String username, String password) throws UserNotFoundException, WrongPasswordException,

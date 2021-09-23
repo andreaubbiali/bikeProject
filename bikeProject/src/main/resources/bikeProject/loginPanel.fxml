@@ -9,8 +9,8 @@
 
 <Pane fx:id="panLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Login">
    <children>
-      <PasswordField fx:id="pswLogin" layoutX="250.0" layoutY="123.0" />
-      <TextField fx:id="txtUsername" layoutX="250.0" layoutY="56.0" />
+      <PasswordField fx:id="pswLogin" layoutX="250.0" layoutY="123.0" text="admin" />
+      <TextField fx:id="txtUsername" layoutX="250.0" layoutY="56.0" text="admin@gmail.com" />
       <Text layoutX="98.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
       <Text layoutX="101.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
       <Button fx:id="btnLogin" layoutX="136.0" layoutY="213.0" mnemonicParsing="false" onAction="#login" text="Login" />
