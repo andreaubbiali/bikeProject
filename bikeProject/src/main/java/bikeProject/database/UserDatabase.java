@@ -12,7 +12,7 @@ import bikeProject.exception.WrongPasswordException;
 
 public class UserDatabase extends Database implements UserDatabaseInterface {
 
-    public void login(User user, String email, String password) throws SQLException, WrongPasswordException {
+    public void login(String email, String password) throws SQLException, WrongPasswordException {
 
         PreparedStatement statement = conn.prepareStatement("SELECT * FROM user WHERE email = ? LIMIT 1;");
         statement.setString(1, email);
@@ -22,7 +22,7 @@ public class UserDatabase extends Database implements UserDatabaseInterface {
             throw new WrongPasswordException();
         }
 
-        user.setUser(res.getInt("id"), res.getString("name"), res.getString("surname"), res.getString("email"),
+        User.setUser(res.getInt("id"), res.getString("name"), res.getString("surname"), res.getString("email"),
                 res.getBoolean("is_Student"));
 
         res.close();

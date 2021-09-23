@@ -60,7 +60,6 @@ public class Controller_Login {
 
     @FXML
     void login(ActionEvent event) {
-        Controller_User user = new Controller_User();
 
         if ( txtUsername.getText().isEmpty() || pswLogin.getText().isEmpty() ) {
             lblError.setText("Username or password empty");
@@ -68,12 +67,9 @@ public class Controller_Login {
         }
 
         try {
-            user.login(txtUsername.getText(), pswLogin.getText());
-        } catch ( UserNotFoundException u ) {
-            lblError.setText("User not found. RETRY");
-            return;
+            User.login(txtUsername.getText(), pswLogin.getText());
         } catch ( WrongPasswordException w ) {
-            lblError.setText("The email or password is wrong. RETRY");
+            lblError.setText("Email or password wrong. RETRY");
             return;
         } catch ( SQLException s ) {
             lblError.setText("Error sql.");

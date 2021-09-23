@@ -1,5 +1,6 @@
 package bikeProject.controller;
 
+import bikeProject.dataservice.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,10 +70,8 @@ public class Controller_Register_New_User {
             return;
         }
 
-        Controller_User user = new Controller_User();
-
         try {
-            user.registerUser(txtRegisterName.getText(), txtRegisterSurname.getText(), txtRegisterEmail.getText(),
+            User.registerNewUser(txtRegisterName.getText(), txtRegisterSurname.getText(), txtRegisterEmail.getText(),
                     pswPassword.getText(), chkStudent.isSelected());
         } catch ( SQLException e ) {
             lblError.setText("SQL exception.");

@@ -11,18 +11,14 @@ public class TotemRack implements DataserviceInterface {
     private /* @ not_null @ */ String address;
     private /* @ not_null @ */ List<RackPosition> rackPositionList;
 
-    public long rentBike(String email, String password, BikeType bikeType) throws SQLException, UserNotFoundException
-            , NotValidRentException, InvalidSubscriptionException, WrongPasswordException {
+    public long rentBike(String email, String password, BikeType bikeType) throws SQLException, NotValidRentException
+            , InvalidSubscriptionException, WrongPasswordException, AccessDeniedException {
 
         // check login user
-        User user = new User();
-        userDB.login(user, email, password);
-        if ( user.getName().isEmpty() ) {
-            throw new UserNotFoundException("User not found");
-        }
+        User.login(email, password);
 
         // get valid subscription of the user
-        Subscription subscription = user.getValidSubscription();
+        Subscription subscription = User.getValidSubscription();
 
         // check positions of the rack
         if ( rackPositionList.size() == 0 ) {
@@ -46,7 +42,7 @@ public class TotemRack implements DataserviceInterface {
 
         // start the rental
         Rent rent = new Rent();
-        rent.createRent(user, rackPosition.getBike());
+        rent.createRent(User.getInstance(), rackPosition.getBike());
 
         // start the subscription(if not already started)
         subscription.startSubscriptionNow();

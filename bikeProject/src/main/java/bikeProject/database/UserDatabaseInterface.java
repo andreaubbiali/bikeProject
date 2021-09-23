@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public interface UserDatabaseInterface {
 
-    void login(User user, String email, String password) throws SQLException, WrongPasswordException;
+    void login(String email, String password) throws SQLException, WrongPasswordException;
 
     int registerNewUser(String name, String surname, String email, boolean isStudent, String password, String salt) throws SQLException;
 
