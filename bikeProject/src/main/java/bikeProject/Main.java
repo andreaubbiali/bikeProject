@@ -15,6 +15,12 @@ import java.nio.file.Paths;
  * Ricordati che per far partire il controller devi aggiungere
  * import javafx.event.ActionEvent;
  * DOVE METTERE LA CLOSE DELLA DB CONNECTION?
+ *
+ * da aggiungere se vuoi usare libreria scaricata da te e non maven
+ * --module-path
+/etc/javafx-sdk-11.0.2/lib
+--add-modules
+javafx.controls,javafx.fxml
  */
 
 public class Main extends Application {
