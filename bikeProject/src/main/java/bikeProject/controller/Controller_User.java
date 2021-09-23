@@ -22,4 +22,9 @@ public class Controller_User {
 
     }
 
+    public void registerUser(String name, String surname, String email, String password, boolean isStudent) throws SQLException {
+
+        user.registerNewUser(name, surname, email, password, isStudent);
+    }
+
 }

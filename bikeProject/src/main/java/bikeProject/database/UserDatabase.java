@@ -33,13 +33,13 @@ public class UserDatabase extends Database implements UserDatabaseInterface {
 
         // prepare the statement
         PreparedStatement statement = conn.prepareStatement("INSERT INTO user (name, surname, email, password, " +
-                "salt, is_student) VALUES (?,?,?,?,?,?);");
+                "salt, is_student) VALUES (?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, name);
         statement.setString(2, surname);
         statement.setString(3, email);
-        statement.setString(5, password);
-        statement.setString(6, salt);
-        statement.setBoolean(7, isStudent);
+        statement.setString(4, password);
+        statement.setString(5, salt);
+        statement.setBoolean(6, isStudent);
 
         // execute the query
         int res = statement.executeUpdate();
