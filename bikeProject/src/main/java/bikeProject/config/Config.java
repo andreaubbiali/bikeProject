@@ -51,9 +51,10 @@ public class Config {
         bankMockResponse = (boolean) jo.get("bankMockResponse");
         rackMockResponse = (boolean) jo.get("rackMockResponse");
         /* 24 hours, maximum rental duration*/
-        maximumRentMinutes = (int) jo.get("maximumRentMinutes");
+        maximumRentMinutes = ((Number) jo.get("maximumRentMinutes")).intValue();
+
         /* tariff paid by user if exceeds the maximum rent time*/
-        tariffExceedMaximumRentMinutes = (Float) jo.get("tariffExceedMaximumRentMinutes");
+        tariffExceedMaximumRentMinutes = ((Number) jo.get("tariffExceedMaximumRentMinutes")).floatValue();
 
         return inst;
     }
