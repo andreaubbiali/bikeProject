@@ -6,13 +6,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SubscriptionTypeDatabase extends Database implements SubscriptionTypeDatabaseInterface {
+public class SubscriptionTypeDatabase implements SubscriptionTypeDatabaseInterface {
 
     public SubscriptionType getTypeByID(long id) throws SQLException {
 
         SubscriptionType subType = new SubscriptionType();
 
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM subscription_type WHERE id = ? LIMIT 1;");
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM subscription_type WHERE id =" +
+                " ? LIMIT 1;");
         statement.setLong(1, id);
         ResultSet res = statement.executeQuery();
 

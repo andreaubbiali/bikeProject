@@ -1,6 +1,7 @@
 package bikeProject;
 
 import bikeProject.config.Config;
+import bikeProject.database.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,11 +11,11 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 
 /*
  * Ricordati che per far partire il controller devi aggiungere
  * import javafx.event.ActionEvent;
- * DOVE METTERE LA CLOSE DELLA DB CONNECTION?
  *
  * da aggiungere se vuoi usare libreria scaricata da te e non maven
  * --module-path
@@ -45,9 +46,20 @@ public class Main extends Application {
         System.out.println("start of the application");
 
         try {
+            // start the database
+            Database.getInstance();
+
             Application.launch(args);
         } catch ( Exception e ) {
-            System.out.println(e);
+            e.printStackTrace();
+        } finally {
+
+            // close db connection
+            try {
+                Database.closeConnection();
+            } catch ( SQLException e ) {
+                e.printStackTrace();
+            }
         }
     }
 

@@ -10,11 +10,12 @@ import bikeProject.dataservice.User;
 import bikeProject.exception.UserNotFoundException;
 import bikeProject.exception.WrongPasswordException;
 
-public class UserDatabase extends Database implements UserDatabaseInterface {
+public class UserDatabase implements UserDatabaseInterface {
 
     public void login(String email, String password) throws SQLException, WrongPasswordException {
 
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM user WHERE email = ? LIMIT 1;");
+        PreparedStatement statement =
+                Database.getConn().prepareStatement("SELECT * FROM user WHERE email = ? LIMIT " + "1;");
         statement.setString(1, email);
         ResultSet res = statement.executeQuery();
 
@@ -32,8 +33,8 @@ public class UserDatabase extends Database implements UserDatabaseInterface {
                                String salt) throws SQLException {
 
         // prepare the statement
-        PreparedStatement statement = conn.prepareStatement("INSERT INTO user (name, surname, email, password, " +
-                "salt, is_student) VALUES (?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement statement = Database.getConn().prepareStatement("INSERT INTO user (name, surname, email, " +
+                "password, " + "salt, is_student) VALUES (?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, name);
         statement.setString(2, surname);
         statement.setString(3, email);
@@ -59,7 +60,7 @@ public class UserDatabase extends Database implements UserDatabaseInterface {
 
     public boolean checkPasswordByID(long id, String password) throws SQLException {
 
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
         statement.setLong(1, id);
         ResultSet res = statement.executeQuery();
 
@@ -71,7 +72,7 @@ public class UserDatabase extends Database implements UserDatabaseInterface {
 
     public void getUser(User user) throws SQLException {
 
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
         statement.setLong(1, user.getID());
         ResultSet res = statement.executeQuery();
 

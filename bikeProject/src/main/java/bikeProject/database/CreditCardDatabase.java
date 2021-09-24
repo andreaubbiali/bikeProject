@@ -9,12 +9,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class CreditCardDatabase extends Database implements CreditCardDatabaseInterface {
+public class CreditCardDatabase implements CreditCardDatabaseInterface {
 
     public List<CreditCard> getCreditCardByUserID(long userID) throws SQLException {
         List<CreditCard> creditCards = new ArrayList<CreditCard>();
 
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM credit_card WHERE user_id = ?;");
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM credit_card WHERE user_id = " +
+                "?;");
         statement.setLong(1, userID);
         ResultSet res = statement.executeQuery();
 
@@ -29,8 +30,8 @@ public class CreditCardDatabase extends Database implements CreditCardDatabaseIn
 
     public long registerNewCreditCard(long userid, long number, long cvv, Date expireDate) throws SQLException {
 
-        PreparedStatement statement = conn.prepareStatement("INSERT INTO credit_card (number, cvv, expire_date, " +
-                "user_id) VALUES (?,?,?);");
+        PreparedStatement statement = Database.getConn().prepareStatement("INSERT INTO credit_card (number, cvv, " +
+                "expire_date, " + "user_id) VALUES (?,?,?);");
         statement.setLong(1, number);
         statement.setLong(2, cvv);
         statement.setDate(3, (java.sql.Date) expireDate);

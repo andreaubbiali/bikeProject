@@ -13,13 +13,13 @@ import bikeProject.dataservice.SubscriptionType;
 import bikeProject.dataservice.User;
 import bikeProject.exception.WrongPasswordException;
 
-public class SubscriptionDatabase extends Database implements SubscriptionDatabaseInterface {
+public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
 
     public long createNewSubscription(Subscription subscription) throws SQLException {
 
         // prepare the statement
-        PreparedStatement statement = conn.prepareStatement("INSERT INTO subscription (subscription_type_id, " +
-                "subscription_date, user_id, count_exceeded_time, start_date, deleted) VALUES " + "(?,?,?,?,?,?);");
+        PreparedStatement statement = Database.getConn().prepareStatement("INSERT INTO subscription " +
+                "(subscription_type_id, " + "subscription_date, user_id, count_exceeded_time, start_date, deleted) " + "VALUES " + "(?,?,?,?,?,?);");
         statement.setLong(1, subscription.getType().getID());
         statement.setDate(2, (Date) subscription.getSubscriptionDate());
         statement.setLong(3, subscription.getUser().getID());
@@ -49,8 +49,9 @@ public class SubscriptionDatabase extends Database implements SubscriptionDataba
     public void updateSubscription(Subscription subscription) throws SQLException {
 
         // prepare the statement
-        PreparedStatement statement = conn.prepareStatement("UPDATE subscription SET (subscription_type_id = ?, " +
-                "subscription_date = ?, user_id = ?, count_exceeded_time = ?, start_date = ?, deleted = ?) WHERE id " + "=" + " ?");
+        PreparedStatement statement = Database.getConn().prepareStatement("UPDATE subscription SET " +
+                "(subscription_type_id = ?, " + "subscription_date = ?, user_id = ?, count_exceeded_time = ?, " +
+                "start_date = ?, deleted = ?) WHERE id " + "=" + " ?");
         statement.setLong(1, subscription.getType().getID());
         statement.setDate(2, (Date) subscription.getSubscriptionDate());
         statement.setLong(3, subscription.getUser().getID());
@@ -75,7 +76,7 @@ public class SubscriptionDatabase extends Database implements SubscriptionDataba
 
         // prepare the statement
         PreparedStatement statement =
-                conn.prepareStatement("UPDATE subscription SET (start_date = ?) " + "WHERE id " + "=" + " ?");
+                Database.getConn().prepareStatement("UPDATE subscription SET (start_date = ?) " + "WHERE id " + "=" + " ?");
 
         statement.setDate(1, (Date) subscription.getStartDate());
         statement.setLong(2, subscription.getID());
@@ -91,7 +92,8 @@ public class SubscriptionDatabase extends Database implements SubscriptionDataba
     public List<Subscription> getSubscriptionByUserID(long id) throws SQLException {
         List<Subscription> subscriptionList = new ArrayList<Subscription>();
 
-        PreparedStatement statement = conn.prepareStatement("SELECT * FROM subscription WHERE user_id = ?;");
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM subscription WHERE user_id =" +
+                " ?;");
         statement.setLong(1, id);
         ResultSet res = statement.executeQuery();
 
