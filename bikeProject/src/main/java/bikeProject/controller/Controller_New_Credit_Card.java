@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,8 +18,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class Controller_New_Credit_Card implements Initializable {
@@ -35,9 +32,6 @@ public class Controller_New_Credit_Card implements Initializable {
     private DatePicker dtpExpireDate;
 
     @FXML
-    private Button btnNewCreditCard;
-
-    @FXML
     private Label lblError;
 
     @FXML
@@ -48,13 +42,13 @@ public class Controller_New_Credit_Card implements Initializable {
 
     @FXML
     void addCreditCard(ActionEvent event) {
-        Date expireDate = java.sql.Date.valueOf(dtpExpireDate.getValue());
-        Date today = new Date();
+        LocalDate expireDate = dtpExpireDate.getValue();
+        LocalDate today = LocalDate.now();
 
         if ( txtNumber.getText().isEmpty() || txtCVV.getText().isEmpty() ) {
             lblError.setText("All fields are required.");
             return;
-        } else if ( expireDate.before(today) ) {
+        } else if ( expireDate.compareTo(today) < 0 ) {
             lblError.setText("The expire date can't be before today.");
             return;
         }
