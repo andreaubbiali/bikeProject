@@ -1,23 +1,22 @@
 package bikeProject.dataservice;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 public class Subscription implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ SubscriptionType type;
-    private /* @ not_null @ */ Date subscriptionDate;
+    private /* @ not_null @ */ LocalDate subscriptionDate;
     private /* @ not_null @ */ User user;
     private /* @ not_null @ */ int countExceededTime;
-    private Date startDate;
+    private LocalDate startDate;
     private /* @ not_null @ */ boolean deleted;
 
     public void createNewSubscription(User user, SubscriptionType subType) throws SQLException {
-        Date today = new Date();
+        LocalDate today = LocalDate.now();
 
         this.type = subType;
         this.subscriptionDate = today;
@@ -53,8 +52,8 @@ public class Subscription implements DataserviceInterface {
      * @return true if is valid false otherwise
      */
     public boolean isValid() {
-        Calendar cal = Calendar.getInstance();
-        Date today = new Date();
+        LocalDate date;
+        LocalDate today = LocalDate.now();
 
         if ( this.deleted ) {
             return false;
@@ -64,19 +63,19 @@ public class Subscription implements DataserviceInterface {
             // subscription started
 
             // calculate startDate + daysDuration
-            cal.setTime(this.startDate);
-            cal.add(Calendar.DAY_OF_YEAR, this.type.getDaysDuration());
+            date = this.startDate;
+            date.plusDays(this.type.getDaysDuration());
 
         } else {
             // subscription not started
 
             // calculate subscriptionDate + mustStartIn
-            cal.setTime(this.subscriptionDate);
-            cal.add(Calendar.DAY_OF_YEAR, this.type.getMustStartIn());
+            date = this.subscriptionDate;
+            date.plusDays(this.type.getMustStartIn());
         }
 
         // check the condition
-        if ( today.before(cal.getTime()) || today.toString().equals(cal.getTime().toString()) ) {
+        if ( today.compareTo(date) <= 0 ) {
             return true;
         }
 
@@ -84,7 +83,7 @@ public class Subscription implements DataserviceInterface {
     }
 
     public void startSubscriptionNow() throws SQLException {
-        Date today = new Date();
+        LocalDate today = LocalDate.now();
 
         this.startDate = today;
 
@@ -124,11 +123,11 @@ public class Subscription implements DataserviceInterface {
         this.type = type;
     }
 
-    public Date getSubscriptionDate() {
+    public LocalDate getSubscriptionDate() {
         return subscriptionDate;
     }
 
-    public void setSubscriptionDate(Date subscriptionDate) {
+    public void setSubscriptionDate(LocalDate subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
     }
 
@@ -140,11 +139,11 @@ public class Subscription implements DataserviceInterface {
         this.user = user;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 

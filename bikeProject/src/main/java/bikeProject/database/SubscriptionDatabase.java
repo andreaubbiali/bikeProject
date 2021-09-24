@@ -1,17 +1,14 @@
 package bikeProject.database;
 
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import bikeProject.PasswordUtils;
 import bikeProject.dataservice.Subscription;
 import bikeProject.dataservice.SubscriptionType;
-import bikeProject.dataservice.User;
-import bikeProject.exception.WrongPasswordException;
+
+import java.sql.*;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
 
@@ -19,17 +16,18 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
 
         // prepare the statement
         PreparedStatement statement = Database.getConn().prepareStatement("INSERT INTO subscription " +
-                "(subscription_type_id, " + "subscription_date, user_id, count_exceeded_time, start_date, deleted) " + "VALUES " + "(?,?,?,?,?,?);");
+                "(subscription_type_id, subscription_date, user_id, count_exceeded_time, start_date, deleted) " +
+                "VALUES (?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
         statement.setLong(1, subscription.getType().getID());
-        statement.setDate(2, (Date) subscription.getSubscriptionDate());
+        statement.setObject(2, subscription.getSubscriptionDate());
         statement.setLong(3, subscription.getUser().getID());
-        statement.setInt(5, subscription.getCountExceededTime());
+        statement.setInt(4, subscription.getCountExceededTime());
         if ( subscription.getStartDate() == null ) {
-            statement.setNull(6, java.sql.Types.NULL);
+            statement.setNull(5, java.sql.Types.NULL);
         } else {
-            statement.setDate(6, (Date) subscription.getStartDate());
+            statement.setObject(5, subscription.getStartDate());
         }
-        statement.setBoolean(7, subscription.isDeleted());
+        statement.setBoolean(6, subscription.isDeleted());
 
         // execute the query
         int res = statement.executeUpdate();
@@ -53,13 +51,13 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
                 "(subscription_type_id = ?, " + "subscription_date = ?, user_id = ?, count_exceeded_time = ?, " +
                 "start_date = ?, deleted = ?) WHERE id " + "=" + " ?");
         statement.setLong(1, subscription.getType().getID());
-        statement.setDate(2, (Date) subscription.getSubscriptionDate());
+        statement.setObject(2, subscription.getSubscriptionDate());
         statement.setLong(3, subscription.getUser().getID());
         statement.setInt(5, subscription.getCountExceededTime());
         if ( subscription.getStartDate() == null ) {
             statement.setNull(6, java.sql.Types.NULL);
         } else {
-            statement.setDate(6, (Date) subscription.getStartDate());
+            statement.setObject(6, subscription.getStartDate());
         }
         statement.setBoolean(7, subscription.isDeleted());
         statement.setLong(7, subscription.getID());
@@ -78,7 +76,7 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
         PreparedStatement statement =
                 Database.getConn().prepareStatement("UPDATE subscription SET (start_date = ?) " + "WHERE id " + "=" + " ?");
 
-        statement.setDate(1, (Date) subscription.getStartDate());
+        statement.setObject(1, subscription.getStartDate());
         statement.setLong(2, subscription.getID());
 
         // execute the query
@@ -92,8 +90,8 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
     public List<Subscription> getSubscriptionByUserID(long id) throws SQLException {
         List<Subscription> subscriptionList = new ArrayList<Subscription>();
 
-        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM subscription WHERE user_id =" +
-                " ?;");
+        PreparedStatement statement =
+                Database.getConn().prepareStatement("SELECT * FROM subscription WHERE user_id " + "=" + " ?;");
         statement.setLong(1, id);
         ResultSet res = statement.executeQuery();
 
@@ -101,9 +99,11 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
             Subscription tempSub = new Subscription();
 
             tempSub.setID(res.getLong("id"));
-            tempSub.setSubscriptionDate(res.getDate("subscription_date"));
+            tempSub.setSubscriptionDate(Instant.ofEpochMilli(res.getDate("subscription_date").getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
             tempSub.setCountExceededTime(res.getInt("count_exceeded_time"));
-            tempSub.setStartDate(res.getDate("start_date"));
+            if ( res.getObject("start_date") != null ) {
+                tempSub.setStartDate(Instant.ofEpochMilli(res.getDate("start_date").getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+            }
             tempSub.setDeleted(res.getBoolean("deleted"));
 
             // add the subType

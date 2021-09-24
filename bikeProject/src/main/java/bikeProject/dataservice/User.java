@@ -1,6 +1,7 @@
 package bikeProject.dataservice;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -88,7 +89,8 @@ public class User implements DataserviceInterface {
      * @param expireDate
      * @throws SQLException
      */
-    public void addCreditCard(long number, long cvv, Date expireDate) throws SQLException, InvalidCreditCardException {
+    public void addCreditCard(long number, long cvv, LocalDate expireDate) throws SQLException,
+            InvalidCreditCardException {
 
         // register the new credit card
         CreditCard newCreditCard = new CreditCard(number, cvv, expireDate, this);

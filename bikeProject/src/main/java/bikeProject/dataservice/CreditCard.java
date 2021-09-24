@@ -1,28 +1,27 @@
 package bikeProject.dataservice;
 
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
-
 import bikeProject.config.Config;
 import bikeProject.exception.InvalidCreditCardException;
 import bikeProject.exception.PaymentException;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class CreditCard implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ long number;
     private /* @ not_null @ */ long cvv;
-    private /* @ not_null @ */ Date expireDate;
+    private /* @ not_null @ */ LocalDate expireDate;
 
-    public CreditCard(long id, long number, long cvv, Date expireDate) {
+    public CreditCard(long id, long number, long cvv, LocalDate expireDate) {
         this.setID(id);
         this.setNumber(number);
         this.setCvv(cvv);
         this.setExpireDate(expireDate);
     }
 
-    public CreditCard(long number, long cvv, Date expireDate, User user) throws SQLException,
+    public CreditCard(long number, long cvv, LocalDate expireDate, User user) throws SQLException,
             InvalidCreditCardException {
         this.setNumber(number);
         this.setCvv(cvv);
@@ -30,12 +29,6 @@ public class CreditCard implements DataserviceInterface {
         registerNewCreditCard(user);
     }
 
-    /**
-     * @param userID
-     * @param number
-     * @param cvv
-     * @param expireDate
-     */
     private void registerNewCreditCard(User user) throws SQLException, InvalidCreditCardException {
 
         if ( this.number == 0 || this.cvv == 0 || this.expireDate == null ) {
@@ -55,14 +48,11 @@ public class CreditCard implements DataserviceInterface {
 
     /**
      * To be valid the credit card must not be expired
-     *
-     * @param expireDate
-     * @return
      */
-    public boolean isCreditCardValid(Date expireDate) {
-        Date today = new Date();
+    public boolean isCreditCardValid(LocalDate expireDate) {
+        LocalDate today = LocalDate.now();
 
-        if ( today.after(expireDate) ) {
+        if ( expireDate.compareTo(today) < 0 ) {
             return false;
         }
 
@@ -99,9 +89,7 @@ public class CreditCard implements DataserviceInterface {
      * @return true if the credit card is valid, false otherwise
      */
     public boolean isCreditCardValidForSubscription(SubscriptionType subType) {
-        Date today = new Date();
-        Calendar minimumDate = Calendar.getInstance();
-        minimumDate.setTime(today);
+        LocalDate minimumDate = LocalDate.now();
 
         // check that the credit card isn't expired or expire today
         if ( !isCreditCardValid(this.expireDate) ) {
@@ -112,19 +100,17 @@ public class CreditCard implements DataserviceInterface {
         int daysDuration = subType.getMustStartIn() + subType.getDaysDuration() + 10;
 
         // add the minimum days the credit card must be valid from today
-        minimumDate.add(Calendar.DAY_OF_YEAR, daysDuration);
+        minimumDate = minimumDate.plusDays(daysDuration);
 
-        // don't find any better methods
-        boolean isDateEqual = minimumDate.getTime().toString().equals(expireDate.toString());
         // control the expireDate
-        if ( minimumDate.getTime().after(expireDate) && !isDateEqual ) {
+        if ( minimumDate.compareTo(expireDate) <= 0 ) {
             return false;
         }
 
         return true;
     }
 
-    public void setCreditCard(long id, long number, long cvv, Date expireDate) {
+    public void setCreditCard(long id, long number, long cvv, LocalDate expireDate) {
         setID(id);
         setNumber(number);
         setCvv(cvv);
@@ -155,11 +141,11 @@ public class CreditCard implements DataserviceInterface {
         this.cvv = cvv;
     }
 
-    public Date getExpireDate() {
+    public LocalDate getExpireDate() {
         return expireDate;
     }
 
-    public void setExpireDate(Date expireDate) {
+    public void setExpireDate(LocalDate expireDate) {
         this.expireDate = expireDate;
     }
 
