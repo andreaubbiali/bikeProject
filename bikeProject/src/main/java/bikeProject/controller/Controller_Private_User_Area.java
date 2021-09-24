@@ -18,6 +18,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,16 +27,16 @@ import java.util.ResourceBundle;
 public class Controller_Private_User_Area implements Initializable {
 
     @FXML
-    private TableView<Subscription> tblSubscription;
+    private TableView<SubscriptionDTO> tblSubscription;
 
     @FXML
-    private TableColumn<Subscription, String> columnType;
+    private TableColumn<SubscriptionDTO, String> columnType;
 
     @FXML
-    private TableColumn<Subscription, Date> columnStartDate;
+    private TableColumn<SubscriptionDTO, LocalDate> columnStartDate;
 
     @FXML
-    private TableColumn<Subscription, Boolean> columnDeleted;
+    private TableColumn<SubscriptionDTO, Boolean> columnDeleted;
 
     @FXML
     private TableView<CreditCard> tblCreditCard;
@@ -66,16 +68,20 @@ public class Controller_Private_User_Area implements Initializable {
             }
 
             // fill the subscription table
-            columnType.setCellValueFactory(new PropertyValueFactory<>("type.type"));
+            columnType.setCellValueFactory(new PropertyValueFactory<>("typeName"));
             columnStartDate.setCellValueFactory(new PropertyValueFactory<>("subscriptionDate"));
             columnDeleted.setCellValueFactory(new PropertyValueFactory<>("deleted"));
 
             List<Subscription> subscriptions = user.getSubscription();
+            List<SubscriptionDTO> subscriptionDTOList = new ArrayList<>();
+            for ( Subscription sub : subscriptions ) {
+                subscriptionDTOList.add(new SubscriptionDTO(sub));
+            }
 
-            if ( subscriptions.size() == 0 ) {
+            if ( subscriptionDTOList.size() == 0 ) {
                 tblSubscription.setPlaceholder(new Label("There aren't subscriptions"));
             } else {
-                tblSubscription.getItems().setAll(subscriptions);
+                tblSubscription.getItems().setAll(subscriptionDTOList);
             }
 
         } catch ( AccessDeniedException e ) {
