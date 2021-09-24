@@ -1,7 +1,6 @@
 package bikeProject.controller;
 
 import bikeProject.dataservice.CreditCard;
-import bikeProject.dataservice.Subscription;
 import bikeProject.dataservice.SubscriptionType;
 import bikeProject.dataservice.User;
 import bikeProject.exception.AccessDeniedException;
@@ -11,9 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -21,9 +25,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller_New_Subscription implements Initializable {
-
-    @FXML
-    private Button btnCreateSubscription;
 
     @FXML
     private TableView<SubscriptionType> tblSubscriptionType;
@@ -56,10 +57,10 @@ public class Controller_New_Subscription implements Initializable {
             SubscriptionType subType = new SubscriptionType();
 
             // fill the subscription type table
-            columnType.setCellValueFactory(new PropertyValueFactory<SubscriptionType, String>("name"));
-            columnPrice.setCellValueFactory(new PropertyValueFactory<SubscriptionType, Float>("price"));
-            columnDuration.setCellValueFactory(new PropertyValueFactory<SubscriptionType, Integer>("daysDuration"));
-            columnMustStartIn.setCellValueFactory(new PropertyValueFactory<SubscriptionType, Integer>("mustStartIn"));
+            columnType.setCellValueFactory(new PropertyValueFactory<>("name"));
+            columnPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+            columnDuration.setCellValueFactory(new PropertyValueFactory<>("daysDuration"));
+            columnMustStartIn.setCellValueFactory(new PropertyValueFactory<>("mustStartIn"));
 
             List<SubscriptionType> subscriptionTypes = subType.getAllSubscriptionTypes();
 
@@ -117,13 +118,29 @@ public class Controller_New_Subscription implements Initializable {
         } catch ( AccessDeniedException e ) {
             lblError.setText("Access denied for user.");
             e.printStackTrace();
+            return;
         } catch ( InvalidCreditCardException ce ) {
             lblError.setText("The credit card is not valid for the subscription.");
+            return;
         } catch ( PaymentException pe ) {
             lblError.setText("Something went wrong with the payment. Retry or change the credit card.");
+            return;
         } catch ( SQLException sql ) {
-            lblError.setText("Access denied for user.");
+            lblError.setText("SQL error.");
             sql.printStackTrace();
+            return;
+        }
+
+        // return to private area
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/privateUserAreaPanel.fxml"));
+            Parent pane = loader.load();
+            Scene scene = new Scene(pane);
+
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            primaryStage.setScene(scene);
+        } catch ( Exception e ) {
+            e.printStackTrace();
         }
     }
 }
