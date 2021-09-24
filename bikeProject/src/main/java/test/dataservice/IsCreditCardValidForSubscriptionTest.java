@@ -4,6 +4,7 @@ import bikeProject.dataservice.CreditCard;
 import bikeProject.dataservice.SubscriptionType;
 import org.junit.Test;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -12,15 +13,13 @@ import static org.junit.Assert.assertTrue;
 
 public class IsCreditCardValidForSubscriptionTest {
 
-    Date today = new Date();
+    LocalDate today = LocalDate.now();
     CreditCard creditCard = new CreditCard(1, 585548484445555l, 5864, today);
     SubscriptionType subType = new SubscriptionType();
 
-    public Date createDateFromToday(int number) {
-        Calendar date = Calendar.getInstance();
-        date.setTime(today);
-        date.add(Calendar.DAY_OF_YEAR, number);
-        return date.getTime();
+    public LocalDate createDateFromToday(int number) {
+
+        return today.plusDays(number);
     }
 
     //credi card expired
