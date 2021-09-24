@@ -8,16 +8,12 @@ import bikeProject.config.Config;
 import bikeProject.exception.InvalidCreditCardException;
 import bikeProject.exception.PaymentException;
 
-public class CreditCard implements DataserviceInterface, CreditCardInterface {
+public class CreditCard implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ long number;
     private /* @ not_null @ */ long cvv;
     private /* @ not_null @ */ Date expireDate;
-
-    // TODO l'ho aggiunto perchè mi dava problemi... va bene lasciarlo così?
-    public CreditCard() {
-    }
 
     public CreditCard(long id, long number, long cvv, Date expireDate) {
         this.setID(id);
@@ -26,28 +22,35 @@ public class CreditCard implements DataserviceInterface, CreditCardInterface {
         this.setExpireDate(expireDate);
     }
 
+    public CreditCard(long number, long cvv, Date expireDate, User user) throws SQLException,
+            InvalidCreditCardException {
+        this.setNumber(number);
+        this.setCvv(cvv);
+        this.setExpireDate(expireDate);
+        registerNewCreditCard(user);
+    }
+
     /**
      * @param userID
      * @param number
      * @param cvv
      * @param expireDate
      */
-    public void registerNewCreditCard(long userID, long number, long cvv, Date expireDate) throws SQLException,
-            InvalidCreditCardException {
-        try {
-            if ( !isCreditCardValid(expireDate) ) {
-                throw new InvalidCreditCardException("The credit card is expired");
-            }
+    private void registerNewCreditCard(User user) throws SQLException, InvalidCreditCardException {
 
-            // register new credit card for a user
-            long id = credCardDB.registerNewCreditCard(userID, number, cvv, expireDate);
-
-            // set credit card fields
-            setCreditCard(id, number, cvv, expireDate);
-
-        } catch ( SQLException e ) {
-            throw e;
+        if ( this.ID == 0 || this.number == 0 || this.cvv == 0 || this.expireDate == null ) {
+            throw new InvalidCreditCardException("Missing some fields");
         }
+
+        if ( !isCreditCardValid(expireDate) ) {
+            throw new InvalidCreditCardException("The credit card is expired");
+        }
+
+        // register new credit card for a user
+        long id = credCardDB.registerNewCreditCard(user.getID(), number, cvv, expireDate);
+
+        this.ID = id;
+
     }
 
     /**

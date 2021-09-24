@@ -12,9 +12,9 @@ import static org.junit.Assert.assertTrue;
 
 public class IsCreditCardValidForSubscriptionTest {
 
-    CreditCard creditCard = new CreditCard();
-    SubscriptionType subType = new SubscriptionType();
     Date today = new Date();
+    CreditCard creditCard = new CreditCard(1, 585548484445555l, 5864, today);
+    SubscriptionType subType = new SubscriptionType();
 
     public Date createDateFromToday(int number) {
         Calendar date = Calendar.getInstance();

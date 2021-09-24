@@ -1,7 +1,7 @@
 package bikeProject.dataservice;
 
 import java.sql.SQLException;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import bikeProject.PasswordUtils;
@@ -90,11 +90,10 @@ public class User implements DataserviceInterface {
      */
     public void addCreditCard(long number, long cvv, Date expireDate) throws SQLException, InvalidCreditCardException {
 
-        CreditCard creditCardTemp = new CreditCard();
         // register the new credit card
-        creditCardTemp.registerNewCreditCard(ID, number, cvv, expireDate);
+        CreditCard newCreditCard = new CreditCard(number, cvv, expireDate, this);
 
-        creditCard.add(creditCardTemp);
+        creditCard.add(newCreditCard);
     }
 
     public static Subscription getValidSubscription() throws InvalidSubscriptionException {
