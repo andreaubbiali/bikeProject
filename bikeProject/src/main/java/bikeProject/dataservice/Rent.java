@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
+import bikeProject.config.Config;
 import bikeProject.database.RentDatabase;
 import bikeProject.exception.InvalidSubscriptionException;
 import bikeProject.exception.NotValidRentException;
@@ -33,7 +34,7 @@ public class Rent implements DataserviceInterface {
 
         rentDB.updateRent(this);
 
-        if (user.isStudent() && bike.getType().getType().equals(BikeTypeEnum.NORMAL)){
+        if ( user.isStudent() && bike.getType().getType().equals(BikeTypeEnum.NORMAL) ) {
             // student user can use bike normal freely
             return;
         }
@@ -45,9 +46,9 @@ public class Rent implements DataserviceInterface {
 
         // calculate the cost to be pay
         Float totalCost;
-        if (config.getMaximumRentMinutes() < rentMinutes){
+        if ( Config.getInstance().getMaximumRentMinutes() < rentMinutes ) {
             // exceeded the maximum rent time so pay the penal
-            totalCost = config.getTariffExceedMaximumRentMinutes();
+            totalCost = Config.getInstance().getTariffExceedMaximumRentMinutes();
 
             // update user subscription because has exceeded the maximum time
             Subscription subscription = user.getValidSubscription();

@@ -49,6 +49,9 @@ public class Main extends Application {
             // start the database
             Database.getInstance();
 
+            // read the config file
+            Config.getInstance();
+
             Application.launch(args);
         } catch ( Exception e ) {
             e.printStackTrace();

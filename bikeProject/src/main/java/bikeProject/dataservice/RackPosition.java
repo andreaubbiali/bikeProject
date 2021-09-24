@@ -1,5 +1,6 @@
 package bikeProject.dataservice;
 
+import bikeProject.config.Config;
 import bikeProject.exception.RackException;
 
 import java.sql.SQLException;
@@ -12,7 +13,8 @@ public class RackPosition implements DataserviceInterface {
     private Bike bike;
 
     /**
-     * check all requisites: a bike into the rack position, bikeType requested by the user, bike not in maintenance and a not broken position
+     * check all requisites: a bike into the rack position, bikeType requested by the user, bike not in maintenance
+     * and a not broken position
      *
      * @return
      */
@@ -37,7 +39,7 @@ public class RackPosition implements DataserviceInterface {
     }
 
     public boolean unlock() throws SQLException {
-        if ( config.isProductionMode() ) {
+        if ( Config.getInstance().isProductionMode() ) {
             try {
                 // try to unlock the position
             } catch ( Exception e ) {
@@ -46,7 +48,7 @@ public class RackPosition implements DataserviceInterface {
             }
         } else {
 
-            if ( !config.getRackMockResponse() ) {
+            if ( !Config.getInstance().getRackMockResponse() ) {
                 setIsBroken(true);
                 return false;
             }
@@ -56,7 +58,7 @@ public class RackPosition implements DataserviceInterface {
     }
 
     public boolean lock() throws SQLException {
-        if ( config.isProductionMode() ) {
+        if ( Config.getInstance().isProductionMode() ) {
             try {
                 // try to lock the position
             } catch ( Exception e ) {
@@ -65,7 +67,7 @@ public class RackPosition implements DataserviceInterface {
             }
         } else {
 
-            if ( !config.getRackMockResponse() ) {
+            if ( !Config.getInstance().getRackMockResponse() ) {
                 setIsBroken(true);
                 return false;
             }

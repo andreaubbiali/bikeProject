@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.List;
 
 import bikeProject.PasswordUtils;
+import bikeProject.config.Config;
 import bikeProject.exception.*;
 
 public class User implements DataserviceInterface {
@@ -153,7 +154,7 @@ public class User implements DataserviceInterface {
     public static boolean checkIsUserAStudent() {
 
         // check if is in production or test mode
-        if ( config.isProductionMode() ) {
+        if ( Config.getInstance().isProductionMode() ) {
 
             try {
                 // this.isStudent = send request to university
@@ -163,7 +164,7 @@ public class User implements DataserviceInterface {
 
         } else {
             // get mocked response for test
-            isStudent = config.getUniversityMockResponse();
+            isStudent = Config.getInstance().getUniversityMockResponse();
 
         }
         return isStudent;

@@ -5,8 +5,6 @@ import bikeProject.database.*;
 
 public interface DataserviceInterface {
 
-    Config config = Config.getInstance();
-
     UserDatabaseInterface userDB = new UserDatabase();
     SubscriptionDatabaseInterface subscriptionDB = new SubscriptionDatabase();
     CreditCardDatabaseInterface credCardDB = new CreditCardDatabase();

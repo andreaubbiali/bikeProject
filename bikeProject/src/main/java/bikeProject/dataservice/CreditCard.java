@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
+import bikeProject.config.Config;
 import bikeProject.exception.InvalidCreditCardException;
 import bikeProject.exception.PaymentException;
 
@@ -70,7 +71,7 @@ public class CreditCard implements DataserviceInterface, CreditCardInterface {
      * @throws PaymentException if something with the call goes wrong
      */
     public void pay(float amount) throws PaymentException {
-        if ( config.isProductionMode() ) {
+        if ( Config.getInstance().isProductionMode() ) {
             try {
                 // send request to bank
             } catch ( Exception e ) {
@@ -78,7 +79,7 @@ public class CreditCard implements DataserviceInterface, CreditCardInterface {
             }
         } else {
 
-            if ( !config.getBankMockResponse() ) {
+            if ( !Config.getInstance().getBankMockResponse() ) {
                 throw new PaymentException();
             }
         }
