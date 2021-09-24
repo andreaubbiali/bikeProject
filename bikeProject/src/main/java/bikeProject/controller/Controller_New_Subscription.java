@@ -120,7 +120,7 @@ public class Controller_New_Subscription implements Initializable {
             e.printStackTrace();
             return;
         } catch ( InvalidCreditCardException ce ) {
-            lblError.setText("The credit card is not valid for the subscription.");
+            lblError.setText(ce.getMessage());
             return;
         } catch ( PaymentException pe ) {
             lblError.setText("Something went wrong with the payment. Retry or change the credit card.");
