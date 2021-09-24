@@ -1,17 +1,22 @@
 package bikeProject.dataservice;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class SubscriptionType implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
-    private /* @ not_null @ */ String type;
+    private /* @ not_null @ */ String name;
     private /* @ not_null @ */ float price;
     private /* @ not_null @ */ int daysDuration;
     private /* @ not_null @ */ int mustStartIn;
 
-    public SubscriptionType getType() throws SQLException {
-        return subTypeDB.getTypeByID(this.ID);
+    public SubscriptionType getSubscriptionType() throws SQLException {
+        return subTypeDB.getSubscriptionTypeByID(this.ID);
+    }
+
+    public List<SubscriptionType> getAllSubscriptionTypes() throws SQLException {
+        return subTypeDB.getAllSubscriptionTypes();
     }
 
     public long getID() {
@@ -22,12 +27,12 @@ public class SubscriptionType implements DataserviceInterface {
         ID = iD;
     }
 
-    public String getTypeName() {
-        return type;
+    public String getName() {
+        return name;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getPrice() {

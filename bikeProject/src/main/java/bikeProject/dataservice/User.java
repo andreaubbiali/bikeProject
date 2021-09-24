@@ -125,12 +125,8 @@ public class User implements DataserviceInterface {
      * @throws InvalidCreditCardException
      * @throws PaymentException
      */
-    public void addSubscription(String password, SubscriptionType subType, CreditCard selectedCreditCard) throws WrongPasswordException, SQLException, InvalidCreditCardException, PaymentException {
-
-        // check the user password to add subscription
-        if ( !checkPassword(password) ) {
-            throw new WrongPasswordException();
-        }
+    public void addSubscription(SubscriptionType subType, CreditCard selectedCreditCard) throws SQLException,
+            InvalidCreditCardException, PaymentException {
 
         // check if the credit card is valid for the subscription selected
         if ( !selectedCreditCard.isCreditCardValidForSubscription(subType) ) {
