@@ -10,18 +10,16 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Private_User_Area">
     <children>
         <Button layoutX="343.0" layoutY="455.0" mnemonicParsing="false" text="Verify I am a student" />
-        <Button layoutX="73.0" layoutY="337.0" mnemonicParsing="false" text="New subscription" />
-        <Button layoutX="591.0" layoutY="337.0" mnemonicParsing="false" text="Add a credit card" />
+        <Button fx:id="newSubscription" layoutX="138.0" layoutY="331.0" mnemonicParsing="false" onAction="#newSubscription" text="New subscription" />
+        <Button fx:id="newCreditCard" layoutX="591.0" layoutY="331.0" mnemonicParsing="false" onAction="#newCreditCard" text="Add a credit card" />
         <Label layoutX="38.0" layoutY="74.0" text="Subscription" />
         <Label layoutX="462.0" layoutY="74.0" text="Credit card" />
-        <TableView layoutX="38.0" layoutY="104.0" prefHeight="200.0" prefWidth="200.0">
+        <TableView fx:id="tblSubscription" layoutX="38.0" layoutY="104.0" prefHeight="200.0" prefWidth="355.0">
             <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="columnType" editable="false" prefWidth="150.0" sortable="false" text="Type" />
+            <TableColumn fx:id="columnStartDate" editable="false" prefWidth="131.0" sortable="false" text="Start date" />
+                <TableColumn fx:id="columnDeleted" editable="false" prefWidth="73.0" sortable="false" text="Deleted" />
             </columns>
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-            </columnResizePolicy>
         </TableView>
         <TableView fx:id="tblCreditCard" layoutX="453.0" layoutY="104.0" prefHeight="200.0" prefWidth="422.0">
             <columns>

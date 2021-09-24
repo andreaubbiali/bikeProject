@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_New_Subscription">
+   <children>
+      <Label layoutX="69.0" layoutY="217.0" text="Subscription type" />
+      <Label layoutX="111.0" layoutY="268.0" text="Credit card" />
+      <Label layoutX="171.0" layoutY="20.0" text="CREATE NEW SUBSCRIPTION">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnCreateSubscription" layoutX="243.0" layoutY="314.0" mnemonicParsing="false" onAction="#createSubscription" text="Add new subscription" />
+      <TableView fx:id="tblSubscriptionType" layoutX="44.0" layoutY="58.0" prefHeight="121.0" prefWidth="591.0">
+        <columns>
+          <TableColumn fx:id="columnType" editable="false" prefWidth="127.0" sortable="false" text="Type" />
+          <TableColumn fx:id="columnPrice" editable="false" prefWidth="100.0" sortable="false" text="Price" />
+            <TableColumn fx:id="columnDuration" editable="false" prefWidth="150.0" sortable="false" text="Duration (days)" />
+            <TableColumn fx:id="columnMustStartIn" editable="false" prefWidth="213.0" sortable="false" text="must start in (days)" />
+        </columns>
+      </TableView>
+      <ChoiceBox fx:id="chkCreditCard" layoutX="247.0" layoutY="264.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chkSubscriptionType" layoutX="247.0" layoutY="213.0" prefWidth="150.0" />
+      <Label fx:id="lblError" layoutX="112.0" layoutY="358.0" prefHeight="16.0" prefWidth="483.0" textFill="RED" />
+   </children>
+</Pane>
