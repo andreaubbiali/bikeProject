@@ -11,7 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,18 +18,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class Controller_Private_User_Area implements Initializable {
-
-    @FXML
-    private Button newSubscription;
-
-    @FXML
-    private Button newCreditCard;
 
     @FXML
     private TableView<Subscription> tblSubscription;
@@ -63,11 +55,10 @@ public class Controller_Private_User_Area implements Initializable {
             User user = User.getInstance();
 
             // fill the credit card table
-            columnNumber.setCellValueFactory(new PropertyValueFactory<CreditCard, String>("number"));
-            columnExpireDate.setCellValueFactory(new PropertyValueFactory<CreditCard, String>("expireDate"));
+            columnNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
+            columnExpireDate.setCellValueFactory(new PropertyValueFactory<>("expireDate"));
 
             List<CreditCard> creditCards = user.getCreditCard();
-
             if ( creditCards.size() == 0 ) {
                 tblCreditCard.setPlaceholder(new Label("There aren't credit cards"));
             } else {
@@ -75,9 +66,9 @@ public class Controller_Private_User_Area implements Initializable {
             }
 
             // fill the subscription table
-            columnType.setCellValueFactory(new PropertyValueFactory<Subscription, String>("type.type"));
-            columnStartDate.setCellValueFactory(new PropertyValueFactory<Subscription, Date>("subscriptionDate"));
-            columnDeleted.setCellValueFactory(new PropertyValueFactory<Subscription, Boolean>("deleted"));
+            columnType.setCellValueFactory(new PropertyValueFactory<>("type.type"));
+            columnStartDate.setCellValueFactory(new PropertyValueFactory<>("subscriptionDate"));
+            columnDeleted.setCellValueFactory(new PropertyValueFactory<>("deleted"));
 
             List<Subscription> subscriptions = user.getSubscription();
 
