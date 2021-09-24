@@ -38,7 +38,7 @@ public class CreditCard implements DataserviceInterface {
      */
     private void registerNewCreditCard(User user) throws SQLException, InvalidCreditCardException {
 
-        if ( this.ID == 0 || this.number == 0 || this.cvv == 0 || this.expireDate == null ) {
+        if ( this.number == 0 || this.cvv == 0 || this.expireDate == null ) {
             throw new InvalidCreditCardException("Missing some fields");
         }
 
