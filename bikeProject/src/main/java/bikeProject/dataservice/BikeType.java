@@ -1,32 +1,39 @@
 package bikeProject.dataservice;
 
-public class  BikeType implements DataserviceInterface{
+import java.sql.SQLException;
+import java.util.List;
 
-	private /* @ not_null @ */ long ID;
-	private /* @ not_null @ */ BikeTypeEnum type;
-	private /* @ not_null @ */ boolean babySeat;
+public class BikeType implements DataserviceInterface {
 
-	public long getID() {
-		return ID;
-	}
+    private /* @ not_null @ */ long ID;
+    private /* @ not_null @ */ BikeTypeEnum type;
+    private /* @ not_null @ */ boolean babySeat;
 
-	public void setID(long ID) {
-		this.ID = ID;
-	}
+    public List<BikeType> getBikeTypes() throws SQLException {
+        return bikeTypeDB.getBikeTypes();
+    }
 
-	public BikeTypeEnum getType() {
-		return type;
-	}
+    public long getID() {
+        return ID;
+    }
 
-	public void setType(BikeTypeEnum type) {
-		this.type = type;
-	}
+    public void setID(long ID) {
+        this.ID = ID;
+    }
 
-	public boolean isBabySeat() {
-		return babySeat;
-	}
+    public BikeTypeEnum getType() {
+        return type;
+    }
 
-	public void setBabySeat(boolean babySeat) {
-		this.babySeat = babySeat;
-	}
+    public void setType(BikeTypeEnum type) {
+        this.type = type;
+    }
+
+    public boolean isBabySeat() {
+        return babySeat;
+    }
+
+    public void setBabySeat(boolean babySeat) {
+        this.babySeat = babySeat;
+    }
 }
