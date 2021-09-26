@@ -2,34 +2,22 @@ package bikeProject.dataservice;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import bikeProject.PasswordUtils;
 import bikeProject.config.Config;
 import bikeProject.exception.*;
 
-public class User implements DataserviceInterface {
+public class User extends UserGeneric implements DataserviceInterface {
 
     private static User user = null;
 
-    private static /* @ not_null @ */ long ID;
-    private static /* @ not_null @ */ String name;
-    private static /* @ not_null @ */ String surname;
-    private static /* @ not_null @ */ String email;
-    private static /* @ not_null @ */ boolean isStudent;
-    private static List<CreditCard> creditCard;
-    private static List<Subscription> subscription;
+    public User(long id, String name, String surname, String email, boolean isStudent, boolean isAdmin) throws SQLException {
+        super(id, name, surname, email, isStudent, isAdmin);
+    }
 
-    private User(long id, String name, String surname, String email, boolean isStudent) throws SQLException {
-        setID(id);
-        setName(name);
-        setSurname(surname);
-        setEmail(email);
-        setIsStudent(isStudent);
-        setCreditCard(credCardDB.getCreditCardByUserID(id));
-        Subscription subscription = new Subscription();
-        setSubscription(subscription.getSubscriptionByUser(this));
+    private User(UserGeneric userGeneric) throws SQLException {
+        super(userGeneric);
     }
 
     public static User getInstance() throws AccessDeniedException {
@@ -65,43 +53,33 @@ public class User implements DataserviceInterface {
 
         System.out.println("New user registered: " + email);
 
-        user = new User(id, name, surname, email, isStudent);
+        user = new User(id, name, surname, email, isStudent, false);
     }
 
-    /**
-     * @param password
-     * @throws UserNotFoundException
-     * @throws SQLException
-     */
     public static void login(String email, String password) throws SQLException, WrongPasswordException {
 
-        userDB.login(email, password);
+        UserGeneric userGeneric = userDB.login(email, password);
+
+        user = new User(userGeneric);
+
         System.out.println("New login from: " + email);
     }
 
-    public static void setUser(long id, String name, String surname, String email, boolean isStudent) throws SQLException {
-        user = new User(id, name, surname, email, isStudent);
-    }
-
-    /**
-     * @param number
-     * @param cvv
-     * @param expireDate
-     * @throws SQLException
-     */
     public void addCreditCard(long number, long cvv, LocalDate expireDate) throws SQLException,
             InvalidCreditCardException {
 
         // register the new credit card
         CreditCard newCreditCard = new CreditCard(number, cvv, expireDate, this);
 
-        creditCard.add(newCreditCard);
+        addNewCreditCard(newCreditCard);
     }
 
     public static Subscription getValidSubscription() throws InvalidSubscriptionException {
         Subscription subscriptionRes = new Subscription();
         boolean found = false;
 
+        List<Subscription> subscription = getSubscription();
+        // inverted loop
         for ( int i = subscription.size() - 1; i >= 0; i-- ) {
             subscriptionRes = subscription.get(i);
 
@@ -119,13 +97,6 @@ public class User implements DataserviceInterface {
         return subscriptionRes;
     }
 
-    /**
-     * @param subType
-     * @param selectedCreditCard
-     * @return
-     * @throws InvalidCreditCardException
-     * @throws PaymentException
-     */
     public void addSubscription(SubscriptionType subType, CreditCard selectedCreditCard) throws SQLException,
             InvalidCreditCardException, PaymentException {
 
@@ -141,7 +112,7 @@ public class User implements DataserviceInterface {
         // payment for the subscription
         selectedCreditCard.pay(subType.getPrice());
 
-        this.subscription.add(subscription);
+        addNewSubscription(subscription);
 
     }
 
@@ -161,107 +132,25 @@ public class User implements DataserviceInterface {
 
         } else {
             // get mocked response for test
-            isStudent = Config.getInstance().getUniversityMockResponse();
+            setIsStudent(Config.getInstance().getUniversityMockResponse());
 
         }
-        return isStudent;
+        return getIsStudent();
     }
 
-    /**
-     * @param password
-     * @return
-     */
     public boolean checkPassword(String password) throws SQLException {
 
-        return userDB.checkPasswordByID(this.ID, password);
+        return userDB.checkPasswordByID(getID(), password);
     }
 
-    public CreditCard getCreditCardValidForSubscription(Subscription subscription) throws InvalidCreditCardException {
+    public static CreditCard getCreditCardValidForSubscription(Subscription subscription) throws InvalidCreditCardException {
 
-        for ( CreditCard creditCard : creditCard ) {
+        for ( CreditCard creditCard : getCreditCard() ) {
             if ( creditCard.isCreditCardValidForSubscription(subscription.getType()) ) {
                 return creditCard;
             }
         }
 
         throw new InvalidCreditCardException("There are no valid credit card");
-    }
-
-    /*
-    public boolean isValidUniqueCodeSubscriptionForUser(String uniqueCode, String password) throws SQLException {
-        Subscription subscription = new Subscription(uniqueCode);
-
-        // TODO fix
-        // login(subscription.getUserID(), password);
-
-        // check the validity of the subscription
-        return subscription.isValid();
-
-    }*/
-
-    /*public void setUser(User user) throws SQLException {
-        setID(user.ID);
-        setName(user.name);
-        setSurname(user.surname);
-        setEmail(user.email);
-        setIsStudent(user.isStudent);
-        setCreditCard(credCardDB.getCreditCardByUserID(id));
-    }*/
-
-    // GETTERS AND SETTERS
-    public long getID() {
-        return ID;
-    }
-
-    public void setID(long iD) {
-        ID = iD;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public boolean isStudent() {
-        return isStudent;
-    }
-
-    public void setIsStudent(boolean isStudent) {
-        this.isStudent = isStudent;
-    }
-
-    public List<CreditCard> getCreditCard() {
-        return creditCard;
-    }
-
-    public void setCreditCard(List<CreditCard> creditCard) {
-        this.creditCard = creditCard;
-    }
-
-    public List<Subscription> getSubscription() {
-        return subscription;
-    }
-
-    public void setSubscription(List<Subscription> subscription) {
-        this.subscription = subscription;
     }
 }

@@ -1,18 +1,18 @@
 package bikeProject.database;
 
+import bikeProject.PasswordUtils;
+import bikeProject.dataservice.User;
+import bikeProject.dataservice.UserGeneric;
+import bikeProject.exception.WrongPasswordException;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import bikeProject.PasswordUtils;
-import bikeProject.dataservice.User;
-import bikeProject.exception.UserNotFoundException;
-import bikeProject.exception.WrongPasswordException;
-
 public class UserDatabase implements UserDatabaseInterface {
 
-    public void login(String email, String password) throws SQLException, WrongPasswordException {
+    public UserGeneric login(String email, String password) throws SQLException, WrongPasswordException {
 
         PreparedStatement statement =
                 Database.getConn().prepareStatement("SELECT * FROM user WHERE email = ? LIMIT " + "1;");
@@ -23,18 +23,21 @@ public class UserDatabase implements UserDatabaseInterface {
             throw new WrongPasswordException();
         }
 
-        User.setUser(res.getInt("id"), res.getString("name"), res.getString("surname"), res.getString("email"),
-                res.getBoolean("is_Student"));
+        UserGeneric userGeneric = new UserGeneric(res.getInt("id"), res.getString("name"), res.getString("surname"),
+                res.getString("email"), res.getBoolean("is_Student"), res.getBoolean("is_admin"));
 
         res.close();
+
+        return userGeneric;
     }
 
     public int registerNewUser(String name, String surname, String email, boolean isStudent, String password,
                                String salt) throws SQLException {
 
         // prepare the statement
-        PreparedStatement statement = Database.getConn().prepareStatement("INSERT INTO user (name, surname, email, " +
-                "password, " + "salt, is_student) VALUES (?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement statement =
+                Database.getConn().prepareStatement("INSERT INTO user (name, surname, email, " + "password, " +
+                        "salt, is_student) VALUES (?,?,?,?,?,?);", Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, name);
         statement.setString(2, surname);
         statement.setString(3, email);
@@ -70,18 +73,18 @@ public class UserDatabase implements UserDatabaseInterface {
         return valid;
     }
 
-    public void getUser(User user) throws SQLException {
+    /*public void getUser(User user) throws SQLException {
 
         PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
         statement.setLong(1, user.getID());
         ResultSet res = statement.executeQuery();
 
         user.setUser(res.getInt("id"), res.getString("name"), res.getString("surname"), res.getString("email"),
-                res.getBoolean("isStudent"));
+                res.getBoolean("isStudent"), res.getBoolean("is_admin"));
 
         res.close();
 
-    }
+    }*/
 
     private boolean checkPassword(ResultSet res, String password) throws SQLException {
 
