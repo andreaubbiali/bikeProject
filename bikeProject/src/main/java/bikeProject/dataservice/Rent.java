@@ -34,7 +34,7 @@ public class Rent implements DataserviceInterface {
 
         rentDB.updateRent(this);
 
-        if ( user.isStudent() && bike.getType().getType().equals(BikeTypeEnum.NORMAL) ) {
+        if ( User.getIsStudent() && bike.getType().getType().equals(BikeTypeEnum.NORMAL) ) {
             // student user can use bike normal freely
             return;
         }

@@ -86,8 +86,12 @@ public class TotemRack implements DataserviceInterface {
         }
 
         Subscription userSubscription = rent.getUser().getValidSubscription();
-        rent.endRent(userSubscription.getUser().getCreditCardValidForSubscription(userSubscription));
+        rent.endRent(User.getCreditCardValidForSubscription(userSubscription));
 
+    }
+
+    public long addNewRack(String address) throws SQLException {
+        return totemRackDB.addNewRack(address);
     }
 
     // GETTERS AND SETTERS

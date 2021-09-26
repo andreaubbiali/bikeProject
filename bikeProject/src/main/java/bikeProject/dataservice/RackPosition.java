@@ -12,6 +12,10 @@ public class RackPosition implements DataserviceInterface {
     private /* @ not_null @ */ BikeType acceptedBikeType;
     private Bike bike;
 
+    public void addRackPositions(long rackID, int numberPositions, String acceptedBike) throws SQLException {
+        rackDB.addRackPositions(rackID, numberPositions, acceptedBike);
+    }
+
     /**
      * check all requisites: a bike into the rack position, bikeType requested by the user, bike not in maintenance
      * and a not broken position
