@@ -94,6 +94,10 @@ public class TotemRack implements DataserviceInterface {
         return totemRackDB.addNewRack(address);
     }
 
+    public List<TotemRack> getAllRacks() throws SQLException {
+        return totemRackDB.getAllRacks();
+    }
+
     // GETTERS AND SETTERS
 
     public long getID() {

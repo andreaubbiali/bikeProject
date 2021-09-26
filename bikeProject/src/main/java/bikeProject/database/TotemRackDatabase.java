@@ -1,9 +1,17 @@
 package bikeProject.database;
 
+import bikeProject.dataservice.Subscription;
+import bikeProject.dataservice.SubscriptionType;
+import bikeProject.dataservice.TotemRack;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TotemRackDatabase implements TotemRackDatabaseInterface {
 
@@ -27,5 +35,26 @@ public class TotemRackDatabase implements TotemRackDatabaseInterface {
                 throw new SQLException("Register new rack failed, no ID obtained.");
             }
         }
+    }
+
+    public List<TotemRack> getAllRacks() throws SQLException {
+
+        List<TotemRack> rackList = new ArrayList<>();
+
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM rack ;");
+        ResultSet res = statement.executeQuery();
+
+        while ( res.next() ) {
+            TotemRack rack = new TotemRack();
+
+            rack.setID(res.getLong("id"));
+            rack.setAddress(res.getString("address"));
+
+            rackList.add(rack);
+        }
+
+        res.close();
+
+        return rackList;
     }
 }
