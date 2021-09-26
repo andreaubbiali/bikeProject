@@ -14,5 +14,7 @@ public interface DataserviceInterface {
     DamagedBikeDatabaseInterface damagedBikeDB = new DamagedBikeDatabase();
     TariffDatabaseInterface tariffDB = new TariffDatabase();
     SubscriptionTypeDatabaseInterface subTypeDB = new SubscriptionTypeDatabase();
+    BikeTypeDatabaseInterface bikeTypeDB = new BikeTypeDatabase();
+    TotemRackDatabaseInterface totemRackDB = new TotemRackDatabase();
 
 }

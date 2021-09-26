@@ -2,6 +2,7 @@ package bikeProject.controller;
 
 import bikeProject.dataservice.Subscription;
 import bikeProject.dataservice.User;
+import bikeProject.dataservice.UserGeneric;
 
 import java.time.LocalDate;
 
@@ -10,7 +11,7 @@ public class SubscriptionDTO {
     public long ID;
     public String typeName;
     public LocalDate subscriptionDate;
-    public User user;
+    public UserGeneric user;
     public int countExceededTime;
     public LocalDate startDate;
     public boolean deleted;
@@ -49,11 +50,11 @@ public class SubscriptionDTO {
         this.subscriptionDate = subscriptionDate;
     }
 
-    public User getUser() {
+    public UserGeneric getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserGeneric user) {
         this.user = user;
     }
 

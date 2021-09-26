@@ -10,7 +10,7 @@ public class Subscription implements DataserviceInterface {
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ SubscriptionType type;
     private /* @ not_null @ */ LocalDate subscriptionDate;
-    private /* @ not_null @ */ User user;
+    private /* @ not_null @ */ UserGeneric user;
     private /* @ not_null @ */ int countExceededTime;
     private LocalDate startDate;
     private /* @ not_null @ */ boolean deleted;
@@ -33,7 +33,7 @@ public class Subscription implements DataserviceInterface {
 
     }
 
-    public List<Subscription> getSubscriptionByUser(User user) throws SQLException {
+    public List<Subscription> getSubscriptionByUser(UserGeneric user) throws SQLException {
         List<Subscription> subscriptionList = subscriptionDB.getSubscriptionByUserID(user.getID());
 
         for ( Subscription sub : subscriptionList ) {
@@ -131,11 +131,11 @@ public class Subscription implements DataserviceInterface {
         this.subscriptionDate = subscriptionDate;
     }
 
-    public User getUser() {
+    public UserGeneric getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserGeneric user) {
         this.user = user;
     }
 
