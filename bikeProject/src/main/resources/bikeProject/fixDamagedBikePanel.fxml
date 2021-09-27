@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="180.0" layoutY="25.0" text="FIX DAMAGED BIKE">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TableView layoutX="83.0" layoutY="76.0" prefHeight="200.0" prefWidth="434.0">
+        <columns>
+          <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Bike id" />
+          <TableColumn editable="false" prefWidth="358.0" sortable="false" text="User message" />
+        </columns>
+      </TableView>
+      <Button layoutX="269.0" layoutY="350.0" mnemonicParsing="false" text="Set fixed" />
+      <ComboBox layoutX="225.0" layoutY="296.0" prefWidth="150.0" />
+      <Label layoutX="144.0" layoutY="300.0" text="Bike id" />
+   </children>
+</Pane>
