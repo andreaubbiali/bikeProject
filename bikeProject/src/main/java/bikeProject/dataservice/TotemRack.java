@@ -94,8 +94,52 @@ public class TotemRack implements DataserviceInterface {
         return totemRackDB.addNewRack(address);
     }
 
+    public void deleteRack() throws SQLException {
+        totemRackDB.delete(this.ID);
+    }
+
     public List<TotemRack> getAllRacks() throws SQLException {
         return totemRackDB.getAllRacks();
+    }
+
+    public void getRackByID(long id) throws SQLException {
+        TotemRack rack = totemRackDB.getRackByID(id);
+        setID(rack.getID());
+        setAddress(rack.getAddress());
+        setRackPositionList(totemRackDB.getRackPositionsByRackID(this.ID));
+    }
+
+    public void updateRackAddress(String address) throws SQLException {
+        totemRackDB.updateRackAddress(this.ID, address);
+        setAddress(address);
+    }
+
+    public void addNewBike(BikeType bikeType) throws SQLException, RackException {
+
+        // check if there is a free place for this type of bike
+        RackPosition rp = isThereAFreePlaceForBikeType(bikeType);
+        if ( rp == null ) {
+            throw new RackException("There isn't place for selected bikeType");
+        }
+
+        // create the bike
+        Bike bike = new Bike();
+        bike.createNewBike(bikeType);
+
+        // add the bike into this place
+        rp.addBike(bike);
+    }
+
+    public RackPosition isThereAFreePlaceForBikeType(BikeType bikeType) {
+
+        for ( RackPosition rp : rackPositionList ) {
+
+            if ( rp.getBike() == null && rp.getAcceptedBikeType().getID() == bikeType.getID() ) {
+                return rp;
+            }
+        }
+
+        return null;
     }
 
     // GETTERS AND SETTERS

@@ -80,11 +80,22 @@ public class RackPosition implements DataserviceInterface {
         return true;
     }
 
-    public void setIsBroken(boolean isBroken) throws SQLException {
+    public void updateIsBroken(boolean isBroken) throws SQLException {
 
         this.isBroken = isBroken;
 
-        rackDB.updateIsBroken(isBroken);
+        rackDB.updateIsBroken(this.ID, isBroken);
+    }
+
+    public void addBike(Bike bike) throws SQLException {
+
+        setBike(bike);
+        rackDB.addBike(this.ID, bike.getID());
+    }
+
+    public void deleteBike() throws SQLException {
+        bike.delete();
+        setBike(null);
     }
 
     public long getID() {
@@ -97,6 +108,10 @@ public class RackPosition implements DataserviceInterface {
 
     public boolean isBroken() {
         return isBroken;
+    }
+
+    public void setIsBroken(boolean isBroken) {
+        this.isBroken = isBroken;
     }
 
     public BikeType getAcceptedBikeType() {

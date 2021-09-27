@@ -80,7 +80,7 @@ public class Controller_Manage implements Initializable {
 
         TotemRack rack = (TotemRack) selectedRack.getKey();
 
-        Controller_Update_Rack.selectedRack = rack.getID();
+        Controller_Update_Rack.selectedRackID = rack.getID();
 
         // go to update rack page
         try {

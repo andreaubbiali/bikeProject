@@ -8,15 +8,29 @@ public class Bike implements DataserviceInterface {
     private /* @ not_null @ */ BikeType type;
     private /* @ not_null @ */ boolean isInMaintenance;
 
-    public void setInMaintenance(boolean isInMaintenance) throws SQLException {
+    public void setBikeInMaintenance() throws SQLException {
 
         this.isInMaintenance = isInMaintenance;
         bikeDB.updateBike(this);
     }
 
-    public long getID() {return ID;}
+    public void createNewBike(BikeType bikeType) throws SQLException {
+        setID(bikeDB.createBike(bikeType.getID()));
+        setIsInMaintenance(false);
+        setType(bikeType);
+    }
 
-    public void setID(long ID) {this.ID = ID;}
+    public void delete() throws SQLException {
+        bikeDB.delete(this.ID);
+    }
+
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
+    }
 
     public BikeType getType() {
         return type;
@@ -28,6 +42,10 @@ public class Bike implements DataserviceInterface {
 
     public boolean isInMaintenance() {
         return isInMaintenance;
+    }
+
+    public void setIsInMaintenance(boolean isInMaintenance) {
+        this.isInMaintenance = isInMaintenance;
     }
 
 }
