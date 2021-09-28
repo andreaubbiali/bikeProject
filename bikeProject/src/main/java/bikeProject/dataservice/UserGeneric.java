@@ -9,8 +9,8 @@ public class UserGeneric implements DataserviceInterface {
     private static /* @ not_null @ */ String surname;
     private static /* @ not_null @ */ String email;
     private static /* @ not_null @ */ boolean isStudent;
-    private static List<CreditCard> creditCard;
-    private static List<Subscription> subscription;
+    private static List<CreditCard> creditCardList;
+    private static List<Subscription> subscriptionList;
     private static boolean isAdmin;
 
     public UserGeneric(UserGeneric userGeneric) {
@@ -22,18 +22,18 @@ public class UserGeneric implements DataserviceInterface {
         setSurname(surname);
         setEmail(email);
         setIsStudent(isStudent);
-        setCreditCard(credCardDB.getCreditCardByUserID(id));
+        setCreditCardList(credCardDB.getCreditCardByUserID(id));
         Subscription subscription = new Subscription();
-        setSubscription(subscription.getSubscriptionByUser(this));
+        setSubscriptionList(subscription.getSubscriptionByUser(this));
         setIsAdmin(isAdmin);
     }
 
     public void addNewCreditCard(CreditCard cr) {
-        creditCard.add(cr);
+        creditCardList.add(cr);
     }
 
     public void addNewSubscription(Subscription sub) {
-        subscription.add(sub);
+        subscriptionList.add(sub);
     }
 
     public static long getID() {
@@ -76,20 +76,20 @@ public class UserGeneric implements DataserviceInterface {
         UserGeneric.isStudent = isStudent;
     }
 
-    public static List<CreditCard> getCreditCard() {
-        return creditCard;
+    public static List<CreditCard> getCreditCardList() {
+        return creditCardList;
     }
 
-    public static void setCreditCard(List<CreditCard> creditCard) {
-        UserGeneric.creditCard = creditCard;
+    public static void setCreditCardList(List<CreditCard> creditCard) {
+        UserGeneric.creditCardList = creditCard;
     }
 
-    public static List<Subscription> getSubscription() {
-        return subscription;
+    public static List<Subscription> getSubscriptionList() {
+        return subscriptionList;
     }
 
-    public static void setSubscription(List<Subscription> subscription) {
-        UserGeneric.subscription = subscription;
+    public static void setSubscriptionList(List<Subscription> subscription) {
+        UserGeneric.subscriptionList = subscription;
     }
 
     public static boolean getIsAdmin() {

@@ -51,8 +51,13 @@ public class Controller_Fix_Broken_Rack_Position implements Initializable {
 
     @FXML
     void fixRackPosition(ActionEvent event) {
-        RackPosition selectedRackPosition =
-                (RackPosition) cmbRackPosition.getSelectionModel().getSelectedItem().getKey();
+        KeyValuePair selectedCmb = cmbRackPosition.getSelectionModel().getSelectedItem();
+
+        if ( selectedCmb == null ) {
+            lblError.setText("Select a rack to fix");
+        }
+
+        RackPosition selectedRackPosition = (RackPosition) selectedCmb.getKey();
 
         try {
             selectedRackPosition.updateIsBroken(false);

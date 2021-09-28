@@ -196,13 +196,26 @@ public class Controller_Update_Rack implements Initializable {
 
     @FXML
     void loadBikeToDelete(ActionEvent event) {
-        BikeType selectedType = (BikeType) cmbBikeTypeDeleteBike.getSelectionModel().getSelectedItem().getKey();
+        KeyValuePair selectedCmb = cmbBikeTypeDeleteBike.getSelectionModel().getSelectedItem();
+
+        if ( selectedCmb == null ) {
+            lblError.setText("Select a type");
+            return;
+        }
+
+        BikeType selectedType = (BikeType) selectedCmb.getKey();
 
         loadCmbBikeToDelete(selectedType.getID());
     }
 
     @FXML
     void deleteBike(ActionEvent event) {
+
+        if ( cmbBikeIDDeleteBike.getSelectionModel().getSelectedItem() == null ) {
+            lblError.setText("Select a bike to be deleted");
+            return;
+        }
+
         RackPosition selectedBike = (RackPosition) cmbBikeIDDeleteBike.getSelectionModel().getSelectedItem().getKey();
         long selectedBikeTypeID = selectedBike.getBike().getType().getID();
 

@@ -60,7 +60,7 @@ public class Controller_Private_User_Area implements Initializable {
             columnNumber.setCellValueFactory(new PropertyValueFactory<>("number"));
             columnExpireDate.setCellValueFactory(new PropertyValueFactory<>("expireDate"));
 
-            List<CreditCard> creditCards = user.getCreditCard();
+            List<CreditCard> creditCards = user.getCreditCardList();
             if ( creditCards.size() == 0 ) {
                 tblCreditCard.setPlaceholder(new Label("There aren't credit cards"));
             } else {
@@ -72,7 +72,7 @@ public class Controller_Private_User_Area implements Initializable {
             columnStartDate.setCellValueFactory(new PropertyValueFactory<>("subscriptionDate"));
             columnDeleted.setCellValueFactory(new PropertyValueFactory<>("deleted"));
 
-            List<Subscription> subscriptions = user.getSubscription();
+            List<Subscription> subscriptions = user.getSubscriptionList();
             List<SubscriptionDTO> subscriptionDTOList = new ArrayList<>();
             for ( Subscription sub : subscriptions ) {
                 subscriptionDTOList.add(new SubscriptionDTO(sub));

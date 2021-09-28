@@ -81,7 +81,7 @@ public class Controller_New_Subscription implements Initializable {
             // fill the credit card choice box
             User user = User.getInstance();
 
-            List<CreditCard> creditCards = user.getCreditCard();
+            List<CreditCard> creditCards = user.getCreditCardList();
 
             ObservableList<KeyValuePair> CreditCardChoices = FXCollections.observableArrayList();
 
