@@ -65,6 +65,10 @@ public class User extends UserGeneric implements DataserviceInterface {
         System.out.println("New login from: " + email);
     }
 
+    public static void logout() {
+        user = null;
+    }
+
     public void addCreditCard(long number, long cvv, LocalDate expireDate) throws SQLException,
             InvalidCreditCardException {
 
@@ -78,7 +82,7 @@ public class User extends UserGeneric implements DataserviceInterface {
         Subscription subscriptionRes = new Subscription();
         boolean found = false;
 
-        List<Subscription> subscription = getSubscription();
+        List<Subscription> subscription = getSubscriptionList();
         // inverted loop
         for ( int i = subscription.size() - 1; i >= 0; i-- ) {
             subscriptionRes = subscription.get(i);
@@ -116,6 +120,18 @@ public class User extends UserGeneric implements DataserviceInterface {
 
     }
 
+    public static Rent haveUserActiveRent() {
+
+        for ( Subscription subscription : getSubscriptionList() ) {
+            Rent rent = subscription.isThereAnActiveRent();
+            if ( rent != null ) {
+                return rent;
+            }
+        }
+
+        return null;
+    }
+
     /**
      * request to the university to check if the user is a student
      */
@@ -145,7 +161,7 @@ public class User extends UserGeneric implements DataserviceInterface {
 
     public static CreditCard getCreditCardValidForSubscription(Subscription subscription) throws InvalidCreditCardException {
 
-        for ( CreditCard creditCard : getCreditCard() ) {
+        for ( CreditCard creditCard : getCreditCardList() ) {
             if ( creditCard.isCreditCardValidForSubscription(subscription.getType()) ) {
                 return creditCard;
             }

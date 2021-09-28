@@ -14,6 +14,7 @@ public class Subscription implements DataserviceInterface {
     private /* @ not_null @ */ int countExceededTime;
     private LocalDate startDate;
     private /* @ not_null @ */ boolean deleted;
+    private List<Rent> rentList;
 
     public void createNewSubscription(User user, SubscriptionType subType) throws SQLException {
         LocalDate today = LocalDate.now();
@@ -27,6 +28,7 @@ public class Subscription implements DataserviceInterface {
         }
         this.countExceededTime = 0;
         this.deleted = false;
+        this.rentList = null;
 
         // add the subscription into db
         this.ID = subscriptionDB.createNewSubscription(this);
@@ -36,9 +38,12 @@ public class Subscription implements DataserviceInterface {
     public List<Subscription> getSubscriptionByUser(UserGeneric user) throws SQLException {
         List<Subscription> subscriptionList = subscriptionDB.getSubscriptionByUserID(user.getID());
 
+        Rent rent = new Rent();
+
         for ( Subscription sub : subscriptionList ) {
             sub.setType(sub.type.getSubscriptionType());
             sub.setUser(user);
+            sub.setRentList(rent.getRentFromSubscriptionID(sub.getID()));
         }
 
         return subscriptionList;
@@ -82,13 +87,29 @@ public class Subscription implements DataserviceInterface {
         return false;
     }
 
+    /*
+     * start the subscription if not started yet
+     */
     public void startSubscriptionNow() throws SQLException {
-        LocalDate today = LocalDate.now();
 
-        this.startDate = today;
+        if ( this.startDate == null ) {
 
-        // update record on db
-        subscriptionDB.setSubscriptionStartDateNow(this);
+            this.startDate = LocalDate.now();
+
+            // update record on db
+            subscriptionDB.setSubscriptionStartDateNow(this);
+        }
+
+    }
+
+    public Rent isThereAnActiveRent() {
+        for ( Rent rentTmp : rentList ) {
+            if ( rentTmp.getEndDate() == null ) {
+                return rentTmp;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -161,6 +182,14 @@ public class Subscription implements DataserviceInterface {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public List<Rent> getRentList() {
+        return rentList;
+    }
+
+    public void setRentList(List<Rent> rentList) {
+        this.rentList = rentList;
     }
 
 }

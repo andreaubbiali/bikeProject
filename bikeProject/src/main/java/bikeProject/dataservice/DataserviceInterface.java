@@ -9,7 +9,7 @@ public interface DataserviceInterface {
     SubscriptionDatabaseInterface subscriptionDB = new SubscriptionDatabase();
     CreditCardDatabaseInterface credCardDB = new CreditCardDatabase();
     RentDatabaseInterface rentDB = new RentDatabase();
-    RackPositionDatabaseInterface rackDB = new RackPositionDatabase();
+    RackPositionDatabaseInterface rackPositionDB = new RackPositionDatabase();
     BikeDatabaseInterface bikeDB = new BikeDatabase();
     DamagedBikeDatabaseInterface damagedBikeDB = new DamagedBikeDatabase();
     TariffDatabaseInterface tariffDB = new TariffDatabase();

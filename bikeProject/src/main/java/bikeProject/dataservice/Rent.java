@@ -3,9 +3,11 @@ package bikeProject.dataservice;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import bikeProject.config.Config;
 import bikeProject.database.RentDatabase;
+import bikeProject.exception.AccessDeniedException;
 import bikeProject.exception.InvalidSubscriptionException;
 import bikeProject.exception.NotValidRentException;
 import bikeProject.exception.PaymentException;
@@ -14,19 +16,18 @@ public class Rent implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ Bike bike;
-    private /* @ not_null @ */ User user;
     private /* @ not_null @ */ Date startDate;
     private /* @ not_null @ */ Date endDate;
+    private DamageMessage damageMessage;
 
-    public void createRent(User user, Bike bike) {
+    public void createRent(Bike bike, Subscription subscription) throws SQLException, AccessDeniedException {
         Date today = new Date();
 
-        this.user = user;
         this.bike = bike;
         this.startDate = today;
 
         // add the record into db
-        rentDB.createRent(user, bike, startDate);
+        rentDB.createRent(bike, startDate, subscription);
     }
 
     public void endRent(CreditCard creditCard) throws PaymentException, SQLException, InvalidSubscriptionException {
@@ -51,7 +52,7 @@ public class Rent implements DataserviceInterface {
             totalCost = Config.getInstance().getTariffExceedMaximumRentMinutes();
 
             // update user subscription because has exceeded the maximum time
-            Subscription subscription = user.getValidSubscription();
+            Subscription subscription = User.getValidSubscription();
             subscription.exceededRentTime();
 
         } else {
@@ -61,6 +62,10 @@ public class Rent implements DataserviceInterface {
         // payment
         creditCard.pay(totalCost);
 
+    }
+
+    public List<Rent> getRentFromSubscriptionID(long subscriptionID) throws SQLException {
+        return rentDB.getRentFromSubscriptionID(subscriptionID);
     }
 
     // GETTERS AND SETTERS
@@ -81,14 +86,6 @@ public class Rent implements DataserviceInterface {
         this.bike = bike;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -103,6 +100,14 @@ public class Rent implements DataserviceInterface {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
+    }
+
+    public DamageMessage getDamageMessage() {
+        return damageMessage;
+    }
+
+    public void setDamageMessage(DamageMessage damageMessage) {
+        this.damageMessage = damageMessage;
     }
 
 }

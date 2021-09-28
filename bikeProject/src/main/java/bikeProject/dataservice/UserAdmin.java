@@ -34,4 +34,8 @@ public class UserAdmin extends UserGeneric implements DataserviceInterface {
         System.out.println("New admin login from: " + email);
     }
 
+    public static void logout() {
+        userAdmin = null;
+    }
+
 }

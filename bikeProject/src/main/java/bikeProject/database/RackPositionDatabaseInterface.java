@@ -8,4 +8,6 @@ public interface RackPositionDatabaseInterface {
     void addRackPositions(long rackID, int numberPositions, String bikeType) throws SQLException;
 
     void addBike(long rackPositionID, long bikeID) throws SQLException;
+
+    void setBikeNull(long rackID) throws SQLException;
 }

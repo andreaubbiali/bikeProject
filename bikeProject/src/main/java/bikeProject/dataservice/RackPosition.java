@@ -13,7 +13,7 @@ public class RackPosition implements DataserviceInterface {
     private Bike bike;
 
     public void addRackPositions(long rackID, int numberPositions, String acceptedBike) throws SQLException {
-        rackDB.addRackPositions(rackID, numberPositions, acceptedBike);
+        rackPositionDB.addRackPositions(rackID, numberPositions, acceptedBike);
     }
 
     /**
@@ -45,18 +45,20 @@ public class RackPosition implements DataserviceInterface {
     public boolean unlock() throws SQLException {
         if ( Config.getInstance().isProductionMode() ) {
             try {
-                // try to unlock the position
+                // call to the hardware to open the position
             } catch ( Exception e ) {
-                setIsBroken(true);
+                updateIsBroken(true);
                 return false;
             }
         } else {
 
             if ( !Config.getInstance().getRackMockResponse() ) {
-                setIsBroken(true);
+                updateIsBroken(true);
                 return false;
             }
         }
+
+        bikeRented();
 
         return true;
     }
@@ -66,13 +68,13 @@ public class RackPosition implements DataserviceInterface {
             try {
                 // try to lock the position
             } catch ( Exception e ) {
-                setIsBroken(true);
+                updateIsBroken(true);
                 return false;
             }
         } else {
 
             if ( !Config.getInstance().getRackMockResponse() ) {
-                setIsBroken(true);
+                updateIsBroken(true);
                 return false;
             }
         }
@@ -84,18 +86,30 @@ public class RackPosition implements DataserviceInterface {
 
         this.isBroken = isBroken;
 
-        rackDB.updateIsBroken(this.ID, isBroken);
+        rackPositionDB.updateIsBroken(this.ID, isBroken);
     }
 
     public void addBike(Bike bike) throws SQLException {
 
         setBike(bike);
-        rackDB.addBike(this.ID, bike.getID());
+        rackPositionDB.addBike(this.ID, bike.getID());
     }
 
+    /**
+     * delete bike from database
+     */
     public void deleteBike() throws SQLException {
         bike.delete();
         setBike(null);
+    }
+
+    /**
+     * delete bike from teh position
+     */
+    public void bikeRented() throws SQLException {
+
+        this.bike = null;
+        rackPositionDB.setBikeNull(this.ID);
     }
 
     public long getID() {

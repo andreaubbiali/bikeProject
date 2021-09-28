@@ -1,17 +1,15 @@
 package bikeProject.database;
 
-import bikeProject.dataservice.Bike;
-import bikeProject.dataservice.BikeType;
-import bikeProject.dataservice.Rent;
-import bikeProject.dataservice.User;
+import bikeProject.dataservice.*;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 public interface RentDatabaseInterface {
-    void createRent(User user, Bike bike, Date startDate);
+    long createRent(Bike bike, Date startDate, Subscription subscription) throws SQLException;
 
-    Rent getRentByEmail(String email) throws SQLException;
+    List<Rent> getRentFromSubscriptionID(long subscriptionID) throws SQLException;
 
     void updateRent(Rent rent) throws SQLException;
 }

@@ -73,8 +73,8 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
     public void setSubscriptionStartDateNow(Subscription subscription) throws SQLException {
 
         // prepare the statement
-        PreparedStatement statement =
-                Database.getConn().prepareStatement("UPDATE subscription SET (start_date = ?) " + "WHERE id " + "=" + " ?");
+        PreparedStatement statement = Database.getConn().prepareStatement("UPDATE subscription SET start_date = ? " +
+                "WHERE id = ?");
 
         statement.setObject(1, subscription.getStartDate());
         statement.setLong(2, subscription.getID());

@@ -11,22 +11,24 @@ public class TotemRack implements DataserviceInterface {
     private /* @ not_null @ */ String address;
     private /* @ not_null @ */ List<RackPosition> rackPositionList;
 
-    public long rentBike(String email, String password, BikeType bikeType) throws SQLException, NotValidRentException
-            , InvalidSubscriptionException, WrongPasswordException, AccessDeniedException {
-
-        // check login user
-        User.login(email, password);
-
-        // get valid subscription of the user
-        Subscription subscription = User.getValidSubscription();
+    public long rentBike(BikeType bikeType) throws SQLException, NotValidRentException, InvalidSubscriptionException,
+            AccessDeniedException, RackException {
 
         // check positions of the rack
         if ( rackPositionList.size() == 0 ) {
             throw new NotValidRentException("The rack has no position");
         }
 
+        // check the user doesn't have an active rent
+        if ( User.haveUserActiveRent() != null ) {
+            throw new NotValidRentException("The user can't rent a bike. There is an active rent yet");
+        }
+
+        // get valid subscription of the user
+        Subscription subscription = User.getValidSubscription();
+
         // find the parkPosition requested
-        RackPosition rackPosition = new RackPosition();
+        RackPosition rackPosition = null;
         for ( RackPosition position : rackPositionList ) {
 
             if ( position.isBikeTypeRentable(bikeType) ) {
@@ -36,26 +38,36 @@ public class TotemRack implements DataserviceInterface {
         }
 
         // check errors
-        if ( rackPosition != null ) {
+        if ( rackPosition == null ) {
             throw new NotValidRentException("No park position founded with the bike type requested or probably rack " + "positions are broken");
         }
 
         // start the rental
         Rent rent = new Rent();
-        rent.createRent(User.getInstance(), rackPosition.getBike());
+        rent.createRent(rackPosition.getBike(), subscription);
 
         // start the subscription(if not already started)
         subscription.startSubscriptionNow();
+
+        // unlock the rack position with the bike to be rented
+        if ( !rackPosition.unlock() ) {
+            throw new RackException("The rack position have some problem, retry");
+        }
 
         // return the position where to take the bike
         return rackPosition.getID();
     }
 
     public void returnBike(String email, long rackPositionPlace) throws SQLException, RackException,
-            InvalidSubscriptionException, PaymentException, InvalidCreditCardException {
+            InvalidSubscriptionException, PaymentException, InvalidCreditCardException, NotValidRentException {
+
+        // get the user active rent
+        Rent rent = User.haveUserActiveRent();
+        if ( rent == null ) {
+            throw new NotValidRentException("The user can't return a bike. There are not active rent");
+        }
 
         // get the bike type used by the user
-        Rent rent = rentDB.getRentByEmail(email);
         BikeType bikeType = rent.getBike().getType();
 
         boolean found = false;
@@ -85,7 +97,7 @@ public class TotemRack implements DataserviceInterface {
             throw new RackException("No position with this rack position number");
         }
 
-        Subscription userSubscription = rent.getUser().getValidSubscription();
+        Subscription userSubscription = User.getValidSubscription();
         rent.endRent(User.getCreditCardValidForSubscription(userSubscription));
 
     }

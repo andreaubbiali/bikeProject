@@ -64,6 +64,7 @@ public class TotemRackDatabase implements TotemRackDatabaseInterface {
 
             rack.setID(res.getLong("id"));
             rack.setAddress(res.getString("address"));
+            rack.setRackPositionList(getRackPositionsByRackID(res.getLong("id")));
 
             rackList.add(rack);
         }
@@ -84,6 +85,7 @@ public class TotemRackDatabase implements TotemRackDatabaseInterface {
 
             totemRack.setID(res.getLong("id"));
             totemRack.setAddress(res.getString("address"));
+            totemRack.setRackPositionList(getRackPositionsByRackID(res.getLong("id")));
 
         }
 
