@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Totem_Rack">
+   <children>
+      <Label fx:id="lblTitle" layoutX="57.0" layoutY="34.0" prefHeight="39.0" prefWidth="756.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="406.0" layoutY="320.0" text="Bike type" />
+      <ComboBox fx:id="cmbBikeType" layoutX="516.0" layoutY="316.0" prefWidth="150.0" />
+      <Button fx:id="btnBikeType" layoutX="551.0" layoutY="363.0" mnemonicParsing="false" onAction="#startRent" text="Rent bike" />
+      <TextArea fx:id="txtResponse" editable="false" layoutX="71.0" layoutY="456.0" prefHeight="78.0" prefWidth="711.0" />
+      <PasswordField fx:id="pswLogin" layoutX="165.0" layoutY="356.0" text="admin" />
+      <TextField fx:id="txtUsername" layoutX="165.0" layoutY="301.0" text="admin@gmail.com" />
+      <Text layoutX="62.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <Text layoutX="59.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <Button fx:id="btnReturnBike" layoutX="203.0" layoutY="401.0" mnemonicParsing="false" onAction="#returnBike" text="Return bike" />
+      <TableView fx:id="tblBike" editable="true" layoutX="40.0" layoutY="110.0" prefHeight="140.0" prefWidth="774.0">
+         <columns>
+            <TableColumn fx:id="columnBikeType" prefWidth="128.0" resizable="false" sortable="false" text="Bike type" />
+            <TableColumn fx:id="columnNumber" prefWidth="208.0" resizable="false" sortable="false" text="Number of bike positions" />
+            <TableColumn fx:id="columnOccupied" prefWidth="228.0" resizable="false" sortable="false" text="Occupied positions" />
+            <TableColumn fx:id="columnRentableBikes" prefWidth="209.0" resizable="false" sortable="false" text="Rentable bikes" />
+         </columns>
+      </TableView>
+      <Button fx:id="btnGoBack" layoutX="389.0" layoutY="542.0" mnemonicParsing="false" onAction="#goBackHome" text="Go back home" />
+   </children>
+</Pane>

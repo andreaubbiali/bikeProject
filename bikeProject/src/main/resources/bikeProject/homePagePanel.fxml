@@ -33,19 +33,23 @@
 -->
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Homepage">
    <children>
-      <Button fx:id="btnRegister" layoutX="383.0" layoutY="200.0" mnemonicParsing="false" onAction="#register" text="Register" />
-      <Button fx:id="btnLogin" layoutX="82.0" layoutY="200.0" mnemonicParsing="false" onAction="#login" text="Login" />
+      <Button fx:id="btnRegister" layoutX="387.0" layoutY="116.0" mnemonicParsing="false" onAction="#register" text="Register" />
+      <Button fx:id="btnLogin" layoutX="84.0" layoutY="116.0" mnemonicParsing="false" onAction="#login" text="Login to private area" />
       <Label layoutX="170.0" layoutY="24.0" prefHeight="31.0" prefWidth="231.0" text="BikeMi">
          <font>
             <Font name="DejaVu Sans Bold" size="30.0" />
          </font>
       </Label>
+      <Button fx:id="btnTotem" layoutX="254.0" layoutY="270.0" mnemonicParsing="false" onAction="#openTotemPage" text="GO TO TOTEM" />
+      <ComboBox fx:id="cmbTotems" layoutX="269.0" layoutY="218.0" prefHeight="24.0" prefWidth="170.0" />
+      <Label layoutX="19.0" layoutY="214.0" text="Select the totem in which you want &#10;to rent/return a bike" />
+      <Label fx:id="lblError" layoutX="58.0" layoutY="328.0" prefHeight="16.0" prefWidth="467.0" textFill="RED" />
    </children>
 </Pane>
