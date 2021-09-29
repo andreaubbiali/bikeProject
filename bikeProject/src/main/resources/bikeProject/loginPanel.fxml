@@ -5,17 +5,23 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="panLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Login">
+<Pane fx:id="panLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="671.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Login">
    <children>
-      <PasswordField fx:id="pswLogin" layoutX="250.0" layoutY="123.0" text="admin" />
-      <TextField fx:id="txtUsername" layoutX="250.0" layoutY="56.0" text="admin@gmail.com" />
-      <Text layoutX="98.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <Text layoutX="101.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <Button fx:id="btnLoginAsUser" layoutX="98.0" layoutY="213.0" mnemonicParsing="false" onAction="#loginAsUser" text="Login as user" />
-      <Button fx:id="btnGoBack" layoutX="420.0" layoutY="213.0" mnemonicParsing="false" onAction="#goBackToHomePage" text="Go back to homepage" />
-      <Label fx:id="lblError" layoutX="98.0" layoutY="165.0" prefHeight="16.0" prefWidth="422.0" textFill="#fc0000" />
-      <Button fx:id="btnLoginAsAdmin" layoutX="250.0" layoutY="213.0" mnemonicParsing="false" onAction="#loginAsAdmin" text="Login as admin" />
+      <PasswordField fx:id="pswLogin" layoutX="246.0" layoutY="178.0" text="admin" />
+      <TextField fx:id="txtUsername" layoutX="246.0" layoutY="111.0" text="admin@gmail.com" />
+      <Text layoutX="94.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <Text layoutX="97.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <Button fx:id="btnLogin" layoutX="132.0" layoutY="268.0" mnemonicParsing="false" onAction="#login" text="Login" />
+      <Button fx:id="btnGoBack" layoutX="416.0" layoutY="268.0" mnemonicParsing="false" onAction="#goBackToHomePage" text="Go back to homepage" />
+      <Label fx:id="lblError" layoutX="94.0" layoutY="220.0" prefHeight="16.0" prefWidth="422.0" textFill="#fc0000" />
+      <Label fx:id="lblTitle" layoutX="64.0" layoutY="37.0" prefHeight="39.0" prefWidth="483.0">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnRegister" layoutX="280.0" layoutY="268.0" mnemonicParsing="false" onAction="#register" text="Register" />
    </children>
 </Pane>

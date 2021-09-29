@@ -57,10 +57,12 @@ public class Controller_Homepage implements Initializable {
     }
 
     @FXML
-    void login(ActionEvent event) {
+    void loginAsUser(ActionEvent event) {
+        Controller_Login.userType = "user";
 
         // open login panel
         try {
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/loginPanel.fxml"));
             Parent pane = loader.load();
             Scene scene = new Scene(pane);
@@ -73,11 +75,12 @@ public class Controller_Homepage implements Initializable {
     }
 
     @FXML
-    void register(ActionEvent event) {
+    void loginAsAdmin(ActionEvent event) {
+        Controller_Login.userType = "admin";
 
-        // open register panel
+        // open login panel
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/registerNewUserPanel.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/loginPanel.fxml"));
             Parent pane = loader.load();
             Scene scene = new Scene(pane);
 
@@ -86,7 +89,6 @@ public class Controller_Homepage implements Initializable {
         } catch ( Exception e ) {
             e.printStackTrace();
         }
-
     }
 
     @FXML
