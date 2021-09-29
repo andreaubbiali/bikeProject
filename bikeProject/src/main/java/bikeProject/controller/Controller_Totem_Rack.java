@@ -110,6 +110,8 @@ public class Controller_Totem_Rack implements Initializable {
         } catch ( AccessDeniedException | NotValidRentException | InvalidSubscriptionException | RackException e ) {
             txtResponse.setText(e.getMessage());
         }
+
+        User.logout();
     }
 
     @FXML
@@ -146,11 +148,14 @@ public class Controller_Totem_Rack implements Initializable {
         } catch ( Exception e ) {
             e.printStackTrace();
         }
+
+        User.logout();
     }
 
     @FXML
     void goBackHome(ActionEvent event) {
-
+        User.logout();
+        
         // open home panel
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/homePagePanel.fxml"));

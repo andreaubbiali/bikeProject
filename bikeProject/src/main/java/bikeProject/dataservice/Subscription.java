@@ -1,6 +1,5 @@
 package bikeProject.dataservice;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
@@ -69,14 +68,14 @@ public class Subscription implements DataserviceInterface {
 
             // calculate startDate + daysDuration
             date = this.startDate;
-            date.plusDays(this.type.getDaysDuration());
+            date = date.plusDays(this.type.getDaysDuration());
 
         } else {
             // subscription not started
 
             // calculate subscriptionDate + mustStartIn
             date = this.subscriptionDate;
-            date.plusDays(this.type.getMustStartIn());
+            date = date.plusDays(this.type.getMustStartIn());
         }
 
         // check the condition
