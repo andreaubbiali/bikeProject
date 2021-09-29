@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Return_Bike">
+   <children>
+      <ComboBox fx:id="cmbRackPositionID" layoutX="269.0" layoutY="94.0" prefWidth="150.0" />
+      <Label layoutX="103.0" layoutY="90.0" text="In which rack position&#10; is the bike" />
+      <Button fx:id="btnReturnBike" layoutX="269.0" layoutY="304.0" mnemonicParsing="false" onAction="#returnBike" text="Return bike" />
+      <Label fx:id="lblError" layoutX="55.0" layoutY="343.0" prefHeight="16.0" prefWidth="491.0" textFill="RED" />
+      <TextArea fx:id="txtDamageText" layoutX="76.0" layoutY="171.0" prefHeight="122.0" prefWidth="479.0" />
+      <Label layoutX="76.0" layoutY="148.0" text="Some damage to communicate?" />
+      <Label layoutX="228.0" layoutY="20.0" text="END RENT">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Label>
+      <Label layoutX="90.0" layoutY="62.0" text="Before to click 'return bike' put the bike in the selected rack position" />
+   </children>
+</Pane>
