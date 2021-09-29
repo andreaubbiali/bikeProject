@@ -11,5 +11,5 @@ public interface RentDatabaseInterface {
 
     List<Rent> getRentFromSubscriptionID(long subscriptionID) throws SQLException;
 
-    void updateRent(Rent rent) throws SQLException;
+    void updateRentEndDate(Rent rent) throws SQLException;
 }

@@ -1,5 +1,8 @@
 package bikeProject.dataservice;
 
+import bikeProject.config.Config;
+import bikeProject.exception.AccessDeniedException;
+
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
@@ -7,20 +10,35 @@ import java.util.List;
 
 public class Tariff implements DataserviceInterface {
 
-    // lavoro a mezz'ore
+    private static List<Tariff> tariffInstance = null;
 
+    private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ int passedTimeInMinutes; // the 0 value indicates if exceed maximum time
     private /* @ not_null @ */ Float tariff;
     private /* @ not_null @ */ BikeType bikeType;
 
-    public Float calculateCostOfRent(int timeOfRentInMinutes, BikeType bikeType) throws SQLException {
+    public Tariff() {
+    }
 
-        List<Tariff> tariffList = tariffDB.getTariffsByBikeTypeID(bikeType.getID());
+    public static List<Tariff> getInstance() throws SQLException {
+        if ( tariffInstance == null ) {
+            tariffInstance = tariff();
+        }
+        return tariffInstance;
+    }
+
+    private static List<Tariff> tariff() throws SQLException {
+
+        // get tariff from db
+        return tariffDB.getAllTariffs();
+    }
+
+    public static Float calculateTariffByBikeType(int timeOfRentInMinutes, BikeType bikeType) {
 
         Float totalCost = 0F;
 
-        for ( Tariff tariff : tariffList ) {
-            if (tariff.passedTimeInMinutes > timeOfRentInMinutes ){
+        for ( Tariff tariff : tariffInstance ) {
+            if ( tariff.passedTimeInMinutes > timeOfRentInMinutes ) {
                 break;
             }
 
@@ -30,12 +48,19 @@ public class Tariff implements DataserviceInterface {
         return totalCost;
     }
 
-    public int calculateMinutesFromDate(Date date){
-        return (int)date.getTime()/60000;
+    public static int calculateMinutesFromDate(Date date) {
+        return (int) date.getTime() / 60000;
     }
 
-
     // GETTERS AND SETTERS
+
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
+    }
 
     public int getPassedTimeInMinutes() {
         return passedTimeInMinutes;
@@ -60,6 +85,5 @@ public class Tariff implements DataserviceInterface {
     public void setBikeType(BikeType bikeType) {
         this.bikeType = bikeType;
     }
-
 
 }

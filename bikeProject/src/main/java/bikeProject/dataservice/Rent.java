@@ -30,42 +30,51 @@ public class Rent implements DataserviceInterface {
         rentDB.createRent(bike, startDate, subscription);
     }
 
-    public void endRent(CreditCard creditCard) throws PaymentException, SQLException, InvalidSubscriptionException {
+    public float endRent(CreditCard creditCard) throws PaymentException, SQLException, InvalidSubscriptionException {
         this.endDate = new Date();
+        float totalCost = 0f;
 
-        rentDB.updateRent(this);
+        rentDB.updateRentEndDate(this);
 
         if ( User.getIsStudent() && bike.getType().getType().equals(BikeTypeEnum.NORMAL) ) {
             // student user can use bike normal freely
-            return;
+            return totalCost;
         }
 
-        Tariff tariff = new Tariff();
-
         // calculate the duration of the rent in minutes
-        int rentMinutes = tariff.calculateMinutesFromDate(endDate) - tariff.calculateMinutesFromDate(startDate);
+        int rentMinutes = Tariff.calculateMinutesFromDate(endDate) - Tariff.calculateMinutesFromDate(startDate);
 
         // calculate the cost to be pay
-        Float totalCost;
+
         if ( Config.getInstance().getMaximumRentMinutes() < rentMinutes ) {
             // exceeded the maximum rent time so pay the penal
             totalCost = Config.getInstance().getTariffExceedMaximumRentMinutes();
 
             // update user subscription because has exceeded the maximum time
-            Subscription subscription = User.getValidSubscription();
+            Subscription subscription = User.getSubscriptionByRent(this);
             subscription.exceededRentTime();
 
         } else {
-            totalCost = tariff.calculateCostOfRent(rentMinutes, bike.getType());
+            totalCost = Tariff.calculateTariffByBikeType(rentMinutes, bike.getType());
         }
 
         // payment
         creditCard.pay(totalCost);
 
+        return totalCost;
     }
 
     public List<Rent> getRentFromSubscriptionID(long subscriptionID) throws SQLException {
         return rentDB.getRentFromSubscriptionID(subscriptionID);
+    }
+
+    public void damageCommunication(String communicationText) throws SQLException {
+
+        // add new damage message into db
+        damageMessage.addNewDamageMessage(communicationText, this);
+
+        // set the bike in maintenance to allow the personal to fix it
+        bike.setBikeInMaintenance();
     }
 
     // GETTERS AND SETTERS

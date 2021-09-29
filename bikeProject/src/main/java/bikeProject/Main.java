@@ -2,6 +2,7 @@ package bikeProject;
 
 import bikeProject.config.Config;
 import bikeProject.database.Database;
+import bikeProject.dataservice.Tariff;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -51,6 +52,9 @@ public class Main extends Application {
 
             // read the config file
             Config.getInstance();
+
+            // instantiate the tariff class
+            Tariff.getInstance();
 
             Application.launch(args);
         } catch ( Exception e ) {

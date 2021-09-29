@@ -40,8 +40,8 @@ public class RentDatabase implements RentDatabaseInterface {
     public List<Rent> getRentFromSubscriptionID(long subscriptionID) throws SQLException {
         List<Rent> rentList = new ArrayList<>();
 
-        PreparedStatement statement = Database.getConn().prepareStatement("SELECT rent.*, damage.id as " + "damageID," +
-                " damage.message as damageMessage, bike.id as bikeID, bike.is_in_maintenance as " +
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT rent.*, damage.id as " + "damageID,"
+                + " damage.message as damageMessage, bike.id as bikeID, bike.is_in_maintenance as " +
                 "bikeIsInMaintenance, bike_type.id as bikeTypeID, bike_type.type as bikeTypeName, bike_type" +
                 ".baby_seat" + " as babySeat FROM rent LEFT JOIN " + "damage ON damage.rent_id = rent" + ".id INNER " + "JOIN bike " + "ON bike.id = rent.bike_id INNER JOIN bike_type ON bike_type.id = bike.type_id WHERE " + "subscription_id " + "=" + " ?;");
         statement.setLong(1, subscriptionID);
@@ -50,9 +50,10 @@ public class RentDatabase implements RentDatabaseInterface {
         while ( res.next() ) {
             Rent rentTemp = new Rent();
 
+            rentTemp.setID(res.getLong("id"));
             rentTemp.setStartDate(res.getDate("start_date"));
             if ( res.getObject("end_date") != null ) {
-                rentTemp.setStartDate(res.getDate("end_date"));
+                rentTemp.setEndDate(res.getDate("end_date"));
             }
 
             // set damage
@@ -82,6 +83,18 @@ public class RentDatabase implements RentDatabaseInterface {
         return rentList;
     }
 
-    public void updateRent(Rent rent) throws SQLException {
+    public void updateRentEndDate(Rent rent) throws SQLException {
+
+        // prepare the statement
+        PreparedStatement statement = Database.getConn().prepareStatement("UPDATE rent SET end_date = ? WHERE id = ?");
+        statement.setObject(1, rent.getEndDate());
+        statement.setLong(2, rent.getID());
+
+        // execute the query
+        int res = statement.executeUpdate();
+        if ( res == 0 ) {
+            throw new SQLException("Update rent failed, no rows affected.");
+        }
+
     }
 }

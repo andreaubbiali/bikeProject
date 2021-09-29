@@ -3,6 +3,7 @@ package bikeProject.dataservice;
 import bikeProject.exception.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TotemRack implements DataserviceInterface {
@@ -20,7 +21,7 @@ public class TotemRack implements DataserviceInterface {
         }
 
         // check the user doesn't have an active rent
-        if ( User.haveUserActiveRent() != null ) {
+        if ( User.activeUserRent() != null ) {
             throw new NotValidRentException("The user can't rent a bike. There is an active rent yet");
         }
 
@@ -58,48 +59,35 @@ public class TotemRack implements DataserviceInterface {
         return rackPosition.getID();
     }
 
-    public void returnBike(String email, long rackPositionPlace) throws SQLException, RackException,
+    public float returnBike(RackPosition rackPositionPlace, String damageText) throws SQLException, RackException,
             InvalidSubscriptionException, PaymentException, InvalidCreditCardException, NotValidRentException {
 
         // get the user active rent
-        Rent rent = User.haveUserActiveRent();
+        Rent rent = User.activeUserRent();
         if ( rent == null ) {
             throw new NotValidRentException("The user can't return a bike. There are not active rent");
         }
 
         // get the bike type used by the user
-        BikeType bikeType = rent.getBike().getType();
+        Bike bikeRented = rent.getBike();
 
-        boolean found = false;
-
-        // check if the rack position allow the bikeType
-        for ( RackPosition position : rackPositionList ) {
-
-            // find the rack position requested
-            if ( position.getID() == rackPositionPlace ) {
-                found = true;
-
-                if ( position.isBroken() ) {
-                    throw new RackException("The rack position selected is broken");
-                } else if ( !position.getAcceptedBikeType().equals(bikeType) ) {
-                    throw new RackException("The rack position selected is for bike of type: " + position.getAcceptedBikeType().getType() + " not for: " + bikeType.getType());
-                }
-
-                // unlock the rack position
-                if ( !position.lock() ) {
-                    throw new RackException("Something wrong trying to unlock the position requested on the rack");
-                }
-            }
-
+        if ( !rackPositionPlace.isFreeAndAccessibleForBikeType(bikeRented.getType()) ) {
+            throw new RackException("The rack position selected is broken or not accept your bike type");
         }
 
-        if ( !found ) {
-            throw new RackException("No position with this rack position number");
+        // lock the rack position with the bike and update db
+        rackPositionPlace.lock(bikeRented);
+
+        if ( damageText != null ) {
+            rent.damageCommunication(damageText);
         }
 
-        Subscription userSubscription = User.getValidSubscription();
-        rent.endRent(User.getCreditCardValidForSubscription(userSubscription));
+        Subscription userSubscription = User.getSubscriptionByRent(rent);
+        if ( userSubscription == null ) {
+            throw new InvalidSubscriptionException("Something went wrong, no subscription with this rent");
+        }
 
+        return rent.endRent(User.getCreditCardValidForSubscription(userSubscription));
     }
 
     public long addNewRack(String address) throws SQLException {
@@ -126,6 +114,17 @@ public class TotemRack implements DataserviceInterface {
         setAddress(address);
     }
 
+    public List<RackPosition> getFreeRackPositionForBikeType(BikeType bikeType) {
+        List<RackPosition> res = new ArrayList<>();
+
+        for ( RackPosition position : getRackPositionList() ) {
+            if ( position.isFreeAndAccessibleForBikeType(bikeType) ) {
+                res.add(position);
+            }
+        }
+        return res;
+    }
+
     public void addNewBike(BikeType bikeType) throws SQLException, RackException {
 
         // check if there is a free place for this type of bike
@@ -146,7 +145,7 @@ public class TotemRack implements DataserviceInterface {
 
         for ( RackPosition rp : rackPositionList ) {
 
-            if ( rp.getBike() == null && rp.getAcceptedBikeType().getID() == bikeType.getID() ) {
+            if ( rp.isFreeAndAccessibleForBikeType(bikeType) ) {
                 return rp;
             }
         }

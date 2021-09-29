@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TariffDatabaseInterface {
 
-    List<Tariff> getTariffsByBikeTypeID(long id) throws SQLException;
+    List<Tariff> getAllTariffs() throws SQLException;
 
 }

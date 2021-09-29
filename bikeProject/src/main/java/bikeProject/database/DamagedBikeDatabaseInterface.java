@@ -7,5 +7,5 @@ import java.sql.SQLException;
 
 public interface DamagedBikeDatabaseInterface {
 
-    public void addNewDamage(Bike bike, User user, String message) throws SQLException;
+    public long addNewDamage(String message, long rentID) throws SQLException;
 }

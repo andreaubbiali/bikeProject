@@ -7,13 +7,12 @@ public class DamageMessage implements DataserviceInterface {
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ String message;
 
-    public void comunicationNewDamage(Bike bike, User user, String message) throws SQLException {
+    public void addNewDamageMessage(String message, Rent rent) throws SQLException {
 
-        // set the bike in maintenance to allow the personal to fix it
-        bike.setBikeInMaintenance();
+        setMessage(message);
 
         // add the communication to db
-        damagedBikeDB.addNewDamage(bike, user, message);
+        setID(damagedBikeDB.addNewDamage(message, rent.getID()));
 
     }
 

@@ -31,8 +31,8 @@
       <TableView fx:id="tblBike" editable="true" layoutX="40.0" layoutY="110.0" prefHeight="140.0" prefWidth="774.0">
          <columns>
             <TableColumn fx:id="columnBikeType" prefWidth="128.0" resizable="false" sortable="false" text="Bike type" />
-            <TableColumn fx:id="columnNumber" prefWidth="208.0" resizable="false" sortable="false" text="Number of bike positions" />
-            <TableColumn fx:id="columnOccupied" prefWidth="228.0" resizable="false" sortable="false" text="Occupied positions" />
+            <TableColumn fx:id="columnNumber" prefWidth="240.0" resizable="false" sortable="false" text="Number of bike positions" />
+            <TableColumn fx:id="columnOccupied" prefWidth="196.0" resizable="false" sortable="false" text="Occupied positions" />
             <TableColumn fx:id="columnRentableBikes" prefWidth="209.0" resizable="false" sortable="false" text="Rentable bikes" />
          </columns>
       </TableView>

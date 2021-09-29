@@ -53,13 +53,13 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
         statement.setLong(1, subscription.getType().getID());
         statement.setObject(2, subscription.getSubscriptionDate());
         statement.setLong(3, subscription.getUser().getID());
-        statement.setInt(5, subscription.getCountExceededTime());
+        statement.setInt(4, subscription.getCountExceededTime());
         if ( subscription.getStartDate() == null ) {
-            statement.setNull(6, java.sql.Types.NULL);
+            statement.setNull(5, java.sql.Types.NULL);
         } else {
-            statement.setObject(6, subscription.getStartDate());
+            statement.setObject(5, subscription.getStartDate());
         }
-        statement.setBoolean(7, subscription.isDeleted());
+        statement.setBoolean(6, subscription.isDeleted());
         statement.setLong(7, subscription.getID());
 
         // execute the query
@@ -73,8 +73,8 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
     public void setSubscriptionStartDateNow(Subscription subscription) throws SQLException {
 
         // prepare the statement
-        PreparedStatement statement = Database.getConn().prepareStatement("UPDATE subscription SET start_date = ? " +
-                "WHERE id = ?");
+        PreparedStatement statement =
+                Database.getConn().prepareStatement("UPDATE subscription SET start_date = ? " + "WHERE id = ?");
 
         statement.setObject(1, subscription.getStartDate());
         statement.setLong(2, subscription.getID());

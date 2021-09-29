@@ -42,6 +42,14 @@ public class RackPosition implements DataserviceInterface {
         return true;
     }
 
+    public boolean isFreeAndAccessibleForBikeType(BikeType bikeType) {
+
+        if ( this.getBike() == null && this.getAcceptedBikeType().getID() == bikeType.getID() && !this.isBroken() ) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean unlock() throws SQLException {
         if ( Config.getInstance().isProductionMode() ) {
             try {
@@ -63,7 +71,7 @@ public class RackPosition implements DataserviceInterface {
         return true;
     }
 
-    public boolean lock() throws SQLException {
+    public boolean lock(Bike bike) throws SQLException {
         if ( Config.getInstance().isProductionMode() ) {
             try {
                 // try to lock the position
@@ -78,6 +86,8 @@ public class RackPosition implements DataserviceInterface {
                 return false;
             }
         }
+
+        addBike(bike);
 
         return true;
     }

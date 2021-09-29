@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Controller_Totem_Rack implements Initializable {
@@ -113,12 +114,43 @@ public class Controller_Totem_Rack implements Initializable {
 
     @FXML
     void returnBike(ActionEvent event) {
+        // try the login
+        login();
 
+        // open return bike panel
+        try {
+            Controller_Return_Bike.totemRack = totemRack;
+            Controller_Return_Bike.loadObjects();
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/returnBikePanel.fxml"));
+            Parent pane = loader.load();
+            Scene scene = new Scene(pane);
+
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            primaryStage.setScene(scene);
+
+        } catch ( NotValidRentException r ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Rent error");
+            alert.setContentText(r.getMessage());
+
+            alert.showAndWait();
+        } catch ( RackException ra ) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Rack error");
+            alert.setContentText(ra.getMessage());
+
+            alert.showAndWait();
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void goBackHome(ActionEvent event) {
-        
+
         // open home panel
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/homePagePanel.fxml"));

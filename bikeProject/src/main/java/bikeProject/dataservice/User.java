@@ -101,6 +101,21 @@ public class User extends UserGeneric implements DataserviceInterface {
         return subscriptionRes;
     }
 
+    public static Subscription getSubscriptionByRent(Rent rent) {
+        Subscription result = null;
+
+        for ( Subscription sub : getSubscriptionList() ) {
+            for ( Rent r : sub.getRentList() ) {
+                if ( r.getID() == rent.getID() ) {
+                    result = sub;
+                    break;
+                }
+            }
+        }
+
+        return result;
+    }
+
     public void addSubscription(SubscriptionType subType, CreditCard selectedCreditCard) throws SQLException,
             InvalidCreditCardException, PaymentException {
 
@@ -120,7 +135,7 @@ public class User extends UserGeneric implements DataserviceInterface {
 
     }
 
-    public static Rent haveUserActiveRent() {
+    public static Rent activeUserRent() {
 
         for ( Subscription subscription : getSubscriptionList() ) {
             Rent rent = subscription.isThereAnActiveRent();

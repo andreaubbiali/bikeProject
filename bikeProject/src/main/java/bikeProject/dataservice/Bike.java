@@ -10,7 +10,7 @@ public class Bike implements DataserviceInterface {
 
     public void setBikeInMaintenance() throws SQLException {
 
-        this.isInMaintenance = isInMaintenance;
+        this.isInMaintenance = true;
         bikeDB.updateBike(this);
     }
 

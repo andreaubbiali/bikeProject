@@ -8,8 +8,8 @@ public class BikeDatabase implements BikeDatabaseInterface {
 
     public void updateBike(Bike bike) throws SQLException {
 
-        PreparedStatement statement =
-                Database.getConn().prepareStatement("UPDATE bike(is_in_maintenance) VALUES(?) " + "WHERE id = ?; ");
+        PreparedStatement statement = Database.getConn().prepareStatement("UPDATE bike SET is_in_maintenance = ? " +
+                "WHERE id = ?; ");
 
         statement.setBoolean(1, bike.isInMaintenance());
         statement.setLong(2, bike.getID());
