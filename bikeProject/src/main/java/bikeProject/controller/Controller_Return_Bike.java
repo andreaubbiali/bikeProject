@@ -76,8 +76,14 @@ public class Controller_Return_Bike {
 
         RackPosition position = (RackPosition) selectedCmb.getKey();
 
+        System.out.println(txtDamageText.getText());
+
         try {
-            float totalCost = totemRack.returnBike(position, txtDamageText.getText());
+            String damageText = null;
+            if ( !txtDamageText.getText().isEmpty() ) {
+                damageText = txtDamageText.getText();
+            }
+            float totalCost = totemRack.returnBike(position, damageText);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
@@ -86,7 +92,6 @@ public class Controller_Return_Bike {
 
             Optional<ButtonType> result = alert.showAndWait();
             if ( result.get() == ButtonType.OK ) {
-                System.out.println("OK CLICCATO");
                 returnTotemRackPanel(event);
             }
 
