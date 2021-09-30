@@ -150,7 +150,7 @@ public class User extends UserGeneric implements DataserviceInterface {
     /**
      * request to the university to check if the user is a student
      */
-    public static boolean checkIsUserAStudent() {
+    public static boolean checkIsUserAStudent() throws SQLException {
 
         // check if is in production or test mode
         if ( Config.getInstance().isProductionMode() ) {
@@ -166,6 +166,9 @@ public class User extends UserGeneric implements DataserviceInterface {
             setIsStudent(Config.getInstance().getUniversityMockResponse());
 
         }
+
+        userDB.updateIsStudent(getID(), getIsStudent());
+
         return getIsStudent();
     }
 

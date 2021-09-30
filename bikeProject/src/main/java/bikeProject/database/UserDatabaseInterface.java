@@ -15,5 +15,5 @@ public interface UserDatabaseInterface {
 
     boolean checkPasswordByID(long id, String password) throws SQLException;
 
-    /*void getUser(User user) throws SQLException;*/
+    void updateIsStudent(long userID, boolean isStudent) throws SQLException;
 }

@@ -73,19 +73,6 @@ public class UserDatabase implements UserDatabaseInterface {
         return valid;
     }
 
-    /*public void getUser(User user) throws SQLException {
-
-        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
-        statement.setLong(1, user.getID());
-        ResultSet res = statement.executeQuery();
-
-        user.setUser(res.getInt("id"), res.getString("name"), res.getString("surname"), res.getString("email"),
-                res.getBoolean("isStudent"), res.getBoolean("is_admin"));
-
-        res.close();
-
-    }*/
-
     private boolean checkPassword(ResultSet res, String password) throws SQLException {
 
         while ( res.next() ) {
@@ -100,6 +87,20 @@ public class UserDatabase implements UserDatabaseInterface {
         }
 
         return false;
+    }
+
+    public void updateIsStudent(long userID, boolean isStudent) throws SQLException {
+
+        // prepare the statement
+        PreparedStatement statement = Database.getConn().prepareStatement("UPDATE user SET is_student = ? WHERE id = "
+                + "?");
+        statement.setBoolean(1, isStudent);
+        statement.setLong(2, userID);
+
+        // execute the query
+        statement.executeUpdate();
+        // no check if no rows updated.
+
     }
 
 }

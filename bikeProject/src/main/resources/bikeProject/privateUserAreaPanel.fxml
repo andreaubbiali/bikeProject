@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Private_User_Area">
     <children>
-        <Button layoutX="343.0" layoutY="455.0" mnemonicParsing="false" text="Verify I am a student" />
+        <Button fx:id="btnVerifyStudent" layoutX="343.0" layoutY="455.0" mnemonicParsing="false" onAction="#verifyStudent" text="Verify I am a student" />
         <Button fx:id="newSubscription" layoutX="138.0" layoutY="331.0" mnemonicParsing="false" onAction="#newSubscription" text="New subscription" />
         <Button fx:id="newCreditCard" layoutX="591.0" layoutY="331.0" mnemonicParsing="false" onAction="#newCreditCard" text="Add a credit card" />
         <Label layoutX="38.0" layoutY="74.0" text="Subscription" />

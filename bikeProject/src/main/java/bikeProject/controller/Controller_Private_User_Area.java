@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -121,6 +122,17 @@ public class Controller_Private_User_Area implements Initializable {
             primaryStage.setScene(scene);
         } catch ( Exception e ) {
             e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void verifyStudent(ActionEvent event) {
+        try {
+            User.checkIsUserAStudent();
+        } catch ( SQLException sql ) {
+            lblError.setText("SQL ERROR");
+            sql.printStackTrace();
         }
 
     }
