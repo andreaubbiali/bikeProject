@@ -1,8 +1,12 @@
 package bikeProject.dataservice;
 
+import bikeProject.config.Config;
 import bikeProject.exception.*;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +22,11 @@ public class TotemRack implements DataserviceInterface {
         // check positions of the rack
         if ( rackPositionList.size() == 0 ) {
             throw new NotValidRentException("The rack has no position");
+        }
+
+        // check if are passed the right minutes from the last rent
+        if ( !arePassedMinutesFromLastRent() ) {
+            throw new NotValidRentException("Is not passed the minimum minutes from your last rent");
         }
 
         // check the user doesn't have an active rent
@@ -57,6 +66,17 @@ public class TotemRack implements DataserviceInterface {
 
         // return the position where to take the bike
         return rackPosition.getID();
+    }
+
+    public boolean arePassedMinutesFromLastRent() throws SQLException {
+        LocalDateTime todayMinusMinutes = LocalDateTime.now().minusMinutes(Config.getMinutesBetweenTwoRent());
+
+        Rent lastRent = User.lastUserRent();
+        if ( lastRent.getEndDate().compareTo(ChronoLocalDate.from(todayMinusMinutes)) < 0 ) {
+            return true;
+        }
+
+        return false;
     }
 
     public float returnBike(RackPosition rackPositionPlace, String damageText) throws SQLException, RackException,

@@ -127,8 +127,7 @@ public class User extends UserGeneric implements DataserviceInterface {
         // check that user has not other active subscription
         for ( Subscription sub : getSubscriptionList() ) {
             if ( sub.isValid() ) {
-                throw new InvalidSubscriptionException("You have an active subscription or a subscription that can " +
-                        "be" + " used");
+                throw new InvalidSubscriptionException("You have an active subscription or a subscription that can " + "be" + " used");
             }
         }
 
@@ -153,6 +152,22 @@ public class User extends UserGeneric implements DataserviceInterface {
         }
 
         return null;
+    }
+
+    public static Rent lastUserRent() throws SQLException {
+        Rent lastRent = new Rent();
+
+        for ( Subscription subscription : getSubscriptionList() ) {
+            List<Rent> rentList = subscription.getRentList();
+            for ( Rent r : rentList ) {
+                if ( r.getEndDate().compareTo(lastRent.getEndDate()) > 0 ) {
+                    lastRent = r;
+                }
+            }
+        }
+
+        return lastRent;
+
     }
 
     /**

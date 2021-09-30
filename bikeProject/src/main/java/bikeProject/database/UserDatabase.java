@@ -1,14 +1,17 @@
 package bikeProject.database;
 
 import bikeProject.PasswordUtils;
-import bikeProject.dataservice.User;
-import bikeProject.dataservice.UserGeneric;
+import bikeProject.dataservice.*;
 import bikeProject.exception.WrongPasswordException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDatabase implements UserDatabaseInterface {
 
