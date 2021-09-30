@@ -103,7 +103,7 @@ public class CreditCard implements DataserviceInterface {
         minimumDate = minimumDate.plusDays(daysDuration);
 
         // control the expireDate
-        if ( minimumDate.compareTo(expireDate) <= 0 ) {
+        if ( minimumDate.compareTo(expireDate) > 0 ) {
             return false;
         }
 

@@ -63,6 +63,7 @@ public class Subscription implements DataserviceInterface {
             return false;
         }
 
+        // calculate the last date in which the subscription is valid
         if ( this.startDate != null ) {
             // subscription started
 
