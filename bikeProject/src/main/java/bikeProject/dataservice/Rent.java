@@ -1,27 +1,25 @@
 package bikeProject.dataservice;
 
-import java.sql.SQLException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import bikeProject.config.Config;
-import bikeProject.database.RentDatabase;
 import bikeProject.exception.AccessDeniedException;
 import bikeProject.exception.InvalidSubscriptionException;
-import bikeProject.exception.NotValidRentException;
 import bikeProject.exception.PaymentException;
+
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class Rent implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ Bike bike;
-    private /* @ not_null @ */ Date startDate;
-    private /* @ not_null @ */ Date endDate;
+    private /* @ not_null @ */ LocalDateTime startDate;
+    private /* @ not_null @ */ LocalDateTime endDate;
     private DamageMessage damageMessage;
 
     public void createRent(Bike bike, Subscription subscription) throws SQLException, AccessDeniedException {
-        Date today = new Date();
+        LocalDateTime today = LocalDateTime.now();
 
         this.bike = bike;
         this.startDate = today;
@@ -31,7 +29,7 @@ public class Rent implements DataserviceInterface {
     }
 
     public float endRent(CreditCard creditCard) throws PaymentException, SQLException, InvalidSubscriptionException {
-        this.endDate = new Date();
+        this.endDate = LocalDateTime.now();
         float totalCost = 0f;
 
         rentDB.updateRentEndDate(this);
@@ -54,7 +52,7 @@ public class Rent implements DataserviceInterface {
             subscription.exceededRentTime();
         }
 
-        // if the rent minutes > 24 hours pay penals
+        // if the rent minutes > 24 hours pay penal
         if ( rentMinutes > 1440 ) {
             // exceeded the maximum rent time so pay the penal + the rent
             totalCost += Config.getInstance().getTariffExceed24Hours();
@@ -97,19 +95,19 @@ public class Rent implements DataserviceInterface {
         this.bike = bike;
     }
 
-    public Date getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 

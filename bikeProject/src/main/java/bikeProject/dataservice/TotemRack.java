@@ -4,7 +4,6 @@ import bikeProject.config.Config;
 import bikeProject.exception.*;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
@@ -72,7 +71,7 @@ public class TotemRack implements DataserviceInterface {
         LocalDateTime todayMinusMinutes = LocalDateTime.now().minusMinutes(Config.getMinutesBetweenTwoRent());
 
         Rent lastRent = User.lastUserRent();
-        if ( lastRent.getEndDate().compareTo(ChronoLocalDate.from(todayMinusMinutes)) < 0 ) {
+        if ( lastRent.getEndDate().compareTo(todayMinusMinutes) < 0 ) {
             return true;
         }
 

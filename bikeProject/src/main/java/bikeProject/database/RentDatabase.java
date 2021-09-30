@@ -7,13 +7,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class RentDatabase implements RentDatabaseInterface {
-    public long createRent(Bike bike, Date startDate, Subscription subscription) throws SQLException {
+    public long createRent(Bike bike, LocalDateTime startDate, Subscription subscription) throws SQLException {
 
         // prepare the statement
         PreparedStatement statement = Database.getConn().prepareStatement("INSERT INTO rent (bike_id, " +
@@ -51,9 +52,9 @@ public class RentDatabase implements RentDatabaseInterface {
             Rent rentTemp = new Rent();
 
             rentTemp.setID(res.getLong("id"));
-            rentTemp.setStartDate(res.getDate("start_date"));
+            rentTemp.setStartDate(res.getTimestamp("start_date").toLocalDateTime());
             if ( res.getObject("end_date") != null ) {
-                rentTemp.setEndDate(res.getDate("end_date"));
+                rentTemp.setEndDate(res.getTimestamp("end_date").toLocalDateTime());
             }
 
             // set damage

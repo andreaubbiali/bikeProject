@@ -4,6 +4,10 @@ import bikeProject.config.Config;
 import bikeProject.exception.AccessDeniedException;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -38,18 +42,19 @@ public class Tariff implements DataserviceInterface {
         Float totalCost = 0F;
 
         for ( Tariff tariff : tariffInstance ) {
-            if ( tariff.passedTimeInMinutes > timeOfRentInMinutes ) {
-                break;
+            if ( tariff.getBikeType().getID() == bikeType.getID() ) {
+                if ( tariff.passedTimeInMinutes > timeOfRentInMinutes ) {
+                    break;
+                }
+                totalCost += tariff.tariff;
             }
-
-            totalCost += tariff.tariff;
         }
 
         return totalCost;
     }
 
-    public static int calculateMinutesFromDate(Date date) {
-        return (int) date.getTime() / 60000;
+    public static int calculateMinutesFromDate(LocalDateTime date) {
+        return (int) date.toEpochSecond(ZoneOffset.UTC) / 60;
     }
 
     // GETTERS AND SETTERS

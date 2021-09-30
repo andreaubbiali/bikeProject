@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,14 +35,14 @@ public class IsValidSubscriptionTest {
         subType.setMustStartIn(mustStartIn);
     }
 
-    public void setSubscription(LocalDate subscriptionDate, LocalDate startDate) {
+    public void setSubscription(LocalDateTime subscriptionDate, LocalDateTime startDate) {
         subscription.setType(subType);
         subscription.setSubscriptionDate(subscriptionDate);
         subscription.setStartDate(startDate);
     }
 
-    public LocalDate createDateFromToday(int number) {
-        LocalDate date = LocalDate.now();
+    public LocalDateTime createDateFromToday(int number) {
+        LocalDateTime date = LocalDateTime.now();
 
         return date.plusDays(number);
     }
@@ -52,7 +53,7 @@ public class IsValidSubscriptionTest {
     @Test
     public void isValid_Subscription_True_1() {
 
-        LocalDate subscriptionDate = createDateFromToday(-5);
+        LocalDateTime subscriptionDate = createDateFromToday(-5);
 
         subscription.setDeleted(false);
         setSubscriptionType(10, 6);
@@ -67,7 +68,7 @@ public class IsValidSubscriptionTest {
     @Test
     public void isValid_Subscription_True_2() {
 
-        LocalDate subscriptionDate = createDateFromToday(-5);
+        LocalDateTime subscriptionDate = createDateFromToday(-5);
 
         subscription.setDeleted(false);
         setSubscriptionType(10, 5);
@@ -83,7 +84,7 @@ public class IsValidSubscriptionTest {
     @Test
     public void isValid_Subscription_False_3() {
 
-        LocalDate subscriptionDate = createDateFromToday(-5);
+        LocalDateTime subscriptionDate = createDateFromToday(-5);
 
         subscription.setDeleted(false);
         setSubscriptionType(10, 4);
@@ -100,7 +101,7 @@ public class IsValidSubscriptionTest {
     @Test
     public void isValid_Subscription_True_4() {
 
-        LocalDate startDate = createDateFromToday(-10);
+        LocalDateTime startDate = createDateFromToday(-10);
 
         subscription.setDeleted(false);
         setSubscriptionType(11, 10);
@@ -115,7 +116,7 @@ public class IsValidSubscriptionTest {
     @Test
     public void isValid_Subscription_True_5() {
 
-        LocalDate startDate = createDateFromToday(-10);
+        LocalDateTime startDate = createDateFromToday(-10);
 
         subscription.setDeleted(false);
         setSubscriptionType(10, 10);
@@ -130,7 +131,7 @@ public class IsValidSubscriptionTest {
     @Test
     public void isValid_Subscription_False_6() {
 
-        LocalDate startDate = createDateFromToday(-10);
+        LocalDateTime startDate = createDateFromToday(-10);
 
         subscription.setDeleted(false);
         setSubscriptionType(9, 10);
@@ -145,7 +146,7 @@ public class IsValidSubscriptionTest {
     @Test
     public void isValid_Subscription_False_7() {
 
-        LocalDate subscriptionDate = createDateFromToday(-5);
+        LocalDateTime subscriptionDate = createDateFromToday(-5);
 
         subscription.setDeleted(true);
         boolean res = subscription.isValid();

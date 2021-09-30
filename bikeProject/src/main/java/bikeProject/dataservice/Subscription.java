@@ -2,21 +2,22 @@ package bikeProject.dataservice;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Subscription implements DataserviceInterface {
 
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ SubscriptionType type;
-    private /* @ not_null @ */ LocalDate subscriptionDate;
+    private /* @ not_null @ */ LocalDateTime subscriptionDate;
     private /* @ not_null @ */ UserGeneric user;
     private /* @ not_null @ */ int countExceededTime;
-    private LocalDate startDate;
+    private LocalDateTime startDate;
     private /* @ not_null @ */ boolean deleted;
     private List<Rent> rentList;
 
     public void createNewSubscription(User user, SubscriptionType subType) throws SQLException {
-        LocalDate today = LocalDate.now();
+        LocalDateTime today = LocalDateTime.now();
 
         this.type = subType;
         this.subscriptionDate = today;
@@ -56,8 +57,8 @@ public class Subscription implements DataserviceInterface {
      * @return true if is valid false otherwise
      */
     public boolean isValid() {
-        LocalDate date;
-        LocalDate today = LocalDate.now();
+        LocalDateTime date;
+        LocalDateTime today = LocalDateTime.now();
 
         if ( this.deleted ) {
             return false;
@@ -94,7 +95,7 @@ public class Subscription implements DataserviceInterface {
 
         if ( this.startDate == null ) {
 
-            this.startDate = LocalDate.now();
+            this.startDate = LocalDateTime.now();
 
             // update record on db
             subscriptionDB.setSubscriptionStartDateNow(this);
@@ -144,11 +145,11 @@ public class Subscription implements DataserviceInterface {
         this.type = type;
     }
 
-    public LocalDate getSubscriptionDate() {
+    public LocalDateTime getSubscriptionDate() {
         return subscriptionDate;
     }
 
-    public void setSubscriptionDate(LocalDate subscriptionDate) {
+    public void setSubscriptionDate(LocalDateTime subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
     }
 
@@ -160,11 +161,11 @@ public class Subscription implements DataserviceInterface {
         this.user = user;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 

@@ -5,15 +5,16 @@ import bikeProject.dataservice.User;
 import bikeProject.dataservice.UserGeneric;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class SubscriptionDTO {
 
     public long ID;
     public String typeName;
-    public LocalDate subscriptionDate;
+    public LocalDateTime subscriptionDate;
     public UserGeneric user;
     public int countExceededTime;
-    public LocalDate startDate;
+    public LocalDateTime startDate;
     public boolean deleted;
 
     public SubscriptionDTO(Subscription subscription) {
@@ -42,11 +43,11 @@ public class SubscriptionDTO {
         this.typeName = typeName;
     }
 
-    public LocalDate getSubscriptionDate() {
+    public LocalDateTime getSubscriptionDate() {
         return subscriptionDate;
     }
 
-    public void setSubscriptionDate(LocalDate subscriptionDate) {
+    public void setSubscriptionDate(LocalDateTime subscriptionDate) {
         this.subscriptionDate = subscriptionDate;
     }
 
@@ -66,11 +67,11 @@ public class SubscriptionDTO {
         this.countExceededTime = countExceededTime;
     }
 
-    public LocalDate getStartDate() {
+    public LocalDateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
 

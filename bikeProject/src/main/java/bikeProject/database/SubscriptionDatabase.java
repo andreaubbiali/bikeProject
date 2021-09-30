@@ -2,6 +2,7 @@ package bikeProject.database;
 
 import bikeProject.dataservice.Subscription;
 import bikeProject.dataservice.SubscriptionType;
+import bikeProject.dataservice.User;
 
 import java.sql.*;
 import java.time.Instant;
@@ -48,11 +49,11 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
 
         // prepare the statement
         PreparedStatement statement = Database.getConn().prepareStatement("UPDATE subscription SET " +
-                "(subscription_type_id = ?, " + "subscription_date = ?, user_id = ?, count_exceeded_time = ?, " +
-                "start_date = ?, deleted = ?) WHERE id " + "=" + " ?");
+                "subscription_type_id = ?, " + "subscription_date = ?, user_id = ?, count_exceeded_time = ?, " +
+                "start_date = ?, deleted = ? WHERE id " + "=" + " ?");
         statement.setLong(1, subscription.getType().getID());
         statement.setObject(2, subscription.getSubscriptionDate());
-        statement.setLong(3, subscription.getUser().getID());
+        statement.setLong(3, User.getID());
         statement.setInt(4, subscription.getCountExceededTime());
         if ( subscription.getStartDate() == null ) {
             statement.setNull(5, java.sql.Types.NULL);
@@ -99,10 +100,10 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
             Subscription tempSub = new Subscription();
 
             tempSub.setID(res.getLong("id"));
-            tempSub.setSubscriptionDate(Instant.ofEpochMilli(res.getDate("subscription_date").getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+            tempSub.setSubscriptionDate(res.getTimestamp("subscription_date").toLocalDateTime());
             tempSub.setCountExceededTime(res.getInt("count_exceeded_time"));
             if ( res.getObject("start_date") != null ) {
-                tempSub.setStartDate(Instant.ofEpochMilli(res.getDate("start_date").getTime()).atZone(ZoneId.systemDefault()).toLocalDate());
+                tempSub.setStartDate(res.getTimestamp("start_date").toLocalDateTime());
             }
             tempSub.setDeleted(res.getBoolean("deleted"));
 

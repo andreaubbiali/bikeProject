@@ -155,12 +155,12 @@ public class User extends UserGeneric implements DataserviceInterface {
     }
 
     public static Rent lastUserRent() throws SQLException {
-        Rent lastRent = new Rent();
+        Rent lastRent = null;
 
         for ( Subscription subscription : getSubscriptionList() ) {
             List<Rent> rentList = subscription.getRentList();
             for ( Rent r : rentList ) {
-                if ( r.getEndDate().compareTo(lastRent.getEndDate()) > 0 ) {
+                if ( lastRent == null || r.getEndDate().compareTo(lastRent.getEndDate()) > 0 ) {
                     lastRent = r;
                 }
             }
