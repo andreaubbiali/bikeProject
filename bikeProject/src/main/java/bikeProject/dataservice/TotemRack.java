@@ -71,7 +71,7 @@ public class TotemRack implements DataserviceInterface {
         LocalDateTime todayMinusMinutes = LocalDateTime.now().minusMinutes(Config.getMinutesBetweenTwoRent());
 
         Rent lastRent = User.lastUserRent();
-        if ( lastRent.getEndDate().compareTo(todayMinusMinutes) < 0 ) {
+        if ( lastRent == null || lastRent.getEndDate().compareTo(todayMinusMinutes) < 0 ) {
             return true;
         }
 
