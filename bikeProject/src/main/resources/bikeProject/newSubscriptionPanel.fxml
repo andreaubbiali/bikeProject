@@ -34,5 +34,6 @@
             <Font size="12.0" />
          </font>
       </Label>
+      <Button fx:id="btnGoBack" layoutX="27.0" layoutY="19.0" mnemonicParsing="false" onAction="#goBackHome" text="Go back" />
    </children>
 </Pane>

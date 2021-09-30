@@ -144,4 +144,20 @@ public class Controller_New_Subscription implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void goBackHome(ActionEvent event) {
+        
+        // return to private area
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/privateUserAreaPanel.fxml"));
+            Parent pane = loader.load();
+            Scene scene = new Scene(pane);
+
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            primaryStage.setScene(scene);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
 }
