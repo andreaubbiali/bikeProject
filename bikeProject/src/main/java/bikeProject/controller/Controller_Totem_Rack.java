@@ -1,9 +1,6 @@
 package bikeProject.controller;
 
-import bikeProject.dataservice.Bike;
-import bikeProject.dataservice.BikeType;
-import bikeProject.dataservice.TotemRack;
-import bikeProject.dataservice.User;
+import bikeProject.dataservice.*;
 import bikeProject.exception.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,18 +12,66 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller_Totem_Rack implements Initializable {
 
+    public class tblDTO {
+        public String bikeType;
+        public int numberPositions;
+        public int occupiedPositions;
+        public int rentableBikes;
+
+        public tblDTO(String bikeType, int numberPositions, int occupiedPositions, int rentableBikes) {
+            this.bikeType = bikeType;
+            this.numberPositions = numberPositions;
+            this.occupiedPositions = occupiedPositions;
+            this.rentableBikes = rentableBikes;
+        }
+
+        public String getBikeType() {
+            return bikeType;
+        }
+
+        public void setBikeType(String bikeType) {
+            this.bikeType = bikeType;
+        }
+
+        public int getNumberPositions() {
+            return numberPositions;
+        }
+
+        public void setNumberPositions(int numberPositions) {
+            this.numberPositions = numberPositions;
+        }
+
+        public int getOccupiedPositions() {
+            return occupiedPositions;
+        }
+
+        public void setOccupiedPositions(int occupiedPositions) {
+            this.occupiedPositions = occupiedPositions;
+        }
+
+        public int getRentableBikes() {
+            return rentableBikes;
+        }
+
+        public void setRentableBikes(int rentableBikes) {
+            this.rentableBikes = rentableBikes;
+        }
+
+    }
+
     BikeType bikeType = new BikeType();
     public static TotemRack totemRack = null;
+    List<BikeType> bikeTypeList = new ArrayList<>();
+    private Map<String, tblDTO> tableRows = new HashMap<>();
 
     @FXML
     private Label lblTitle;
@@ -44,19 +89,19 @@ public class Controller_Totem_Rack implements Initializable {
     private TextField txtUsername;
 
     @FXML
-    private TableView<?> tblBike;
+    private TableView<tblDTO> tblBike;
 
     @FXML
-    private TableColumn<?, ?> columnBikeType;
+    private TableColumn<tblDTO, String> columnBikeType;
 
     @FXML
-    private TableColumn<?, ?> columnNumber;
+    private TableColumn<tblDTO, Integer> columnNumber;
 
     @FXML
-    private TableColumn<?, ?> columnOccupied;
+    private TableColumn<tblDTO, Integer> columnOccupied;
 
     @FXML
-    private TableColumn<?, ?> columnRentableBikes;
+    private TableColumn<tblDTO, Integer> columnRentableBikes;
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
@@ -67,7 +112,7 @@ public class Controller_Totem_Rack implements Initializable {
 
         // load the bikeType
         try {
-            List<BikeType> bikeTypeList = bikeType.getBikeTypes();
+            bikeTypeList = bikeType.getBikeTypes();
 
             ObservableList<KeyValuePair> bikeTypesChoices = FXCollections.observableArrayList();
 
@@ -82,6 +127,48 @@ public class Controller_Totem_Rack implements Initializable {
         }
 
         lblTitle.setText("Totem address: " + totemRack.getAddress());
+
+        // set the table
+        columnBikeType.setCellValueFactory(new PropertyValueFactory<>("bikeType"));
+        columnNumber.setCellValueFactory(new PropertyValueFactory<>("numberPositions"));
+        columnOccupied.setCellValueFactory(new PropertyValueFactory<>("occupiedPositions"));
+        columnRentableBikes.setCellValueFactory(new PropertyValueFactory<>("rentableBikes"));
+
+        // load data into table
+        loadTable();
+    }
+
+    public void loadTable() {
+
+        for ( BikeType bt : bikeTypeList ) {
+            int countPositions = 0;
+            int countOccupied = 0;
+            int countRentableBikes = 0;
+
+            for ( RackPosition rp : totemRack.getRackPositionList() ) {
+                if ( rp.getAcceptedBikeType().getID() == bt.getID() ) {
+                    countPositions++;
+
+                    if ( rp.getBike() != null ) {
+                        countOccupied++;
+                    }
+
+                    if ( rp.getBike() != null && !rp.getBike().isInMaintenance() && !rp.isBroken() ) {
+                        countRentableBikes++;
+                    }
+                }
+
+            }
+
+            tableRows.put(bt.getType().toString(), new tblDTO(bt.getType().toString(), countPositions, countOccupied,
+                    countRentableBikes));
+        }
+
+        if ( tableRows.size() == 0 ) {
+            tblBike.setPlaceholder(new Label("There aren't bikes types"));
+        } else {
+            tblBike.getItems().setAll(tableRows.values());
+        }
 
     }
 
@@ -103,14 +190,14 @@ public class Controller_Totem_Rack implements Initializable {
         try {
             long positionID = totemRack.rentBike(selectedBikeType);
 
-            txtResponse.setText("Go to the position: " + positionID + " and take your bike. \nEnjoy the service.");
+            txtResponse.setText("Go to the position: " + positionID + " and take your bike. \nEnjoy the ride.");
         } catch ( SQLException sql ) {
             txtResponse.setText("Error sql.");
             sql.printStackTrace();
         } catch ( AccessDeniedException | NotValidRentException | InvalidSubscriptionException | RackException e ) {
             txtResponse.setText(e.getMessage());
         }
-
+        loadTable();
         User.logout();
     }
 
@@ -149,13 +236,14 @@ public class Controller_Totem_Rack implements Initializable {
             e.printStackTrace();
         }
 
+        loadTable();
         User.logout();
     }
 
     @FXML
     void goBackHome(ActionEvent event) {
         User.logout();
-        
+
         // open home panel
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/homePagePanel.fxml"));

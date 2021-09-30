@@ -19,9 +19,9 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="406.0" layoutY="320.0" text="Bike type" />
-      <ComboBox fx:id="cmbBikeType" layoutX="516.0" layoutY="316.0" prefWidth="150.0" />
-      <Button fx:id="btnBikeType" layoutX="551.0" layoutY="363.0" mnemonicParsing="false" onAction="#startRent" text="Rent bike" />
+      <Label layoutX="408.0" layoutY="337.0" text="Bike type" />
+      <ComboBox fx:id="cmbBikeType" layoutX="518.0" layoutY="333.0" prefWidth="150.0" />
+      <Button fx:id="btnBikeType" layoutX="553.0" layoutY="401.0" mnemonicParsing="false" onAction="#startRent" text="Rent bike" />
       <TextArea fx:id="txtResponse" editable="false" layoutX="71.0" layoutY="456.0" prefHeight="78.0" prefWidth="711.0" />
       <PasswordField fx:id="pswLogin" layoutX="165.0" layoutY="356.0" text="admin" />
       <TextField fx:id="txtUsername" layoutX="165.0" layoutY="301.0" text="admin@gmail.com" />
@@ -37,5 +37,10 @@
          </columns>
       </TableView>
       <Button fx:id="btnGoBack" layoutX="389.0" layoutY="542.0" mnemonicParsing="false" onAction="#goBackHome" text="Go back home" />
+      <Label layoutX="611.0" layoutY="255.0" prefHeight="48.0" prefWidth="215.0" style="-fx-border-color: grey;" text="Rentable bikes number might be&#10;less than occupied positions because&#10;bike/rack can be broken">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
