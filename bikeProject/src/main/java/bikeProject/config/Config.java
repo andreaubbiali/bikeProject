@@ -14,6 +14,7 @@ public class Config {
     private static boolean rackMockResponse;
     private static int maximumRentMinutes;
     private static Float tariffExceed24Hours;
+    private static int minutesBetweenTwoRent;
 
     private Config() {
         // Exists only to defeat instantiation.
@@ -50,11 +51,15 @@ public class Config {
         universityMockResponse = (boolean) jo.get("universityMockResponse");
         bankMockResponse = (boolean) jo.get("bankMockResponse");
         rackMockResponse = (boolean) jo.get("rackMockResponse");
+
         /* 2 hours, maximum rental duration*/
         maximumRentMinutes = ((Number) jo.get("maximumRentMinutes")).intValue();
 
         /* tariff paid by user if exceeds the maximum rent time*/
         tariffExceed24Hours = ((Number) jo.get("tariffExceed24Hours")).floatValue();
+
+        /*minutes needed between two rent*/
+        minutesBetweenTwoRent = ((Number) jo.get("minutesBetweenTwoRent")).intValue();
 
         return inst;
     }
@@ -84,6 +89,10 @@ public class Config {
 
     public Float getTariffExceed24Hours() {
         return tariffExceed24Hours;
+    }
+
+    public static int getMinutesBetweenTwoRent() {
+        return minutesBetweenTwoRent;
     }
 
 }

@@ -4,5 +4,6 @@
   "bankMockResponse": true,
   "rackMockResponse": true,
   "maximumRentMinutes": 120,
-  "tariffExceed24Hours": 150
+  "tariffExceed24Hours": 150,
+  "minutesBetweenTwoRent": 5
 }
