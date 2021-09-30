@@ -45,17 +45,19 @@ public class Rent implements DataserviceInterface {
         int rentMinutes = Tariff.calculateMinutesFromDate(endDate) - Tariff.calculateMinutesFromDate(startDate);
 
         // calculate the cost to be pay
+        totalCost = Tariff.calculateTariffByBikeType(rentMinutes, bike.getType());
 
-        if ( Config.getInstance().getMaximumRentMinutes() < rentMinutes ) {
-            // exceeded the maximum rent time so pay the penal
-            totalCost = Config.getInstance().getTariffExceedMaximumRentMinutes();
+        if ( rentMinutes > Config.getInstance().getMaximumRentMinutes() ) {
 
             // update user subscription because has exceeded the maximum time
             Subscription subscription = User.getSubscriptionByRent(this);
             subscription.exceededRentTime();
+        }
 
-        } else {
-            totalCost = Tariff.calculateTariffByBikeType(rentMinutes, bike.getType());
+        // if the rent minutes > 24 hours pay penals
+        if ( rentMinutes > 1440 ) {
+            // exceeded the maximum rent time so pay the penal + the rent
+            totalCost += Config.getInstance().getTariffExceed24Hours();
         }
 
         // payment

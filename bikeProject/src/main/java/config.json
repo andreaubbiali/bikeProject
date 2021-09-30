@@ -3,6 +3,6 @@
   "universityMockResponse": true,
   "bankMockResponse": true,
   "rackMockResponse": true,
-  "maximumRentMinutes": 1440,
-  "tariffExceedMaximumRentMinutes": 150
+  "maximumRentMinutes": 120,
+  "tariffExceed24Hours": 150
 }
