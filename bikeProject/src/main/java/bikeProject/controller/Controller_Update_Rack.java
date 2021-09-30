@@ -261,18 +261,19 @@ public class Controller_Update_Rack implements Initializable {
     void fixDamagedBike(ActionEvent event) {
 
         // check if there is some damaged bike in the rack
-        boolean found = false;
+        List<Bike> damagedBikes = new ArrayList<>();
         for ( RackPosition rp : rack.getRackPositionList() ) {
             if ( rp.getBike() != null && rp.getBike().isInMaintenance() ) {
-                found = true;
-                break;
+                damagedBikes.add(rp.getBike());
             }
         }
 
-        if ( !found ) {
+        if ( damagedBikes.size() == 0 ) {
             lblError.setText("There are not damaged bike into this rack");
             return;
         }
+
+        Controller_Fix_Damaged_Bike.damagedBikeList = damagedBikes;
 
         // go to damaged bikes page
         try {

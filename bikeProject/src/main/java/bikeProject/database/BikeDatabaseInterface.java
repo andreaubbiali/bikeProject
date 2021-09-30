@@ -11,4 +11,6 @@ public interface BikeDatabaseInterface {
     long createBike(long bikeTypeID) throws SQLException;
 
     void delete(long bikeID) throws SQLException;
+
+    void fixBike(long bikeID) throws SQLException;
 }

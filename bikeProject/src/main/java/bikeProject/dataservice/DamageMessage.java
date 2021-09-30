@@ -16,6 +16,14 @@ public class DamageMessage implements DataserviceInterface {
 
     }
 
+    public DamageMessage getDamageByBikeID(long bikeID) throws SQLException {
+        return damagedBikeDB.getDamageByBikeID(bikeID);
+    }
+
+    public static void deleteMessage(long bikeID) throws SQLException {
+        damagedBikeDB.deleteMessage(bikeID);
+    }
+
     public long getID() {
         return ID;
     }

@@ -24,6 +24,13 @@ public class Bike implements DataserviceInterface {
         bikeDB.delete(this.ID);
     }
 
+    public void fixBikeInMaintenance() throws SQLException {
+        bikeDB.fixBike(this.ID);
+        setIsInMaintenance(false);
+
+        DamageMessage.deleteMessage(this.ID);
+    }
+
     public long getID() {
         return ID;
     }

@@ -56,4 +56,19 @@ public class BikeDatabase implements BikeDatabaseInterface {
 
         statement.close();
     }
+
+    public void fixBike(long bikeID) throws SQLException {
+
+        PreparedStatement statement = Database.getConn().prepareStatement("UPDATE bike SET is_in_maintenance = false "
+                + "WHERE id = ?; ");
+
+        statement.setLong(1, bikeID);
+        int res = statement.executeUpdate();
+
+        if ( res != 1 ) {
+            throw new SQLException();
+        }
+
+        statement.close();
+    }
 }
