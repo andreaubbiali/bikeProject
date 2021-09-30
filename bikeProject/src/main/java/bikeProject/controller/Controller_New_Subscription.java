@@ -5,6 +5,7 @@ import bikeProject.dataservice.SubscriptionType;
 import bikeProject.dataservice.User;
 import bikeProject.exception.AccessDeniedException;
 import bikeProject.exception.InvalidCreditCardException;
+import bikeProject.exception.InvalidSubscriptionException;
 import bikeProject.exception.PaymentException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -119,7 +120,7 @@ public class Controller_New_Subscription implements Initializable {
             lblError.setText("Access denied for user.");
             e.printStackTrace();
             return;
-        } catch ( InvalidCreditCardException ce ) {
+        } catch ( InvalidCreditCardException | InvalidSubscriptionException ce ) {
             lblError.setText(ce.getMessage());
             return;
         } catch ( PaymentException pe ) {

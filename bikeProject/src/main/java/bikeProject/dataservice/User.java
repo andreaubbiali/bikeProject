@@ -117,11 +117,19 @@ public class User extends UserGeneric implements DataserviceInterface {
     }
 
     public void addSubscription(SubscriptionType subType, CreditCard selectedCreditCard) throws SQLException,
-            InvalidCreditCardException, PaymentException {
+            InvalidCreditCardException, PaymentException, InvalidSubscriptionException {
 
         // check if the credit card is valid for the subscription selected
         if ( !selectedCreditCard.isCreditCardValidForSubscription(subType) ) {
             throw new InvalidCreditCardException("The selected creditCard isn't valid for the subscription");
+        }
+
+        // check that user has not other active subscription
+        for ( Subscription sub : getSubscriptionList() ) {
+            if ( sub.isValid() ) {
+                throw new InvalidSubscriptionException("You have an active subscription or a subscription that can " +
+                        "be" + " used");
+            }
         }
 
         // creation of the subscription
