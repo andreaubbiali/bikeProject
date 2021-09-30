@@ -94,4 +94,20 @@ public class Controller_Manage implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    void goBackHome(ActionEvent event) {
+        
+        // open new homePage panel
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/homePagePanel.fxml"));
+            Parent pane = loader.load();
+            Scene scene = new Scene(pane);
+
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            primaryStage.setScene(scene);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
 }

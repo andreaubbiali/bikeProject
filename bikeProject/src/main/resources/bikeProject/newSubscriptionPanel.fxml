@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="679.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_New_Subscription">
    <children>
       <Label layoutX="69.0" layoutY="217.0" text="Subscription type" />
@@ -30,5 +29,10 @@
       <ChoiceBox fx:id="chkCreditCard" layoutX="247.0" layoutY="264.0" prefWidth="150.0" />
       <ChoiceBox fx:id="chkSubscriptionType" layoutX="247.0" layoutY="213.0" prefWidth="150.0" />
       <Label fx:id="lblError" layoutX="112.0" layoutY="358.0" prefHeight="16.0" prefWidth="483.0" textFill="RED" />
+      <Label layoutX="439.0" layoutY="232.0" style="-fx-border-color: grey;" text="The credit card must be valid for:&#10;+ duration of subscription&#10;+ must start in&#10;+ 10 days">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

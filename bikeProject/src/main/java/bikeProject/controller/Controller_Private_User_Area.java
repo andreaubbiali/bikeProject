@@ -137,4 +137,21 @@ public class Controller_Private_User_Area implements Initializable {
 
     }
 
+    @FXML
+    void logout(ActionEvent event) {
+        User.logout();
+
+        // open new homePage panel
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/homePagePanel.fxml"));
+            Parent pane = loader.load();
+            Scene scene = new Scene(pane);
+
+            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            primaryStage.setScene(scene);
+        } catch ( Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
 }

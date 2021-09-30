@@ -36,5 +36,6 @@
             </font>
         </Label>
       <Label fx:id="lblError" layoutX="203.0" layoutY="409.0" prefHeight="16.0" prefWidth="526.0" textFill="RED" />
+      <Button fx:id="btnLogout" layoutX="48.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
     </children>
 </Pane>

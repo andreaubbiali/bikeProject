@@ -18,5 +18,6 @@
       <ComboBox fx:id="cmbManageRack" layoutX="225.0" layoutY="176.0" prefWidth="150.0" />
       <Label layoutX="154.0" layoutY="180.0" text="Rack" />
       <Label fx:id="lblError" layoutX="26.0" layoutY="319.0" prefHeight="16.0" prefWidth="530.0" textFill="RED" />
+      <Button fx:id="btnGoBack" layoutX="243.0" layoutY="315.0" mnemonicParsing="false" onAction="#goBackHome" text="Go back home" />
    </children>
 </Pane>
