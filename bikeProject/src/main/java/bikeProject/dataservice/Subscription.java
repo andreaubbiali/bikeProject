@@ -1,7 +1,6 @@
 package bikeProject.dataservice;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -81,11 +80,11 @@ public class Subscription implements DataserviceInterface {
         }
 
         // check the condition
-        if ( today.compareTo(date) <= 0 ) {
-            return true;
+        if ( today.toLocalDate().compareTo(date.toLocalDate()) > 0 ) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /*
