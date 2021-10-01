@@ -103,6 +103,10 @@ public class Subscription implements DataserviceInterface {
     }
 
     public Rent isThereAnActiveRent() {
+        if ( rentList == null || rentList.size() == 0 ) {
+            return null;
+        }
+
         for ( Rent rentTmp : rentList ) {
             if ( rentTmp.getEndDate() == null ) {
                 return rentTmp;
