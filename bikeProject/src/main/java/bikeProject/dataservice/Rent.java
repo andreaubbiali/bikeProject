@@ -1,12 +1,9 @@
 package bikeProject.dataservice;
 
 import bikeProject.config.Config;
-import bikeProject.exception.AccessDeniedException;
-import bikeProject.exception.InvalidSubscriptionException;
 import bikeProject.exception.PaymentException;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class Rent implements DataserviceInterface {
     private /* @ not_null @ */ LocalDateTime endDate;
     private DamageMessage damageMessage;
 
-    public void createRent(Bike bike, Subscription subscription) throws SQLException, AccessDeniedException {
+    public void createRent(Bike bike, Subscription subscription) throws SQLException {
         LocalDateTime today = LocalDateTime.now();
 
         this.bike = bike;
@@ -28,7 +25,7 @@ public class Rent implements DataserviceInterface {
         rentDB.createRent(bike, startDate, subscription);
     }
 
-    public float endRent(CreditCard creditCard) throws PaymentException, SQLException, InvalidSubscriptionException {
+    public float endRent(CreditCard creditCard) throws PaymentException, SQLException {
         this.endDate = LocalDateTime.now();
         float totalCost = 0f;
 
