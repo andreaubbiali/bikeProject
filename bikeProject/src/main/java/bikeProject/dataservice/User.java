@@ -144,10 +144,12 @@ public class User extends UserGeneric implements DataserviceInterface {
 
     public static Rent activeUserRent() {
 
-        for ( Subscription subscription : getSubscriptionList() ) {
-            Rent rent = subscription.isThereAnActiveRent();
-            if ( rent != null ) {
-                return rent;
+        if ( getSubscriptionList() != null ) {
+            for ( Subscription subscription : getSubscriptionList() ) {
+                Rent rent = subscription.isThereAnActiveRent();
+                if ( rent != null ) {
+                    return rent;
+                }
             }
         }
 
@@ -163,9 +165,12 @@ public class User extends UserGeneric implements DataserviceInterface {
 
         for ( Subscription subscription : getSubscriptionList() ) {
             List<Rent> rentList = subscription.getRentList();
-            for ( Rent r : rentList ) {
-                if ( lastRent == null || r.getEndDate().compareTo(lastRent.getEndDate()) > 0 ) {
-                    lastRent = r;
+
+            if ( rentList != null ) {
+                for ( Rent r : rentList ) {
+                    if ( lastRent == null || r.getEndDate().compareTo(lastRent.getEndDate()) > 0 ) {
+                        lastRent = r;
+                    }
                 }
             }
         }
