@@ -5,7 +5,6 @@ import bikeProject.exception.*;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class TotemRack implements DataserviceInterface {
         }
 
         // check if are passed the right minutes from the last rent
-        if ( !arePassedMinutesFromLastRent() ) {
+        if ( !arePassedMinutesFromRent(User.lastUserRent()) ) {
             throw new NotValidRentException("Is not passed the minimum minutes from your last rent");
         }
 
@@ -67,15 +66,10 @@ public class TotemRack implements DataserviceInterface {
         return rackPosition.getID();
     }
 
-    public boolean arePassedMinutesFromLastRent() throws SQLException {
+    public boolean arePassedMinutesFromRent(Rent rent) {
         LocalDateTime todayMinusMinutes = LocalDateTime.now().minusMinutes(Config.getMinutesBetweenTwoRent());
 
-        Rent lastRent = User.lastUserRent();
-        if ( lastRent == null || lastRent.getEndDate().compareTo(todayMinusMinutes) < 0 ) {
-            return true;
-        }
-
-        return false;
+        return rent == null || rent.getEndDate().compareTo(todayMinusMinutes) < 0;
     }
 
     public float returnBike(RackPosition rackPositionPlace, String damageText) throws SQLException, RackException,
