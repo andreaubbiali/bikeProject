@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="457.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Statistics_Data">
+   <children>
+      <Label layoutX="223.0" layoutY="21.0" text="STATISTICS DATA:">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="101.0" layoutY="98.0" text="Number of active subscription:" />
+      <Label layoutX="101.0" layoutY="148.0" text="Number of active rent:" />
+      <Label layoutX="101.0" layoutY="200.0" text="Number of user:" />
+      <Label layoutX="101.0" layoutY="247.0" text="Average of use of a bike:" />
+      <Label layoutX="101.0" layoutY="303.0" text="Mostly bike type used:" />
+      <Label layoutX="99.0" layoutY="357.0" text="Rack most used:" />
+      <Label fx:id="lblNumberActiveSubscription" layoutX="382.0" layoutY="98.0" />
+      <Label fx:id="lblNumberActiveRent" layoutX="382.0" layoutY="148.0" />
+      <Label fx:id="lblNumberUser" layoutX="383.0" layoutY="200.0" />
+      <Label fx:id="lblAverageUseBike" layoutX="383.0" layoutY="247.0" />
+      <Label fx:id="lblMostlyBikeUsed" layoutX="382.0" layoutY="303.0" />
+      <Label fx:id="lblRackMostUsed" layoutX="382.0" layoutY="357.0" />
+      <Button fx:id="btnGoBack" layoutX="39.0" layoutY="27.0" mnemonicParsing="false" onAction="#goBackHome" text="Return back home" />
+   </children>
+</Pane>

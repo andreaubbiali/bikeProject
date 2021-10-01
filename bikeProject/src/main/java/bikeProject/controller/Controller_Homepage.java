@@ -120,7 +120,6 @@ public class Controller_Homepage implements Initializable {
 
         // open statistic panel
         try {
-            Controller_Totem_Rack.totemRack = (TotemRack) cmbTotems.getSelectionModel().getSelectedItem().getKey();
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/statisticsDataPanel.fxml"));
             Parent pane = loader.load();
