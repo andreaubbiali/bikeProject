@@ -11,7 +11,7 @@ import java.util.Date;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class IsCreditCardValidForSubscriptionTest {
+public class CreditCard_isCreditCardValidForSubscription_Test {
 
     LocalDate today = LocalDate.now();
     CreditCard creditCard = new CreditCard(1, 585548484445555L, 5864, today);

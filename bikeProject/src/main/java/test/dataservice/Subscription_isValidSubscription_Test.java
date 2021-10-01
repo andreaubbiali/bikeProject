@@ -24,7 +24,7 @@ import bikeProject.dataservice.SubscriptionType;
 //				SE endDate == oggi VALIDO
 //				SE endDate > oggi VALIDO
 
-public class IsValidSubscriptionTest {
+public class Subscription_isValidSubscription_Test {
 
     Subscription subscription = new Subscription();
     SubscriptionType subType = new SubscriptionType();

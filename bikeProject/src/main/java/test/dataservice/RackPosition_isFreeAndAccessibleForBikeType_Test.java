@@ -9,7 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class isFreeAndAccessibleForBikeTypeTest {
+public class RackPosition_isFreeAndAccessibleForBikeType_Test {
 
     RackPosition rackPosition = new RackPosition();
     BikeType bikeType = new BikeType();

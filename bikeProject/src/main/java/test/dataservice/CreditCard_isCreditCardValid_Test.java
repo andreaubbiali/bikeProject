@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class IsCreditCardValidTest {
+public class CreditCard_isCreditCardValid_Test {
 
     LocalDate today = LocalDate.now();
     CreditCard creditCard = new CreditCard(1, 58, 59, today);

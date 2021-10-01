@@ -10,7 +10,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class IsBikeTypeRentableTest {
+public class RackPosition_isBikeTypeRentable_Test {
 
     // bici non rotta, bici esiste, tipo di bici uguale, rack non rotta
 
