@@ -1,7 +1,6 @@
 package bikeProject.dataservice;
 
 import bikeProject.config.Config;
-import bikeProject.exception.RackException;
 
 import java.sql.SQLException;
 
@@ -19,8 +18,6 @@ public class RackPosition implements DataserviceInterface {
     /**
      * check all requisites: a bike into the rack position, bikeType requested by the user, bike not in maintenance
      * and a not broken position
-     *
-     * @return
      */
     public boolean isBikeTypeRentable(BikeType bikeType) {
 
