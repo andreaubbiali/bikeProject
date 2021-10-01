@@ -14,65 +14,59 @@ import static org.junit.Assert.assertTrue;
 public class IsCreditCardValidForSubscriptionTest {
 
     LocalDate today = LocalDate.now();
-    CreditCard creditCard = new CreditCard(1, 585548484445555l, 5864, today);
+    CreditCard creditCard = new CreditCard(1, 585548484445555L, 5864, today);
     SubscriptionType subType = new SubscriptionType();
 
-    public LocalDate createDateFromToday(int number) {
-
-        return today.plusDays(number);
+    public void addDaysToExpireDate(int number) {
+        creditCard.setExpireDate(creditCard.getExpireDate().plusDays(number));
     }
 
-    //credi card expired
+    // credit card expired
     @Test
     public void isCreditCardValidForSubscription_False_CreditCardExpired() {
-
-        // the credit card will expire in 20 days
-        creditCard.setExpireDate(createDateFromToday(-20));
+        addDaysToExpireDate(-1);
 
         boolean res = creditCard.isCreditCardValidForSubscription(subType);
         assertFalse(res);
     }
 
-    // start immediately, duration 10 days + 10 days for penalties = 20
+    // credit card not expired mustStartIn = 5 daysDuration = 5 --> 10+10 = 20
+    // expire 19
     @Test
-    public void isCreditCardValidForSubscription_True_equalDate() {
+    public void isCreditCardValidForSubscription_False_CreditCardExpireDayBefore() {
+        addDaysToExpireDate(19);
 
-        // the credit card will expire in 20 days
-        creditCard.setExpireDate(createDateFromToday(20));
-
-        subType.setMustStartIn(0);
-        subType.setDaysDuration(10);
+        subType.setMustStartIn(5);
+        subType.setDaysDuration(5);
 
         boolean res = creditCard.isCreditCardValidForSubscription(subType);
-        assertTrue(res);
+        assertFalse(res);
     }
 
-    // start immediately, duration 5 days + 10 days for penalties = 15
+    // credit card not expired mustStartIn = 5 daysDuration = 5 --> 10+10 = 20
+    // expire 20
     @Test
-    public void isCreditCardValidForSubscription_True_ExpireAfter() {
+    public void isCreditCardValidForSubscription_False_CreditCardExpireSameDay() {
+        addDaysToExpireDate(20);
 
-        // the credit card will expire in 20 days
-        creditCard.setExpireDate(createDateFromToday(20));
-
-        subType.setMustStartIn(0);
+        subType.setMustStartIn(5);
         subType.setDaysDuration(5);
 
         boolean res = creditCard.isCreditCardValidForSubscription(subType);
         assertTrue(res);
     }
 
-    // start immediately, duration 15 days + 10 days for penalties = 25
+    // credit card not expired mustStartIn = 5 daysDuration = 5 --> 10+10 = 20
+    // expire 21
     @Test
-    public void isCreditCardValidForSubscription_False_ExpireBefore() {
+    public void isCreditCardValidForSubscription_False_CreditCardExpireAfter() {
+        addDaysToExpireDate(21);
 
-        // the credit card will expire in 20 days
-        creditCard.setExpireDate(createDateFromToday(20));
-
-        subType.setMustStartIn(0);
-        subType.setDaysDuration(15);
+        subType.setMustStartIn(5);
+        subType.setDaysDuration(5);
 
         boolean res = creditCard.isCreditCardValidForSubscription(subType);
-        assertFalse(res);
+        assertTrue(res);
     }
 
 }

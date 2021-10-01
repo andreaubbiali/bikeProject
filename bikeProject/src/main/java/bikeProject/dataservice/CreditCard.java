@@ -77,10 +77,9 @@ public class CreditCard implements DataserviceInterface {
 
     /**
      * The credit card is valid if is valid for all the period of the subscription
-     * from today. The credit card must be valid for at least the duration of the
-     * subscription +10 days if the subscription start automatically. For other
-     * subscription the card must be valid for the 'MustStartIn' + daysDuration + 10
-     * days.
+     * from today. The credit card must be valid for at least the subtype.MustStartIn +
+     * subtype.daysDuration + 10 days. 10 days are added to be secure that the user can pay
+     * penal in next days.
      *
      * @param subType the type of subscription
      * @return true if the credit card is valid, false otherwise
