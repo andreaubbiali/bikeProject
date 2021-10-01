@@ -9,7 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="923.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Private_User_Area">
     <children>
-        <Button fx:id="btnVerifyStudent" layoutX="343.0" layoutY="455.0" mnemonicParsing="false" onAction="#verifyStudent" text="Verify I am a student" />
+        <Button fx:id="btnVerifyStudent" layoutX="369.0" layoutY="392.0" mnemonicParsing="false" onAction="#verifyStudent" text="Verify I am a student" />
         <Button fx:id="newSubscription" layoutX="138.0" layoutY="331.0" mnemonicParsing="false" onAction="#newSubscription" text="New subscription" />
         <Button fx:id="newCreditCard" layoutX="591.0" layoutY="331.0" mnemonicParsing="false" onAction="#newCreditCard" text="Add a credit card" />
         <Label layoutX="38.0" layoutY="74.0" text="Subscription" />
@@ -30,12 +30,12 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
-        <Label layoutX="295.0" layoutY="29.0" text="PRIVATE AREA">
+        <Label layoutX="356.0" layoutY="26.0" text="PRIVATE AREA">
             <font>
                 <Font size="25.0" />
             </font>
         </Label>
-      <Label fx:id="lblError" layoutX="203.0" layoutY="409.0" prefHeight="16.0" prefWidth="526.0" textFill="RED" />
+      <Label fx:id="lblError" layoutX="199.0" layoutY="494.0" prefHeight="16.0" prefWidth="526.0" textFill="RED" />
       <Button fx:id="btnLogout" layoutX="48.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
     </children>
 </Pane>

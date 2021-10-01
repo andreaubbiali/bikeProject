@@ -12,23 +12,23 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Totem_Rack">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="633.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Totem_Rack">
    <children>
-      <Label fx:id="lblTitle" layoutX="57.0" layoutY="34.0" prefHeight="39.0" prefWidth="756.0">
+      <Label fx:id="lblTitle" layoutX="130.0" layoutY="34.0" prefHeight="39.0" prefWidth="683.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="408.0" layoutY="337.0" text="Bike type" />
-      <ComboBox fx:id="cmbBikeType" layoutX="518.0" layoutY="333.0" prefWidth="150.0" />
-      <Button fx:id="btnBikeType" layoutX="553.0" layoutY="401.0" mnemonicParsing="false" onAction="#startRent" text="Rent bike" />
-      <TextArea fx:id="txtResponse" editable="false" layoutX="71.0" layoutY="456.0" prefHeight="78.0" prefWidth="711.0" />
-      <PasswordField fx:id="pswLogin" layoutX="165.0" layoutY="356.0" text="admin" />
-      <TextField fx:id="txtUsername" layoutX="165.0" layoutY="301.0" text="admin@gmail.com" />
-      <Text layoutX="62.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
-      <Text layoutX="59.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
-      <Button fx:id="btnReturnBike" layoutX="203.0" layoutY="401.0" mnemonicParsing="false" onAction="#returnBike" text="Return bike" />
-      <TableView fx:id="tblBike" editable="true" layoutX="40.0" layoutY="110.0" prefHeight="140.0" prefWidth="774.0">
+      <Label layoutX="411.0" layoutY="353.0" text="Bike type" />
+      <ComboBox fx:id="cmbBikeType" layoutX="521.0" layoutY="349.0" prefWidth="150.0" />
+      <Button fx:id="btnBikeType" layoutX="556.0" layoutY="417.0" mnemonicParsing="false" onAction="#startRent" prefHeight="48.0" prefWidth="93.0" text="Rent bike" />
+      <TextArea fx:id="txtResponse" editable="false" layoutX="72.0" layoutY="481.0" prefHeight="78.0" prefWidth="711.0" />
+      <PasswordField fx:id="pswLogin" layoutX="168.0" layoutY="372.0" />
+      <TextField fx:id="txtUsername" layoutX="168.0" layoutY="317.0" />
+      <Text layoutX="65.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" />
+      <Text layoutX="62.0" layoutY="386.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <Button fx:id="btnReturnBike" layoutX="191.0" layoutY="417.0" mnemonicParsing="false" onAction="#returnBike" prefHeight="48.0" prefWidth="104.0" text="Return bike" />
+      <TableView fx:id="tblBike" editable="true" layoutX="40.0" layoutY="99.0" prefHeight="140.0" prefWidth="774.0">
          <columns>
             <TableColumn fx:id="columnBikeType" prefWidth="128.0" resizable="false" sortable="false" text="Bike type" />
             <TableColumn fx:id="columnNumber" prefWidth="240.0" resizable="false" sortable="false" text="Number of bike positions" />
@@ -36,7 +36,7 @@
             <TableColumn fx:id="columnRentableBikes" prefWidth="209.0" resizable="false" sortable="false" text="Rentable bikes" />
          </columns>
       </TableView>
-      <Button fx:id="btnGoBack" layoutX="389.0" layoutY="542.0" mnemonicParsing="false" onAction="#goBackHome" text="Go back home" />
+      <Button fx:id="btnGoBack" layoutX="6.0" layoutY="34.0" mnemonicParsing="false" onAction="#goBackHome" text="Go back home" />
       <Label layoutX="611.0" layoutY="255.0" prefHeight="48.0" prefWidth="215.0" style="-fx-border-color: grey;" text="Rentable bikes number might be&#10;less than occupied positions because&#10;bike/rack can be broken">
          <font>
             <Font size="11.0" />
