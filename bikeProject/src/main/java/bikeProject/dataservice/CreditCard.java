@@ -40,14 +40,11 @@ public class CreditCard implements DataserviceInterface {
         }
 
         // register new credit card for a user
-        long id = credCardDB.registerNewCreditCard(user.getID(), number, cvv, expireDate);
-
-        this.ID = id;
-
+        this.ID = credCardDB.registerNewCreditCard(user.getID(), number, cvv, expireDate);
     }
 
     /**
-     * To be valid the credit card must not be expired
+     * To be valid the credit card must not be expired (return true if expire today)
      */
     public boolean isCreditCardValid(LocalDate expireDate) {
         LocalDate today = LocalDate.now();
