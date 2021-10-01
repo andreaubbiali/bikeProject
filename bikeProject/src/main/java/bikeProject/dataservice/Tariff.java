@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Tariff implements DataserviceInterface {
 
-    private static List<Tariff> tariffInstance = null;
+    public static List<Tariff> tariffInstance = null;
 
     private /* @ not_null @ */ long ID;
     private /* @ not_null @ */ int passedTimeInMinutes; // the 0 value indicates if exceed maximum time
@@ -42,11 +42,13 @@ public class Tariff implements DataserviceInterface {
         Float totalCost = 0F;
 
         for ( Tariff tariff : tariffInstance ) {
-            if ( tariff.getBikeType().getID() == bikeType.getID() ) {
+
+            if ( tariff.getBikeType().getType().equals(bikeType.getType()) ) {
+                totalCost += tariff.tariff;
+
                 if ( tariff.passedTimeInMinutes > timeOfRentInMinutes ) {
                     break;
                 }
-                totalCost += tariff.tariff;
             }
         }
 
