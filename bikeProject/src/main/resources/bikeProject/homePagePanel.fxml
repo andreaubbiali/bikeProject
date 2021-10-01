@@ -40,17 +40,16 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Homepage">
    <children>
-      <Button fx:id="btnUser" layoutX="31.0" layoutY="110.0" mnemonicParsing="false" onAction="#loginAsUser" prefHeight="36.0" prefWidth="117.0" text="Login as user" />
+      <Button fx:id="btnUser" layoutX="97.0" layoutY="110.0" mnemonicParsing="false" onAction="#loginAsUser" prefHeight="36.0" prefWidth="117.0" text="Login as user" />
       <Label layoutX="155.0" layoutY="23.0" prefHeight="36.0" prefWidth="308.0" text="Bike rent service">
          <font>
             <Font name="DejaVu Sans Bold" size="30.0" />
          </font>
       </Label>
       <Button fx:id="btnTotem" layoutX="254.0" layoutY="270.0" mnemonicParsing="false" onAction="#openTotemPage" text="GO TO TOTEM" />
-      <ComboBox fx:id="cmbTotems" layoutX="269.0" layoutY="218.0" prefHeight="24.0" prefWidth="170.0" />
-      <Label layoutX="19.0" layoutY="214.0" text="Select the totem in which you want &#10;to rent/return a bike" />
+      <ComboBox fx:id="cmbTotems" layoutX="316.0" layoutY="218.0" prefHeight="24.0" prefWidth="170.0" />
+      <Label layoutX="46.0" layoutY="214.0" text="Select the totem in which you want &#10;to rent/return a bike" />
       <Label fx:id="lblError" layoutX="58.0" layoutY="328.0" prefHeight="16.0" prefWidth="467.0" textFill="RED" />
-      <Button fx:id="btnAdmin" layoutX="203.0" layoutY="110.0" mnemonicParsing="false" onAction="#loginAsAdmin" prefHeight="36.0" prefWidth="149.0" text="Login as admin" />
-      <Button fx:id="btnStatisticData" layoutX="417.0" layoutY="112.0" mnemonicParsing="false" onAction="#statisticData" prefHeight="36.0" prefWidth="117.0" text="Statistics data" />
+      <Button fx:id="btnAdmin" layoutX="365.0" layoutY="110.0" mnemonicParsing="false" onAction="#loginAsAdmin" prefHeight="36.0" prefWidth="149.0" text="Login as admin" />
    </children>
 </Pane>

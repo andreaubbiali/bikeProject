@@ -13,11 +13,12 @@
             <Font size="35.0" />
          </font>
       </Label>
-      <Button fx:id="btnAddRack" layoutX="246.0" layoutY="104.0" mnemonicParsing="false" onAction="#addRack" prefHeight="44.0" prefWidth="112.0" text="Add new rack" />
+      <Button fx:id="btnAddRack" layoutX="92.0" layoutY="110.0" mnemonicParsing="false" onAction="#addRack" prefHeight="44.0" prefWidth="112.0" text="Add new rack" />
       <Button fx:id="btnManageRack" layoutX="251.0" layoutY="256.0" mnemonicParsing="false" onAction="#manageRack" prefHeight="44.0" prefWidth="112.0" text="Manage rack" />
       <ComboBox fx:id="cmbManageRack" layoutX="227.0" layoutY="212.0" prefWidth="150.0" />
       <Label layoutX="156.0" layoutY="216.0" text="Rack" />
       <Label fx:id="lblError" layoutX="34.0" layoutY="334.0" prefHeight="16.0" prefWidth="530.0" textFill="RED" />
       <Button fx:id="btnGoBack" layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#goBackHome" text="Go back home" />
+      <Button fx:id="btnStatisticData" layoutX="377.0" layoutY="106.0" mnemonicParsing="false" onAction="#statisticData" prefHeight="52.0" prefWidth="124.0" text="Statistics data" />
    </children>
 </Pane>

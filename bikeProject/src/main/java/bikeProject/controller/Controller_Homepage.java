@@ -115,21 +115,4 @@ public class Controller_Homepage implements Initializable {
 
     }
 
-    @FXML
-    void statisticData(ActionEvent event) {
-
-        // open statistic panel
-        try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/statisticsDataPanel.fxml"));
-            Parent pane = loader.load();
-            Scene scene = new Scene(pane);
-
-            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            primaryStage.setScene(scene);
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-    }
-
 }
