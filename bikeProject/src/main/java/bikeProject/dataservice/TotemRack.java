@@ -69,7 +69,7 @@ public class TotemRack implements DataserviceInterface {
     public boolean arePassedMinutesFromRent(Rent rent) {
         LocalDateTime todayMinusMinutes = LocalDateTime.now().minusMinutes(Config.getMinutesBetweenTwoRent());
 
-        return rent == null || rent.getEndDate().compareTo(todayMinusMinutes) < 0;
+        return rent == null || rent.getEndDate() == null || rent.getEndDate().compareTo(todayMinusMinutes) < 0;
     }
 
     public float returnBike(RackPosition rackPositionPlace, String damageText) throws SQLException, RackException,
