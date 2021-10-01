@@ -16,7 +16,7 @@ public class User extends UserGeneric implements DataserviceInterface {
         super(id, name, surname, email, isStudent, isAdmin);
     }
 
-    private User(UserGeneric userGeneric) throws SQLException {
+    private User(UserGeneric userGeneric) {
         super(userGeneric);
     }
 
@@ -154,8 +154,12 @@ public class User extends UserGeneric implements DataserviceInterface {
         return null;
     }
 
-    public static Rent lastUserRent() throws SQLException {
+    public static Rent lastUserRent() {
         Rent lastRent = null;
+
+        if ( getSubscriptionList() == null ) {
+            return null;
+        }
 
         for ( Subscription subscription : getSubscriptionList() ) {
             List<Rent> rentList = subscription.getRentList();
@@ -167,7 +171,6 @@ public class User extends UserGeneric implements DataserviceInterface {
         }
 
         return lastRent;
-
     }
 
     /**
@@ -195,16 +198,13 @@ public class User extends UserGeneric implements DataserviceInterface {
         return getIsStudent();
     }
 
-    public boolean checkPassword(String password) throws SQLException {
-
-        return userDB.checkPasswordByID(getID(), password);
-    }
-
     public static CreditCard getCreditCardValidForSubscription(Subscription subscription) throws InvalidCreditCardException {
 
-        for ( CreditCard creditCard : getCreditCardList() ) {
-            if ( creditCard.isCreditCardValidForSubscription(subscription.getType()) ) {
-                return creditCard;
+        if ( getSubscriptionList() != null ) {
+            for ( CreditCard creditCard : getCreditCardList() ) {
+                if ( creditCard.isCreditCardValidForSubscription(subscription.getType()) ) {
+                    return creditCard;
+                }
             }
         }
 
