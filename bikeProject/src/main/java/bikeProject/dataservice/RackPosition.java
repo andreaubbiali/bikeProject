@@ -39,6 +39,10 @@ public class RackPosition implements DataserviceInterface {
         return true;
     }
 
+    /**
+     * The rack position is free and accessible if the bike type allowed is the same as bikeType,
+     * if the rack isn't broken and the position is free.
+     */
     public boolean isFreeAndAccessibleForBikeType(BikeType bikeType) {
 
         if ( this.getBike() == null && this.getAcceptedBikeType().getID() == bikeType.getID() && !this.isBroken() ) {
