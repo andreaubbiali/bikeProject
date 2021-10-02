@@ -39,6 +39,10 @@ public class CreditCard implements DataserviceInterface {
             throw new InvalidCreditCardException("The credit card is expired");
         }
 
+        if ( !requestValidityToBank() ) {
+            throw new InvalidCreditCardException("The bank doesn't validate the credit card");
+        }
+
         // register new credit card for a user
         this.ID = credCardDB.registerNewCreditCard(user.getID(), number, cvv, expireDate);
     }
@@ -73,6 +77,19 @@ public class CreditCard implements DataserviceInterface {
                 throw new PaymentException();
             }
         }
+    }
+
+    public boolean requestValidityToBank() {
+        if ( Config.getInstance().isProductionMode() ) {
+            try {
+                // send request to bank
+            } catch ( Exception e ) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        // use the mocked response
+        return Config.getInstance().getBankMockResponse();
     }
 
     /**
