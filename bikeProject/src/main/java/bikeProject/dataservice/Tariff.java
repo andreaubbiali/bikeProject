@@ -10,7 +10,7 @@ public class Tariff implements DataserviceInterface {
     public static List<Tariff> tariffInstance = null;
 
     private /* @ not_null @ */ long ID;
-    private /* @ not_null @ */ int passedTimeInMinutes; // the 0 value indicates if exceed maximum time
+    private /* @ not_null @ */ int passedTimeInMinutes;
     private /* @ not_null @ */ Float tariff;
     private /* @ not_null @ */ BikeType bikeType;
 
