@@ -123,13 +123,6 @@ public class CreditCard implements DataserviceInterface {
         return true;
     }
 
-    public void setCreditCard(long id, long number, long cvv, LocalDate expireDate) {
-        setID(id);
-        setNumber(number);
-        setCvv(cvv);
-        setExpireDate(expireDate);
-    }
-
     public long getID() {
         return ID;
     }
