@@ -106,6 +106,10 @@ public class Rent implements DataserviceInterface {
             }
         }
 
+        if ( totalRentMinutes == 0 ) {
+            return 0;
+        }
+
         return totalRentMinutes / rents.size();
     }
 

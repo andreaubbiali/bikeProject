@@ -1,9 +1,6 @@
 package bikeProject.controller;
 
-import bikeProject.dataservice.Bike;
-import bikeProject.dataservice.Rent;
-import bikeProject.dataservice.Subscription;
-import bikeProject.dataservice.User;
+import bikeProject.dataservice.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -34,9 +31,6 @@ public class Controller_Statistics_Data implements Initializable {
 
     @FXML
     private Label lblMostlyBikeUsed;
-
-    @FXML
-    private Label lblRackMostUsed;
 
     @FXML
     private Label lblError;

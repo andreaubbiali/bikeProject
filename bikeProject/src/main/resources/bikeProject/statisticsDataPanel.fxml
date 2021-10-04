@@ -17,13 +17,11 @@
       <Label layoutX="101.0" layoutY="200.0" text="Number of user:" />
       <Label layoutX="101.0" layoutY="247.0" text="Average of use of a bike in minutes:" />
       <Label layoutX="101.0" layoutY="303.0" text="Mostly bike type used:" />
-      <Label layoutX="99.0" layoutY="357.0" text="Rack most used:" />
       <Label fx:id="lblNumberActiveSubscription" layoutX="382.0" layoutY="98.0" />
       <Label fx:id="lblNumberActiveRent" layoutX="382.0" layoutY="148.0" />
       <Label fx:id="lblNumberUser" layoutX="383.0" layoutY="200.0" />
       <Label fx:id="lblAverageUseBike" layoutX="383.0" layoutY="247.0" />
       <Label fx:id="lblMostlyBikeUsed" layoutX="382.0" layoutY="303.0" />
-      <Label fx:id="lblRackMostUsed" layoutX="382.0" layoutY="357.0" />
       <Button fx:id="btnGoBack" layoutX="39.0" layoutY="27.0" mnemonicParsing="false" onAction="#goBackHome" text="Return back home" />
       <Label fx:id="lblError" layoutX="108.0" layoutY="404.0" prefHeight="16.0" prefWidth="465.0" textFill="RED" />
    </children>
