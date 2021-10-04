@@ -1,11 +1,8 @@
 package bikeProject.controller;
 
-import bikeProject.database.Database;
-import bikeProject.database.DatabaseStatisticsData;
-import bikeProject.database.DatabaseStatisticsDataInterface;
 import bikeProject.dataservice.Rent;
 import bikeProject.dataservice.Subscription;
-import bikeProject.dataservice.TotemRack;
+import bikeProject.dataservice.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,11 +42,11 @@ public class Controller_Statistics_Data implements Initializable {
 
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        DatabaseStatisticsData db = new DatabaseStatisticsData();
 
         try {
             lblNumberActiveSubscription.setText(String.valueOf(Subscription.getActiveSubscriptionCount()));
             lblNumberActiveRent.setText(String.valueOf(Rent.getActiveRentCount()));
+            lblNumberUser.setText(String.valueOf(User.getNumberUserCount()));
         } catch ( SQLException sql ) {
             lblError.setText("SQL ERROR.");
             sql.printStackTrace();

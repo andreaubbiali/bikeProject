@@ -64,18 +64,6 @@ public class UserDatabase implements UserDatabaseInterface {
 
     }
 
-    public boolean checkPasswordByID(long id, String password) throws SQLException {
-
-        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM user WHERE id = ? LIMIT 1;");
-        statement.setLong(1, id);
-        ResultSet res = statement.executeQuery();
-
-        boolean valid = checkPassword(res, password);
-        res.close();
-
-        return valid;
-    }
-
     private boolean checkPassword(ResultSet res, String password) throws SQLException {
 
         while ( res.next() ) {
@@ -104,6 +92,25 @@ public class UserDatabase implements UserDatabaseInterface {
         statement.executeUpdate();
         // no check if no rows updated.
 
+    }
+
+    public int getNumberUserCount() throws SQLException {
+        int count = 0;
+
+        List<Subscription> subscriptionList = new ArrayList<Subscription>();
+
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT count(id) as conteggio FROM user;");
+        ResultSet res = statement.executeQuery();
+
+        while ( res.next() ) {
+
+            count = res.getInt("conteggio");
+
+        }
+
+        res.close();
+
+        return count;
     }
 
 }

@@ -215,4 +215,8 @@ public class User extends UserGeneric implements DataserviceInterface {
 
         throw new InvalidCreditCardException("There are no valid credit card");
     }
+
+    public static int getNumberUserCount() throws SQLException {
+        return userDB.getNumberUserCount();
+    }
 }

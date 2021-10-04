@@ -11,7 +11,7 @@ public interface UserDatabaseInterface {
 
     int registerNewUser(String name, String surname, String email, boolean isStudent, String password, String salt) throws SQLException;
 
-    boolean checkPasswordByID(long id, String password) throws SQLException;
-
     void updateIsStudent(long userID, boolean isStudent) throws SQLException;
+
+    int getNumberUserCount() throws SQLException;
 }
