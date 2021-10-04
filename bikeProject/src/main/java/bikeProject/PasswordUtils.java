@@ -18,28 +18,28 @@ public class PasswordUtils {
     public static String getSalt(int length) {
 
         StringBuilder returnValue = new StringBuilder(length);
-        for (int i = 0; i < length; i++) {
+        for ( int i = 0; i < length; i++ ) {
             returnValue.append(ALPHABET.charAt(RANDOM.nextInt(ALPHABET.length())));
         }
         return new String(returnValue);
 
     }
 
-
-    public static byte[] hash(char[] password, byte[] salt) {
+    private static byte[] hash(char[] password, byte[] salt) {
 
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
         try {
             SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             return skf.generateSecret(spec).getEncoded();
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+        } catch ( NoSuchAlgorithmException | InvalidKeySpecException e ) {
             throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
         } finally {
             spec.clearPassword();
         }
 
     }
+
     public static String generateSecurePassword(String password, String salt) {
 
         String returnValue = null;
