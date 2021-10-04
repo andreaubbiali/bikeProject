@@ -98,4 +98,50 @@ public class RentDatabase implements RentDatabaseInterface {
         }
 
     }
+
+    public List<Rent> getAllRents() throws SQLException {
+
+        List<Rent> rentList = new ArrayList<>();
+
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT rent.*, damage.id as " + "damageID,"
+                + " damage.message as damageMessage, bike.id as bikeID, bike.is_in_maintenance as " +
+                "bikeIsInMaintenance, bike_type.id as bikeTypeID, bike_type.type as bikeTypeName, bike_type" +
+                ".baby_seat" + " as babySeat FROM rent LEFT JOIN " + "damage ON damage.rent_id = rent" + ".id INNER " + "JOIN bike " + "ON bike.id = rent.bike_id INNER JOIN bike_type ON bike_type.id = bike.type_id ;");
+        ResultSet res = statement.executeQuery();
+
+        while ( res.next() ) {
+            Rent rentTemp = new Rent();
+
+            rentTemp.setID(res.getLong("id"));
+            rentTemp.setStartDate(res.getTimestamp("start_date").toLocalDateTime());
+            if ( res.getObject("end_date") != null ) {
+                rentTemp.setEndDate(res.getTimestamp("end_date").toLocalDateTime());
+            }
+
+            // set damage
+            DamageMessage damage = new DamageMessage();
+            damage.setID(res.getLong("damageID"));
+            damage.setMessage(res.getString("damageMessage"));
+            rentTemp.setDamageMessage(damage);
+
+            // set bike
+            Bike bike = new Bike();
+            bike.setID(res.getLong("bikeID"));
+            bike.setIsInMaintenance(res.getBoolean("bikeIsInMaintenance"));
+            // bikeType
+            BikeType bikeType = new BikeType();
+            bikeType.setID(res.getLong("bikeTypeID"));
+            bikeType.setType(BikeTypeEnum.valueOf(res.getString("bikeTypeName")));
+            bikeType.setBabySeat(res.getBoolean("babySeat"));
+
+            bike.setType(bikeType);
+            rentTemp.setBike(bike);
+
+            rentList.add(rentTemp);
+        }
+
+        res.close();
+
+        return rentList;
+    }
 }

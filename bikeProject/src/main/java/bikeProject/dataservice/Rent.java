@@ -74,6 +74,28 @@ public class Rent implements DataserviceInterface {
         bike.setBikeInMaintenance();
     }
 
+    public boolean isActive() {
+
+        if ( endDate == null ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static int getActiveRentCount() throws SQLException {
+        List<Rent> rents = rentDB.getAllRents();
+        int count = 0;
+
+        for ( Rent r : rents ) {
+            if ( r.isActive() ) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     // GETTERS AND SETTERS
 
     public long getID() {

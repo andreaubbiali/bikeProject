@@ -3,6 +3,7 @@ package bikeProject.controller;
 import bikeProject.database.Database;
 import bikeProject.database.DatabaseStatisticsData;
 import bikeProject.database.DatabaseStatisticsDataInterface;
+import bikeProject.dataservice.Rent;
 import bikeProject.dataservice.Subscription;
 import bikeProject.dataservice.TotemRack;
 import javafx.event.ActionEvent;
@@ -47,7 +48,8 @@ public class Controller_Statistics_Data implements Initializable {
         DatabaseStatisticsData db = new DatabaseStatisticsData();
 
         try {
-            lblNumberActiveSubscription.setText(String.valueOf(Subscription.getActiveSubscription()));
+            lblNumberActiveSubscription.setText(String.valueOf(Subscription.getActiveSubscriptionCount()));
+            lblNumberActiveRent.setText(String.valueOf(Rent.getActiveRentCount()));
         } catch ( SQLException sql ) {
             lblError.setText("SQL ERROR.");
             sql.printStackTrace();

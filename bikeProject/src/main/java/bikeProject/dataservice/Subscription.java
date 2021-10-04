@@ -108,7 +108,7 @@ public class Subscription implements DataserviceInterface {
         }
 
         for ( Rent rentTmp : rentList ) {
-            if ( rentTmp.getEndDate() == null ) {
+            if ( rentTmp.isActive() ) {
                 return rentTmp;
             }
         }
@@ -132,7 +132,7 @@ public class Subscription implements DataserviceInterface {
         subscriptionDB.updateSubscription(this);
     }
 
-    public static int getActiveSubscription() throws SQLException {
+    public static int getActiveSubscriptionCount() throws SQLException {
         List<Subscription> subscriptions = subscriptionDB.getAllSubscription();
         int count = 0;
 
