@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -35,9 +34,6 @@ public class Controller_Login {
     private Label lblError;
 
     @FXML
-    private Button btnRegister;
-
-    @FXML
     private void initialize() throws Exception {
         if ( userType == null ) {
             throw new Exception("userType hasn't been settled.");
@@ -46,10 +42,6 @@ public class Controller_Login {
         }
 
         lblTitle.setText("Login as: " + userType);
-
-        if ( userType.equals("admin") ) {
-            btnRegister.setDisable(true);
-        }
     }
 
     @FXML
@@ -118,28 +110,11 @@ public class Controller_Login {
     }
 
     @FXML
-    void register(ActionEvent event) {
-
-        // open register panel
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/registerNewUserPanel.fxml"));
-            Parent pane = loader.load();
-            Scene scene = new Scene(pane);
-
-            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            primaryStage.setScene(scene);
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @FXML
     void goBackToHomePage(ActionEvent event) {
 
-        // return to homepage
+        // return to client panel
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/homePagePanel.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/clientPanel.fxml"));
             Parent pane = loader.load();
             Scene scene = new Scene(pane);
 

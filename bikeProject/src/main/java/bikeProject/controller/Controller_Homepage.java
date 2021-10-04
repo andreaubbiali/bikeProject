@@ -57,30 +57,11 @@ public class Controller_Homepage implements Initializable {
     }
 
     @FXML
-    void loginAsUser(ActionEvent event) {
-        Controller_Login.userType = "user";
-
-        // open login panel
+    void client(ActionEvent event) {
+        
+        // open client panel
         try {
-
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/loginPanel.fxml"));
-            Parent pane = loader.load();
-            Scene scene = new Scene(pane);
-
-            Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            primaryStage.setScene(scene);
-        } catch ( Exception e ) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void loginAsAdmin(ActionEvent event) {
-        Controller_Login.userType = "admin";
-
-        // open login panel
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/loginPanel.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/clientPanel.fxml"));
             Parent pane = loader.load();
             Scene scene = new Scene(pane);
 

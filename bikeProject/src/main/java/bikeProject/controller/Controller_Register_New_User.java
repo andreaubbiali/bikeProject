@@ -96,7 +96,7 @@ public class Controller_Register_New_User {
     void returnHomePage(ActionEvent event) {
         // return to homepage
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/homePagePanel.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/clientPanel.fxml"));
             Parent pane = loader.load();
             Scene scene = new Scene(pane);
 

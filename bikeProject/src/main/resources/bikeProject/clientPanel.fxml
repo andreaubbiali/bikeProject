@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bikeProject.controller.Controller_Client">
+   <children>
+      <Label layoutX="186.0" layoutY="33.0" text="CHOOSE A LOGIN">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnUser" layoutX="104.0" layoutY="138.0" mnemonicParsing="false" onAction="#loginAsUser" prefHeight="66.0" prefWidth="127.0" text="Login as user" />
+      <Button fx:id="btnAdmin" layoutX="379.0" layoutY="138.0" mnemonicParsing="false" onAction="#loginAsAdmin" prefHeight="66.0" prefWidth="145.0" text="Login as admin" />
+      <Button fx:id="btnRegister" layoutX="255.0" layoutY="282.0" mnemonicParsing="false" onAction="#register" prefHeight="39.0" prefWidth="91.0" text="Register" />
+      <Label layoutX="239.0" layoutY="256.0" text="Are you new here?" />
+      <Button fx:id="btnGoBack" layoutX="29.0" layoutY="21.0" mnemonicParsing="false" onAction="#returnBackHome" text="Go back home" />
+   </children>
+</Pane>
