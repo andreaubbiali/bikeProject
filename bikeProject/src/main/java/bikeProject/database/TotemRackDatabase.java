@@ -45,7 +45,7 @@ public class TotemRackDatabase implements TotemRackDatabaseInterface {
         int res = statement.executeUpdate();
 
         if ( res != 1 ) {
-            throw new SQLException("noDelete");
+            throw new SQLException("error the rack has not been deleted");
         }
 
         statement.close();

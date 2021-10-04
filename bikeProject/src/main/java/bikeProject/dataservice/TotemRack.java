@@ -107,7 +107,14 @@ public class TotemRack implements DataserviceInterface {
         return totemRackDB.addNewRack(address);
     }
 
-    public void deleteRack() throws SQLException {
+    public void deleteRack() throws SQLException, RackException {
+
+        for ( RackPosition rp : rackPositionList ) {
+            if ( rp.getBike() != null ) {
+                throw new RackException("The rack is not empty, there are some bikes on it.");
+            }
+        }
+
         totemRackDB.delete(this.ID);
     }
 

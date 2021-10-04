@@ -184,12 +184,10 @@ public class Controller_Update_Rack implements Initializable {
             goBackPage(event);
 
         } catch ( SQLException sql ) {
-            if ( sql.getMessage().equals("noDelete") ) {
-                lblError.setText("Is not possible to delete a rack with bike in it");
-            } else {
-                lblError.setText("ERROR SQL");
-                sql.printStackTrace();
-            }
+            lblError.setText("ERROR SQL");
+            sql.printStackTrace();
+        } catch ( RackException r ) {
+            lblError.setText(r.getMessage());
         }
 
     }
