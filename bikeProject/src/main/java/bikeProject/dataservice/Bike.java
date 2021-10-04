@@ -31,6 +31,10 @@ public class Bike implements DataserviceInterface {
         DamageMessage.deleteMessage(this.ID);
     }
 
+    public static String getMostlyUsedBikeType() throws SQLException {
+        return bikeDB.getMostlyUsedBikeType();
+    }
+
     public long getID() {
         return ID;
     }

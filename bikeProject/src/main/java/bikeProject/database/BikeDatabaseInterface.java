@@ -13,4 +13,6 @@ public interface BikeDatabaseInterface {
     void delete(long bikeID) throws SQLException;
 
     void fixBike(long bikeID) throws SQLException;
+
+    String getMostlyUsedBikeType() throws SQLException;
 }

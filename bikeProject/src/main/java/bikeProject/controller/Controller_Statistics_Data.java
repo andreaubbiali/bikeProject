@@ -1,5 +1,6 @@
 package bikeProject.controller;
 
+import bikeProject.dataservice.Bike;
 import bikeProject.dataservice.Rent;
 import bikeProject.dataservice.Subscription;
 import bikeProject.dataservice.User;
@@ -48,6 +49,7 @@ public class Controller_Statistics_Data implements Initializable {
             lblNumberActiveRent.setText(String.valueOf(Rent.getActiveRentCount()));
             lblNumberUser.setText(String.valueOf(User.getNumberUserCount()));
             lblAverageUseBike.setText(String.valueOf(Rent.getAverageUseBike()));
+            lblMostlyBikeUsed.setText(Bike.getMostlyUsedBikeType());
         } catch ( SQLException sql ) {
             lblError.setText("SQL ERROR.");
             sql.printStackTrace();

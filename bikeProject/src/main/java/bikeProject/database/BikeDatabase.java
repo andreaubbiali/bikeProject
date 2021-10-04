@@ -1,8 +1,11 @@
 package bikeProject.database;
 
 import bikeProject.dataservice.Bike;
+import bikeProject.dataservice.Subscription;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BikeDatabase implements BikeDatabaseInterface {
 
@@ -70,5 +73,24 @@ public class BikeDatabase implements BikeDatabaseInterface {
         }
 
         statement.close();
+    }
+
+    public String getMostlyUsedBikeType() throws SQLException {
+        String bike = null;
+
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT bt.`type` as bikeType, count(r" +
+                ".bike_id) as " + "cont from rent r " + "INNER JOIN bike b on b.id = r.bike_id INNER JOIN bike_type " + "bt on " + "bt.id = " + "b.type_id  " + "group by bt.`type` order by cont DESC;");
+        ResultSet res = statement.executeQuery();
+
+        while ( res.next() ) {
+
+            // take only the first one
+            bike = res.getString("bikeType");
+            break;
+        }
+
+        res.close();
+
+        return bike;
     }
 }
