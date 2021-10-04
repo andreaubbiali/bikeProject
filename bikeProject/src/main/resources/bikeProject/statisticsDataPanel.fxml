@@ -15,7 +15,7 @@
       <Label layoutX="101.0" layoutY="98.0" text="Number of active subscription:" />
       <Label layoutX="101.0" layoutY="148.0" text="Number of active rent:" />
       <Label layoutX="101.0" layoutY="200.0" text="Number of user:" />
-      <Label layoutX="101.0" layoutY="247.0" text="Average of use of a bike:" />
+      <Label layoutX="101.0" layoutY="247.0" text="Average of use of a bike in minutes:" />
       <Label layoutX="101.0" layoutY="303.0" text="Mostly bike type used:" />
       <Label layoutX="99.0" layoutY="357.0" text="Rack most used:" />
       <Label fx:id="lblNumberActiveSubscription" layoutX="382.0" layoutY="98.0" />

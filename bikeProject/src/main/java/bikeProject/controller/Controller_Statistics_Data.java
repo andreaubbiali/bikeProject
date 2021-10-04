@@ -47,6 +47,7 @@ public class Controller_Statistics_Data implements Initializable {
             lblNumberActiveSubscription.setText(String.valueOf(Subscription.getActiveSubscriptionCount()));
             lblNumberActiveRent.setText(String.valueOf(Rent.getActiveRentCount()));
             lblNumberUser.setText(String.valueOf(User.getNumberUserCount()));
+            lblAverageUseBike.setText(String.valueOf(Rent.getAverageUseBike()));
         } catch ( SQLException sql ) {
             lblError.setText("SQL ERROR.");
             sql.printStackTrace();

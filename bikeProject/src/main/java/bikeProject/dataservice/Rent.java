@@ -96,6 +96,19 @@ public class Rent implements DataserviceInterface {
         return count;
     }
 
+    public static float getAverageUseBike() throws SQLException {
+        List<Rent> rents = rentDB.getAllRents();
+        float totalRentMinutes = 0;
+
+        for ( Rent r : rents ) {
+            if ( !r.isActive() ) {
+                totalRentMinutes += Tariff.calculateMinutesFromDate(r.endDate) - Tariff.calculateMinutesFromDate(r.startDate);
+            }
+        }
+
+        return totalRentMinutes / rents.size();
+    }
+
     // GETTERS AND SETTERS
 
     public long getID() {
