@@ -132,6 +132,19 @@ public class Subscription implements DataserviceInterface {
         subscriptionDB.updateSubscription(this);
     }
 
+    public static int getActiveSubscription() throws SQLException {
+        List<Subscription> subscriptions = subscriptionDB.getAllSubscription();
+        int count = 0;
+
+        for ( Subscription sub : subscriptions ) {
+            if ( sub.isValid() ) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
     public long getID() {
         return ID;
     }

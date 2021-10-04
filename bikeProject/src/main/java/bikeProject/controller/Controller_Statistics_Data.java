@@ -1,5 +1,9 @@
 package bikeProject.controller;
 
+import bikeProject.database.Database;
+import bikeProject.database.DatabaseStatisticsData;
+import bikeProject.database.DatabaseStatisticsDataInterface;
+import bikeProject.dataservice.Subscription;
 import bikeProject.dataservice.TotemRack;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Controller_Statistics_Data implements Initializable {
@@ -35,8 +40,19 @@ public class Controller_Statistics_Data implements Initializable {
     private Label lblRackMostUsed;
 
     @FXML
+    private Label lblError;
+
+    @FXML
     public void initialize(URL location, ResourceBundle resources) {
-        
+        DatabaseStatisticsData db = new DatabaseStatisticsData();
+
+        try {
+            lblNumberActiveSubscription.setText(String.valueOf(Subscription.getActiveSubscription()));
+        } catch ( SQLException sql ) {
+            lblError.setText("SQL ERROR.");
+            sql.printStackTrace();
+        }
+
     }
 
     @FXML
@@ -44,7 +60,7 @@ public class Controller_Statistics_Data implements Initializable {
 
         // open homePage panel
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/homePagePanel.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/bikeProject/managePanel.fxml"));
             Parent pane = loader.load();
             Scene scene = new Scene(pane);
 

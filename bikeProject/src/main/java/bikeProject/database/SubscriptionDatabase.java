@@ -120,4 +120,34 @@ public class SubscriptionDatabase implements SubscriptionDatabaseInterface {
         return subscriptionList;
     }
 
+    public List<Subscription> getAllSubscription() throws SQLException {
+        List<Subscription> subscriptionList = new ArrayList<Subscription>();
+
+        PreparedStatement statement = Database.getConn().prepareStatement("SELECT * FROM subscription;");
+        ResultSet res = statement.executeQuery();
+
+        while ( res.next() ) {
+            Subscription tempSub = new Subscription();
+
+            tempSub.setID(res.getLong("id"));
+            tempSub.setSubscriptionDate(res.getTimestamp("subscription_date").toLocalDateTime());
+            tempSub.setCountExceededTime(res.getInt("count_exceeded_time"));
+            if ( res.getObject("start_date") != null ) {
+                tempSub.setStartDate(res.getTimestamp("start_date").toLocalDateTime());
+            }
+            tempSub.setDeleted(res.getBoolean("deleted"));
+
+            // add the subType
+            SubscriptionType subType = new SubscriptionType();
+            subType.setID(res.getLong("subscription_type_id"));
+            tempSub.setType(subType);
+
+            subscriptionList.add(tempSub);
+        }
+
+        res.close();
+
+        return subscriptionList;
+    }
+
 }

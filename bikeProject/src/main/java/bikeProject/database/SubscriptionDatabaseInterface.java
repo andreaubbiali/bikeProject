@@ -14,4 +14,6 @@ public interface SubscriptionDatabaseInterface {
     void setSubscriptionStartDateNow(Subscription subscription) throws SQLException;
 
     List<Subscription> getSubscriptionByUserID(long id) throws SQLException;
+
+    List<Subscription> getAllSubscription() throws SQLException;
 }
