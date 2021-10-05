@@ -795,9 +795,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 45,
-											"top": 877,
+											"top": 890,
 											"width": 126.43896484375,
-											"height": 26,
+											"height": 13,
 											"text": "Personale comunale",
 											"wordWrap": true
 										},
@@ -831,9 +831,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 40,
-									"top": 870,
+									"top": 883,
 									"width": 136.43896484375,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGHeH8yf0p8="
 									},
@@ -977,9 +977,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 643.5,
-											"top": 286,
+											"top": 292.5,
 											"width": 173,
-											"height": 26,
+											"height": 13,
 											"text": "Registrazione abbonamento",
 											"wordWrap": true
 										},
@@ -1013,9 +1013,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 638.5,
-									"top": 279,
+									"top": 285.5,
 									"width": 183,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGI1BszKqAA="
 									},
@@ -1178,9 +1178,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 567,
-											"top": 630,
+											"top": 636.5,
 											"width": 115,
-											"height": 26,
+											"height": 13,
 											"text": "Noleggio bicicletta",
 											"wordWrap": true
 										},
@@ -1214,9 +1214,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 562,
-									"top": 623,
+									"top": 629.5,
 									"width": 125,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGJX3sz4OhQ="
 									},
@@ -1415,7 +1415,7 @@
 									"font": "Arial;13;0",
 									"left": 1041,
 									"top": 212.5,
-									"width": 80.07177734375,
+									"width": 79,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGKGb80nIt8="
@@ -1577,9 +1577,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 731.5,
-											"top": 510,
+											"top": 516.5,
 											"width": 137,
-											"height": 26,
+											"height": 13,
 											"text": "Restituzione bicicletta",
 											"wordWrap": true
 										},
@@ -1611,9 +1611,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 726.5,
-									"top": 503,
+									"top": 509.5,
 									"width": 147,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGLQl81Xnrg="
 									},
@@ -1771,9 +1771,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 1043.5,
-											"top": 510,
+											"top": 516.5,
 											"width": 175,
-											"height": 26,
+											"height": 13,
 											"text": "Annullamento abbonamento",
 											"wordWrap": true
 										},
@@ -1807,9 +1807,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1038.5,
-									"top": 503,
+									"top": 509.5,
 									"width": 185,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGLxi82FEiA="
 									},
@@ -1972,9 +1972,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 1100,
-											"top": 414,
+											"top": 420.5,
 											"width": 101,
-											"height": 26,
+											"height": 13,
 											"text": "Addebito penale",
 											"wordWrap": true
 										},
@@ -2008,9 +2008,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1095,
-									"top": 407,
+									"top": 413.5,
 									"width": 111,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGPkos23X7c="
 									},
@@ -2173,9 +2173,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 511,
-											"top": 1046,
+											"top": 1052.5,
 											"width": 115,
-											"height": 26,
+											"height": 13,
 											"text": "Gestione biciclette",
 											"wordWrap": true
 										},
@@ -2209,9 +2209,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 506,
-									"top": 1039,
+									"top": 1045.5,
 									"width": 125,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGRVIs3qPho="
 									},
@@ -2374,9 +2374,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 513,
-											"top": 734,
+											"top": 740.5,
 											"width": 125,
-											"height": 26,
+											"height": 13,
 											"text": "Gestione rastrelliere",
 											"wordWrap": true
 										},
@@ -2410,9 +2410,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 508,
-									"top": 727,
+									"top": 733.5,
 									"width": 135,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGSSpM4ZcG8="
 									},
@@ -2575,9 +2575,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 1053.5,
-											"top": 958,
+											"top": 964.5,
 											"width": 146,
-											"height": 26,
+											"height": 13,
 											"text": "Manutenzione bicicletta",
 											"wordWrap": true
 										},
@@ -2611,9 +2611,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1048.5,
-									"top": 951,
+									"top": 957.5,
 									"width": 156,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGTeKs5IMGw="
 									},
@@ -2813,7 +2813,7 @@
 									"font": "Arial;13;0",
 									"left": 406,
 									"top": 872.5,
-									"width": 105.1259765625,
+									"width": 104,
 									"height": 38,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3vGUjps53j8I="
@@ -3013,7 +3013,7 @@
 									"font": "Arial;13;0",
 									"left": 452,
 									"top": 28.5,
-									"width": 95.24267578125,
+									"width": 94,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF3wJC+JL38F6k="
@@ -3176,9 +3176,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 643,
-											"top": 366,
+											"top": 372.5,
 											"width": 134,
-											"height": 26,
+											"height": 13,
 											"text": "Comunicazione danni",
 											"wordWrap": true
 										},
@@ -3212,9 +3212,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 638,
-									"top": 359,
+									"top": 365.5,
 									"width": 144,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF32cCoume9WCc="
 									},
@@ -3377,9 +3377,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 875.5,
-											"top": 62,
+											"top": 68.5,
 											"width": 135,
-											"height": 26,
+											"height": 13,
 											"text": "Prova status studente",
 											"wordWrap": true
 										},
@@ -3413,9 +3413,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 870.5,
-									"top": 55,
+									"top": 61.5,
 									"width": 145,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF32cJqq2fuKtM="
 									},
@@ -3578,9 +3578,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 1079.5,
-											"top": 1062,
+											"top": 1068.5,
 											"width": 115,
-											"height": 26,
+											"height": 13,
 											"text": "Aggiunta bicicletta",
 											"wordWrap": true
 										},
@@ -3614,9 +3614,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1074.5,
-									"top": 1055,
+									"top": 1061.5,
 									"width": 125,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF32cqzUmgkEkc="
 									},
@@ -3779,9 +3779,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 804,
-											"top": 1110,
+											"top": 1116.5,
 											"width": 139,
-											"height": 26,
+											"height": 13,
 											"text": "Eliminazione bicicletta",
 											"wordWrap": true
 										},
@@ -3815,9 +3815,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 799,
-									"top": 1103,
+									"top": 1109.5,
 									"width": 149,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF32ctZLGhUeDo="
 									},
@@ -3980,9 +3980,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 1049.5,
-											"top": 862,
+											"top": 868.5,
 											"width": 125,
-											"height": 26,
+											"height": 13,
 											"text": "Aggiunta rastrelliera",
 											"wordWrap": true
 										},
@@ -4016,9 +4016,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1044.5,
-									"top": 855,
+									"top": 861.5,
 									"width": 135,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF32cuvgmiE3D0="
 									},
@@ -4181,9 +4181,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 886,
-											"top": 702,
+											"top": 708.5,
 											"width": 149,
-											"height": 26,
+											"height": 13,
 											"text": "Eliminazione rastrelliera",
 											"wordWrap": true
 										},
@@ -4217,9 +4217,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 881,
-									"top": 695,
+									"top": 701.5,
 									"width": 159,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF32cv/xWi0C2s="
 									},
@@ -7014,9 +7014,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 460.5,
-											"top": 182,
+											"top": 188.5,
 											"width": 141,
-											"height": 26,
+											"height": 13,
 											"text": "Accesso area riservata",
 											"wordWrap": true
 										},
@@ -7048,9 +7048,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 455.5,
-									"top": 175,
+									"top": 181.5,
 									"width": 151,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF32fBKY7QmGBs="
 									},
@@ -10371,9 +10371,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 677,
-											"top": 894,
+											"top": 900.5,
 											"width": 221,
-											"height": 26,
+											"height": 13,
 											"text": "Autenticazione personale comunale",
 											"wordWrap": true
 										},
@@ -10407,9 +10407,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 672,
-									"top": 887,
+									"top": 893.5,
 									"width": 231,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF34n+4gXK1pjg="
 									},
@@ -11141,9 +11141,9 @@
 											},
 											"font": "Arial;13;1",
 											"left": 1063.5,
-											"top": 782,
+											"top": 788.5,
 											"width": 156,
-											"height": 26,
+											"height": 13,
 											"text": "Manutenzione rastrelliera",
 											"wordWrap": true
 										},
@@ -11177,9 +11177,9 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1058.5,
-									"top": 775,
+									"top": 781.5,
 									"width": 166,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8QAWdStACr+k="
 									},
@@ -12973,9 +12973,9 @@
 												"$ref": "AAAAAAF36N48flWeiSM="
 											},
 											"font": "Arial;13;0",
-											"left": 40.72998046875,
+											"left": 38.55908203125,
 											"top": 5,
-											"width": 80.4853515625,
+											"width": 72.474609375,
 											"height": 13,
 											"text": "Registrazione"
 										},
@@ -12988,7 +12988,7 @@
 											"font": "Arial;13;1",
 											"left": 21,
 											"top": 5,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -13931,9 +13931,9 @@
 												"$ref": "AAAAAAF8QKl5Hff7rjs="
 											},
 											"font": "Arial;13;0",
-											"left": 85.07177734375,
+											"left": 83.61181640625,
 											"top": 213,
-											"width": 98.55712890625,
+											"width": 89.81005859375,
 											"height": 13,
 											"text": "checkIsAStudent"
 										},
@@ -13946,7 +13946,7 @@
 											"font": "Arial;13;1",
 											"left": 61,
 											"top": 213,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -14187,9 +14187,9 @@
 												"$ref": "AAAAAAF36RoNvHavjW8="
 											},
 											"font": "Arial;13;0",
-											"left": 24.72998046875,
+											"left": 22.55908203125,
 											"top": 5,
-											"width": 81.919921875,
+											"width": 74.25830078125,
 											"height": 13,
 											"text": "Area riservata"
 										},
@@ -14202,7 +14202,7 @@
 											"font": "Arial;13;1",
 											"left": 5,
 											"top": 5,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -14922,9 +14922,9 @@
 												"$ref": "AAAAAAF37tjpi8nzabk="
 											},
 											"font": "Arial;13;0",
-											"left": 69.07177734375,
+											"left": 67.61181640625,
 											"top": 149,
-											"width": 125.2998046875,
+											"width": 110.03369140625,
 											"height": 13,
 											"text": "prova status studente"
 										},
@@ -14937,7 +14937,7 @@
 											"font": "Arial;13;1",
 											"left": 45,
 											"top": 149,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -15023,9 +15023,9 @@
 												"$ref": "AAAAAAF37ts1kMqQURs="
 											},
 											"font": "Arial;13;0",
-											"left": 61.07177734375,
+											"left": 59.61181640625,
 											"top": 285,
-											"width": 164.2998046875,
+											"width": 149.33837890625,
 											"height": 13,
 											"text": "registrazione carta di credito"
 										},
@@ -15038,7 +15038,7 @@
 											"font": "Arial;13;1",
 											"left": 37,
 											"top": 285,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -15090,9 +15090,9 @@
 												"$ref": "AAAAAAF37tzmH8qxXmw="
 											},
 											"font": "Arial;13;0",
-											"left": 69.07177734375,
+											"left": 67.61181640625,
 											"top": 541,
-											"width": 158.548828125,
+											"width": 141.41650390625,
 											"height": 13,
 											"text": "registrazione abbonamento"
 										},
@@ -15105,7 +15105,7 @@
 											"font": "Arial;13;1",
 											"left": 45,
 											"top": 541,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -17005,9 +17005,9 @@
 												"$ref": "AAAAAAF4S0p1xl3yxe0="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 30.55908203125,
 											"top": 5,
-											"width": 106.50439453125,
+											"width": 100.27099609375,
 											"height": 13,
 											"text": "Noleggio bicicletta"
 										},
@@ -17020,7 +17020,7 @@
 											"font": "Arial;13;1",
 											"left": 13,
 											"top": 5,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -17402,9 +17402,9 @@
 												"$ref": "AAAAAAF4S3/2ZaWnZwU="
 											},
 											"font": "Arial;13;0",
-											"left": 136.72998046875,
+											"left": 135.99365234375,
 											"top": 261,
-											"width": 115.91162109375,
+											"width": 103.53369140625,
 											"height": 13,
 											"text": "esisteAbbonamento"
 										},
@@ -17417,7 +17417,7 @@
 											"font": "Arial;13;1",
 											"left": 117,
 											"top": 261,
-											"width": 14.72998046875,
+											"width": 13.99365234375,
 											"height": 13,
 											"text": "alt"
 										},
@@ -17450,7 +17450,7 @@
 															"font": "Arial;13;0",
 															"left": 132,
 															"top": 294,
-															"width": 29.62451171875,
+															"width": 28.869140625,
 															"height": 13,
 															"text": "[true]"
 														}
@@ -19607,9 +19607,9 @@
 												"$ref": "AAAAAAF8RiS0EUhyoqc="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 30.55908203125,
 											"top": 13,
-											"width": 126.72802734375,
+											"width": 116.87646484375,
 											"height": 13,
 											"text": "Restituzione bicicletta"
 										},
@@ -19622,7 +19622,7 @@
 											"font": "Arial;13;1",
 											"left": 13,
 											"top": 13,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -21911,9 +21911,9 @@
 											},
 											"lineColor": "#fc4040",
 											"font": "Arial;13;0",
-											"left": 133.07177734375,
+											"left": 131.61181640625,
 											"top": 397,
-											"width": 180.22607421875,
+											"width": 163.8046875,
 											"height": 13,
 											"text": "durataNoleggio maggiore 2 ore"
 										},
@@ -21927,7 +21927,7 @@
 											"font": "Arial;13;1",
 											"left": 109,
 											"top": 397,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -22469,9 +22469,9 @@
 											},
 											"lineColor": "#fc4848",
 											"font": "Arial;13;0",
-											"left": 133.07177734375,
+											"left": 131.61181640625,
 											"top": 485,
-											"width": 187.4560546875,
+											"width": 170.3046875,
 											"height": 13,
 											"text": "durataNoleggio maggiore 24 ore"
 										},
@@ -22485,7 +22485,7 @@
 											"font": "Arial;13;1",
 											"left": 109,
 											"top": 485,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -23093,9 +23093,9 @@
 												"$ref": "AAAAAAF8Rj4u7EvxkJM="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 30.55908203125,
 											"top": 5,
-											"width": 105.787109375,
+											"width": 101.0009765625,
 											"height": 13,
 											"text": "Aggiungi bicicletta"
 										},
@@ -23108,7 +23108,7 @@
 											"font": "Arial;13;1",
 											"left": 13,
 											"top": 5,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -23373,9 +23373,9 @@
 												"$ref": "AAAAAAF8Rkh5L03zmqU="
 											},
 											"font": "Arial;13;0",
-											"left": 112.72998046875,
+											"left": 111.99365234375,
 											"top": 237,
-											"width": 68.20263671875,
+											"width": 58.78271484375,
 											"height": 13,
 											"text": "esistePosto"
 										},
@@ -23388,7 +23388,7 @@
 											"font": "Arial;13;1",
 											"left": 93,
 											"top": 237,
-											"width": 14.72998046875,
+											"width": 13.99365234375,
 											"height": 13,
 											"text": "alt"
 										},
@@ -24454,9 +24454,9 @@
 												"$ref": "AAAAAAF8RlOBgE7oeI0="
 											},
 											"font": "Arial;13;0",
-											"left": 24.72998046875,
+											"left": 22.55908203125,
 											"top": 5,
-											"width": 107.2216796875,
+											"width": 98.10009765625,
 											"height": 13,
 											"text": "Gestione bicicletta"
 										},
@@ -24469,7 +24469,7 @@
 											"font": "Arial;13;1",
 											"left": 5,
 											"top": 5,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -24953,9 +24953,9 @@
 												"$ref": "AAAAAAF8RlnyxU/2QrY="
 											},
 											"font": "Arial;13;0",
-											"left": 505.1708984375,
+											"left": 504.42822265625,
 											"top": 237,
-											"width": 418.8291015625,
+											"width": 419.57177734375,
 											"height": 13,
 											"text": "Aggiungi bicicletta"
 										},
@@ -24968,7 +24968,7 @@
 											"font": "Arial;13;1",
 											"left": 469,
 											"top": 237,
-											"width": 16.1708984375,
+											"width": 15.42822265625,
 											"height": 13,
 											"text": "ref"
 										}
@@ -25341,9 +25341,9 @@
 												"$ref": "AAAAAAF8RnTQM4FH9mo="
 											},
 											"font": "Arial;13;0",
-											"left": 497.1708984375,
+											"left": 496.42822265625,
 											"top": 365,
-											"width": 410.8291015625,
+											"width": 411.57177734375,
 											"height": 13,
 											"text": "Elimina bicicletta"
 										},
@@ -25356,7 +25356,7 @@
 											"font": "Arial;13;1",
 											"left": 461,
 											"top": 365,
-											"width": 16.1708984375,
+											"width": 15.42822265625,
 											"height": 13,
 											"text": "ref"
 										}
@@ -25613,9 +25613,9 @@
 												"$ref": "AAAAAAF8RndE8IF8T8I="
 											},
 											"font": "Arial;13;0",
-											"left": 93.07177734375,
+											"left": 91.61181640625,
 											"top": 501,
-											"width": 66.736328125,
+											"width": 61.658203125,
 											"height": 13,
 											"text": "sistemaBici"
 										},
@@ -25628,7 +25628,7 @@
 											"font": "Arial;13;1",
 											"left": 69,
 											"top": 501,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -26160,9 +26160,9 @@
 												"$ref": "AAAAAAF8Rnl8JoH7bL4="
 											},
 											"font": "Arial;13;0",
-											"left": 101.07177734375,
+											"left": 99.61181640625,
 											"top": 221,
-											"width": 73.2744140625,
+											"width": 69.2373046875,
 											"height": 13,
 											"text": "aggiungi bici"
 										},
@@ -26175,7 +26175,7 @@
 											"font": "Arial;13;1",
 											"left": 77,
 											"top": 221,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -26261,9 +26261,9 @@
 												"$ref": "AAAAAAF8RnnuKYIWQXA="
 											},
 											"font": "Arial;13;0",
-											"left": 85.07177734375,
+											"left": 83.61181640625,
 											"top": 341,
-											"width": 65.3017578125,
+											"width": 62.73095703125,
 											"height": 13,
 											"text": "elimina bici"
 										},
@@ -26276,7 +26276,7 @@
 											"font": "Arial;13;1",
 											"left": 61,
 											"top": 341,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -26644,9 +26644,9 @@
 												"$ref": "AAAAAAF8RlEcgU6WdgI="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 30.55908203125,
 											"top": 5,
-											"width": 117.3271484375,
+											"width": 106.03466796875,
 											"height": 13,
 											"text": "Gestione rastrelliera"
 										},
@@ -26659,7 +26659,7 @@
 											"font": "Arial;13;1",
 											"left": 13,
 											"top": 5,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -27601,9 +27601,9 @@
 												"$ref": "AAAAAAF8RpEBmYUYv+w="
 											},
 											"font": "Arial;13;0",
-											"left": 109.07177734375,
+											"left": 107.61181640625,
 											"top": 229,
-											"width": 114.45166015625,
+											"width": 105.3173828125,
 											"height": 13,
 											"text": "aggiungi rastrelliera"
 										},
@@ -27616,7 +27616,7 @@
 											"font": "Arial;13;1",
 											"left": 85,
 											"top": 229,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -27702,9 +27702,9 @@
 												"$ref": "AAAAAAF8RpGBqoUzurk="
 											},
 											"font": "Arial;13;0",
-											"left": 109.07177734375,
+											"left": 107.61181640625,
 											"top": 341,
-											"width": 106.47900390625,
+											"width": 98.81103515625,
 											"height": 13,
 											"text": "elimina rastrelliera"
 										},
@@ -27717,7 +27717,7 @@
 											"font": "Arial;13;1",
 											"left": 85,
 											"top": 341,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -27803,9 +27803,9 @@
 												"$ref": "AAAAAAF8RpK5aIVgJBg="
 											},
 											"font": "Arial;13;0",
-											"left": 649.1708984375,
+											"left": 648.42822265625,
 											"top": 237,
-											"width": 306.8291015625,
+											"width": 307.57177734375,
 											"height": 13,
 											"text": "Aggiungi rastrelliera"
 										},
@@ -27818,7 +27818,7 @@
 											"font": "Arial;13;1",
 											"left": 613,
 											"top": 237,
-											"width": 16.1708984375,
+											"width": 15.42822265625,
 											"height": 13,
 											"text": "ref"
 										}
@@ -27852,9 +27852,9 @@
 												"$ref": "AAAAAAF8RpMst4VuU+M="
 											},
 											"font": "Arial;13;0",
-											"left": 649.1708984375,
+											"left": 648.42822265625,
 											"top": 357,
-											"width": 314.8291015625,
+											"width": 315.57177734375,
 											"height": 13,
 											"text": "Elimina rastrelliera"
 										},
@@ -27867,7 +27867,7 @@
 											"font": "Arial;13;1",
 											"left": 613,
 											"top": 357,
-											"width": 16.1708984375,
+											"width": 15.42822265625,
 											"height": 13,
 											"text": "ref"
 										}
@@ -27901,9 +27901,9 @@
 												"$ref": "AAAAAAF8RpPZsoV8P+o="
 											},
 											"font": "Arial;13;0",
-											"left": 93.07177734375,
+											"left": 91.61181640625,
 											"top": 493,
-											"width": 81.9072265625,
+											"width": 73.2109375,
 											"height": 13,
 											"text": "sistemaMorsa"
 										},
@@ -27916,7 +27916,7 @@
 											"font": "Arial;13;1",
 											"left": 69,
 											"top": 493,
-											"width": 19.07177734375,
+											"width": 17.61181640625,
 											"height": 13,
 											"text": "opt"
 										},
@@ -28717,9 +28717,9 @@
 												"$ref": "AAAAAAF8RnBX3H/bz3M="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 30.55908203125,
 											"top": 13,
-											"width": 97.814453125,
+											"width": 93.04736328125,
 											"height": 13,
 											"text": "Elimina bicicletta"
 										},
@@ -28732,7 +28732,7 @@
 											"font": "Arial;13;1",
 											"left": 13,
 											"top": 13,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -29695,9 +29695,9 @@
 												"$ref": "AAAAAAF8RnxI6oJVkFU="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 30.55908203125,
 											"top": 13,
-											"width": 115.892578125,
+											"width": 108.935546875,
 											"height": 13,
 											"text": "Aggiungi rastrelliera"
 										},
@@ -29710,7 +29710,7 @@
 											"font": "Arial;13;1",
 											"left": 13,
 											"top": 13,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -30217,9 +30217,9 @@
 												"$ref": "AAAAAAF8RopQ+YMiEq0="
 											},
 											"font": "Arial;13;0",
-											"left": 427.578125,
+											"left": 426.11181640625,
 											"top": 141,
-											"width": 167.92431640625,
+											"width": 154.81005859375,
 											"height": 13,
 											"text": "n volte per ogni tipo di morsa"
 										},
@@ -30232,7 +30232,7 @@
 											"font": "Arial;13;1",
 											"left": 397,
 											"top": 141,
-											"width": 25.578125,
+											"width": 24.11181640625,
 											"height": 13,
 											"text": "loop"
 										},
@@ -30427,9 +30427,9 @@
 												"$ref": "AAAAAAF8RotmrYNBFx0="
 											},
 											"font": "Arial;13;0",
-											"left": 32.72998046875,
+											"left": 30.55908203125,
 											"top": 13,
-											"width": 107.919921875,
+											"width": 100.98193359375,
 											"height": 13,
 											"text": "Elimina rastrelliera"
 										},
@@ -30442,7 +30442,7 @@
 											"font": "Arial;13;1",
 											"left": 13,
 											"top": 13,
-											"width": 14.72998046875,
+											"width": 12.55908203125,
 											"height": 13,
 											"text": "sd"
 										}
@@ -31051,9 +31051,9 @@
 												"$ref": "AAAAAAF8Ro1IsoQb7bA="
 											},
 											"font": "Arial;13;0",
-											"left": 144.72998046875,
+											"left": 143.99365234375,
 											"top": 229,
-											"width": 97.09716796875,
+											"width": 88.70556640625,
 											"height": 13,
 											"text": "rastrelliera vuota"
 										},
@@ -31066,7 +31066,7 @@
 											"font": "Arial;13;1",
 											"left": 125,
 											"top": 229,
-											"width": 14.72998046875,
+											"width": 13.99365234375,
 											"height": 13,
 											"text": "alt"
 										},
@@ -31152,9 +31152,9 @@
 												"$ref": "AAAAAAF8Ro4rF4Q5Pg4="
 											},
 											"font": "Arial;13;0",
-											"left": 323.578125,
+											"left": 322.11181640625,
 											"top": 245,
-											"width": 167.93701171875,
+											"width": 150.1064453125,
 											"height": 13,
 											"text": "n volte quante sono le morse"
 										},
@@ -31167,7 +31167,7 @@
 											"font": "Arial;13;1",
 											"left": 293,
 											"top": 245,
-											"width": 25.578125,
+											"width": 24.11181640625,
 											"height": 13,
 											"text": "loop"
 										},
@@ -32077,7 +32077,7 @@
 											"left": 77,
 											"top": 327,
 											"width": 214.728515625,
-											"height": 26,
+											"height": 13,
 											"text": "Inserimento dati dell'abbonamento",
 											"wordWrap": true
 										},
@@ -32113,7 +32113,7 @@
 									"left": 72,
 									"top": 320,
 									"width": 224.728515625,
-									"height": 38,
+									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAF8Rs7Tsp+mUl0="
 									},
@@ -51357,7 +51357,7 @@
 									"font": "Arial;13;0",
 									"left": 1161,
 									"top": 812,
-									"width": 12.65087890625,
+									"width": 13.83154296875,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -51398,9 +51398,9 @@
 										"$ref": "AAAAAAF8S/n8elXposM="
 									},
 									"font": "Arial;13;0",
-									"left": 1165,
+									"left": 1164,
 									"top": 840,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -51737,9 +51737,9 @@
 										"$ref": "AAAAAAF8S/3fX10c2f0="
 									},
 									"font": "Arial;13;0",
-									"left": 1594,
+									"left": 1593,
 									"top": 1193,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -71234,7 +71234,8 @@
 													"_parent": {
 														"$ref": "AAAAAAF8S8DTkk47ywk="
 													},
-													"name": "BikeType bikeType"
+													"name": "BikeType bikeType",
+													"type": ""
 												},
 												{
 													"_type": "UMLParameter",
@@ -71261,7 +71262,8 @@
 													"_parent": {
 														"$ref": "AAAAAAF8S8DtqE5EVK4="
 													},
-													"name": "BikeType bikeType"
+													"name": "BikeType bikeType",
+													"type": ""
 												},
 												{
 													"_type": "UMLParameter",
@@ -78044,290 +78046,6 @@
 							"text": "TCP/IP JDBC driver"
 						},
 						{
-							"_type": "UMLCommunicationPathView",
-							"_id": "AAAAAAF8StWkpirw3iI=",
-							"_parent": {
-								"$ref": "AAAAAAF8Ssm7WiW4yG0="
-							},
-							"model": {
-								"$ref": "AAAAAAF8StWkpirskTM="
-							},
-							"subViews": [
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpirxWOk=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpirskTM="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 683,
-									"top": 209,
-									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 15,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"edgePosition": 1
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpiryKHw=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpirskTM="
-									},
-									"visible": null,
-									"font": "Arial;13;0",
-									"left": 690,
-									"top": 196,
-									"height": 13,
-									"alpha": 1.5707963267948966,
-									"distance": 30,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"edgePosition": 1
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpyrz41s=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpirskTM="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 670,
-									"top": 236,
-									"height": 13,
-									"alpha": -1.5707963267948966,
-									"distance": 15,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"edgePosition": 1
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpyr0COY=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpirtsLg="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 625,
-									"top": 181,
-									"height": 13,
-									"alpha": 0.5235987755982988,
-									"distance": 30,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"edgePosition": 2
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpyr1a/w=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpirtsLg="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 633,
-									"top": 170,
-									"height": 13,
-									"alpha": 0.7853981633974483,
-									"distance": 40,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"edgePosition": 2
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpyr2/pE=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpirtsLg="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 609,
-									"top": 203,
-									"height": 13,
-									"alpha": -0.5235987755982988,
-									"distance": 25,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"edgePosition": 2
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpyr3SDQ=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpiruHlY="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 742,
-									"top": 239,
-									"height": 13,
-									"alpha": -0.5235987755982988,
-									"distance": 30,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									}
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpyr41ic=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpiruHlY="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 746,
-									"top": 226,
-									"height": 13,
-									"alpha": -0.7853981633974483,
-									"distance": 40,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									}
-								},
-								{
-									"_type": "EdgeLabelView",
-									"_id": "AAAAAAF8StWkpyr5LYM=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpiruHlY="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"left": 734,
-									"top": 265,
-									"height": 13,
-									"alpha": 0.5235987755982988,
-									"distance": 25,
-									"hostEdge": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									}
-								},
-								{
-									"_type": "UMLQualifierCompartmentView",
-									"_id": "AAAAAAF8StWkpyr6BS4=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpirtsLg="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"top": 200,
-									"width": 10,
-									"height": 10
-								},
-								{
-									"_type": "UMLQualifierCompartmentView",
-									"_id": "AAAAAAF8StWkpyr7tXs=",
-									"_parent": {
-										"$ref": "AAAAAAF8StWkpirw3iI="
-									},
-									"model": {
-										"$ref": "AAAAAAF8StWkpiruHlY="
-									},
-									"visible": false,
-									"font": "Arial;13;0",
-									"top": 200,
-									"width": 10,
-									"height": 10
-								}
-							],
-							"font": "Arial;13;0",
-							"head": {
-								"$ref": "AAAAAAF8SsxDOiZGrKk="
-							},
-							"tail": {
-								"$ref": "AAAAAAF8StOLmSkJOaA="
-							},
-							"lineStyle": 1,
-							"points": "596:189;759:270",
-							"showVisibility": true,
-							"nameLabel": {
-								"$ref": "AAAAAAF8StWkpirxWOk="
-							},
-							"stereotypeLabel": {
-								"$ref": "AAAAAAF8StWkpiryKHw="
-							},
-							"propertyLabel": {
-								"$ref": "AAAAAAF8StWkpyrz41s="
-							},
-							"tailRoleNameLabel": {
-								"$ref": "AAAAAAF8StWkpyr0COY="
-							},
-							"tailPropertyLabel": {
-								"$ref": "AAAAAAF8StWkpyr1a/w="
-							},
-							"tailMultiplicityLabel": {
-								"$ref": "AAAAAAF8StWkpyr2/pE="
-							},
-							"headRoleNameLabel": {
-								"$ref": "AAAAAAF8StWkpyr3SDQ="
-							},
-							"headPropertyLabel": {
-								"$ref": "AAAAAAF8StWkpyr41ic="
-							},
-							"headMultiplicityLabel": {
-								"$ref": "AAAAAAF8StWkpyr5LYM="
-							},
-							"tailQualifiersCompartment": {
-								"$ref": "AAAAAAF8StWkpyr6BS4="
-							},
-							"headQualifiersCompartment": {
-								"$ref": "AAAAAAF8StWkpyr7tXs="
-							}
-						},
-						{
-							"_type": "UMLTextView",
-							"_id": "AAAAAAF8StWwAyumkJU=",
-							"_parent": {
-								"$ref": "AAAAAAF8Ssm7WiW4yG0="
-							},
-							"font": "Arial;13;0",
-							"left": 656,
-							"top": 184,
-							"width": 87.3271484375,
-							"height": 38,
-							"text": "collegamento fisico"
-						},
-						{
 							"_type": "UMLNodeView",
 							"_id": "AAAAAAF8SuiECzBEV8U=",
 							"_parent": {
@@ -79603,7 +79321,8 @@
 							"_parent": {
 								"$ref": "AAAAAAF8SspvESXiR5g="
 							},
-							"name": "MySql RDBMS"
+							"name": "MySql RDBMS",
+							"type": ""
 						}
 					]
 				},
