@@ -47,7 +47,7 @@ public class Controller_Return_Bike {
 
         // get free rack position where the bike can be set
         freeRackPosition = totemRack.getFreeRackPositionForBikeType(userRent.getBike().getType());
-        if ( freeRackPosition == null ) {
+        if ( freeRackPosition == null || freeRackPosition.isEmpty() ) {
             throw new RackException("Sorry there are not free rack position for your bike. Try in another totem rack.");
         }
     }
