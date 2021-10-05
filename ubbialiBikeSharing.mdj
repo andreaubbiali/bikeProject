@@ -39087,7 +39087,7 @@
 							"top": 264,
 							"width": 171.85888671875,
 							"height": 25,
-							"text": "aggiungiBici(tipoBici)/blocca"
+							"text": "blocca(bici)/aggiunta"
 						},
 						{
 							"_type": "UMLTextView",
@@ -39100,7 +39100,7 @@
 							"top": 328,
 							"width": 168.9580078125,
 							"height": 25,
-							"text": "aggiungiBici(tipoBici)/errore"
+							"text": "blocca(bici)/errore"
 						},
 						{
 							"_type": "UMLTextView",
@@ -39113,7 +39113,7 @@
 							"top": 496,
 							"width": 170.38623046875,
 							"height": 25,
-							"text": "eliminaBici()/sblocca"
+							"text": "sblocca/eliminata"
 						},
 						{
 							"_type": "UMLTextView",
@@ -39126,7 +39126,7 @@
 							"top": 320,
 							"width": 160.9853515625,
 							"height": 25,
-							"text": "eliminaBici()/errore"
+							"text": "sblocca/errore"
 						},
 						{
 							"_type": "UMLTransitionView",
@@ -39230,9 +39230,9 @@
 							"font": "Arial;13;0",
 							"left": 128,
 							"top": 432,
-							"width": 193.7646484375,
+							"width": 259.50732421875,
 							"height": 25,
-							"text": "aggiungiBici(tipoBici)/erroreTipo"
+							"text": "blocca(tipoBici)/erroreTipo"
 						},
 						{
 							"_type": "UMLTextView",
