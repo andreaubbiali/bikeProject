@@ -17,7 +17,7 @@ public class TariffDatabase implements TariffDatabaseInterface {
 
         PreparedStatement statement = Database.getConn().prepareStatement("SELECT t.id, t.time_in_minutes, t.tariff, "
                 + "b.id as bikeID, b.baby_seat, b.type FROM bike_tariff t INNER JOIN " + "bike_type b ON b.id = t" +
-                ".bike_type_id;");
+                ".bike_type_id ORDER BY time_in_minutes;");
         ResultSet res = statement.executeQuery();
 
         while ( res.next() ) {
