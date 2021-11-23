@@ -8,3 +8,6 @@ Code of the bike project
 
 - ho implementato una cosa sbagliata... l'utente alla sottoscrizione di un abbonamento deve aggiungere una carta di credito valida. Questa scelta però non la salvo in database quindi poi quando farò un noleggio detraggo il costo da una qualsiasi carta di credito dell'utente. Sono sicuro che una carta sia valida durante il noleggio però potrei aver problemi perchè il pagamento ricade su una qualsiasi carta valida dell'utente.
 
+### aprire file mdj
+
+per aprire il file mdj usare il software starUml
